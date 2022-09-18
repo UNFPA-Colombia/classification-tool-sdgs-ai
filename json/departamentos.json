@@ -1,0 +1,134 @@
+[
+    {
+        "nombre": "Amazonas",
+        "divipola": "91000"
+    },
+    {
+        "nombre": "Antioquia",
+        "divipola": "05000"
+    },
+    {
+        "nombre": "Arauca",
+        "divipola": "81000"
+    },
+    {
+        "nombre": "Atlántico",
+        "divipola": "08000"
+    },
+    {
+        "nombre": "Bogotá, D.C.",
+        "divipola": "11001"
+    },
+    {
+        "nombre": "Bolívar",
+        "divipola": "13000"
+    },
+    {
+        "nombre": "Boyacá",
+        "divipola": "15000"
+    },
+    {
+        "nombre": "Caldas",
+        "divipola": "17000"
+    },
+    {
+        "nombre": "Caquetá",
+        "divipola": "18000"
+    },
+    {
+        "nombre": "Casanare",
+        "divipola": "85000"
+    },
+    {
+        "nombre": "Cauca",
+        "divipola": "19000"
+    },
+    {
+        "nombre": "Cesar",
+        "divipola": "20000"
+    },
+    {
+        "nombre": "Chocó",
+        "divipola": "27000"
+    },
+    {
+        "nombre": "Cundinamarca",
+        "divipola": "25000"
+    },
+    {
+        "nombre": "Córdoba",
+        "divipola": "23000"
+    },
+    {
+        "nombre": "Guainía",
+        "divipola": "94000"
+    },
+    {
+        "nombre": "Guaviare",
+        "divipola": "95000"
+    },
+    {
+        "nombre": "Huila",
+        "divipola": "41000"
+    },
+    {
+        "nombre": "La Guajira",
+        "divipola": "44000"
+    },
+    {
+        "nombre": "Magdalena",
+        "divipola": "47000"
+    },
+    {
+        "nombre": "Meta",
+        "divipola": "50000"
+    },
+    {
+        "nombre": "Nariño",
+        "divipola": "52000"
+    },
+    {
+        "nombre": "Norte de Santander",
+        "divipola": "54000"
+    },
+    {
+        "nombre": "Putumayo",
+        "divipola": "86000"
+    },
+    {
+        "nombre": "Quindío",
+        "divipola": "63000"
+    },
+    {
+        "nombre": "Risaralda",
+        "divipola": "66000"
+    },
+    {
+        "nombre": "San Andrés y Providencia",
+        "divipola": "88000"
+    },
+    {
+        "nombre": "Santander",
+        "divipola": "68000"
+    },
+    {
+        "nombre": "Sucre",
+        "divipola": "70000"
+    },
+    {
+        "nombre": "Tolima",
+        "divipola": "73000"
+    },
+    {
+        "nombre": "Valle del Cauca",
+        "divipola": "76000"
+    },
+    {
+        "nombre": "Vaupés",
+        "divipola": "97000"
+    },
+    {
+        "nombre": "Vichada",
+        "divipola": "99000"
+    }
+]
