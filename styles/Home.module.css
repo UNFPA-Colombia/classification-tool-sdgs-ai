@@ -25,6 +25,7 @@
   margin: 2rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
+  color: #004696;
 }
 
 .footer {
@@ -64,8 +65,11 @@
 }
 
 .title,
-.description {
+.description,
+.grid {
   text-align: center;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 .footer a:hover,
@@ -109,6 +113,7 @@
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
+  color: #004696;
 }
 
 .logo {
@@ -119,7 +124,10 @@
 @media (prefers-color-scheme: dark) {
   .container {
     background: linear-gradient(160deg, #142242, #256c7d);
-    color: white;
+    color: #EFEFEF;
+  }
+  .description, .card p {
+    color: #E6E6E6;
   }
   .logo img {
     filter: invert(1);
