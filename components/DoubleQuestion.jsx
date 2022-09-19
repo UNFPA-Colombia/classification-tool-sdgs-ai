@@ -7,7 +7,7 @@ export default function DoubleQuestion({ question, options, caption, answer, han
         if (answer) {
             return (
                 <Select
-                    className={styles.select_item}
+                    className={styles.selectItem}
                     placeholder={caption1}
                     value={answer1 || ''}
                     onChange={handleAnswer1}
@@ -23,7 +23,7 @@ export default function DoubleQuestion({ question, options, caption, answer, han
             <p className={styles.question}>{question}</p>
             <div className={styles.select}>
                 <Select
-                    className={styles.select_item}
+                    className={styles.selectItem}
                     placeholder={caption}
                     value={answer || ''}
                     onChange={handleAnswer}

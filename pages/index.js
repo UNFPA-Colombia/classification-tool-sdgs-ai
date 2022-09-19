@@ -12,6 +12,11 @@ export default function Home() {
         <meta name="keywords" content="IA, Objetivos de Desarrollo Sostenibles, UNFPA, Colombia"></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <div className={styles.logoODSIA}>
+                ODS-IA
+      </div>
+
       <main className={styles.main}>
         <h1 className={styles.title}>
           ¡Bienvenido a <strong>ODS-IA</strong> del <a href="https://colombia.unfpa.org" target="_blank" rel="noopener noreferrer">UNFPA!</a>
@@ -37,15 +42,14 @@ export default function Home() {
           </a>
           </Link>
 
-          <a
-            href=""
-            className={styles.card}
-          >
+          <Link href="/conocer">
+          <a className={styles.card}>
             <h2>Conocer más &#x1F4DA;</h2>
             <p>
               Conoce más de esta iniciativa y sobre que son los Objetivos de Desarrollo Sostenibles.
             </p>
           </a>
+          </Link>
         </div>
 
       </main>

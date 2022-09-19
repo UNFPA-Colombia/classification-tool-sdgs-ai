@@ -54,8 +54,11 @@
   text-decoration: underline;
 }
 
-.title strong{
-  color: #0070f3;
+.title strong {
+  letter-spacing: 2px;
+  font-family: sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 100;
 }
 
 .title {
@@ -96,6 +99,7 @@
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   max-width: 330px;
+  background-color: #eaeaea95;
 }
 
 .card:hover,
@@ -121,23 +125,45 @@
   margin-left: 0.5rem;
 }
 
+.logoODSIA {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 100;
+  font-family: sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 2px;
+}
+
 @media (prefers-color-scheme: dark) {
   .container {
     background: linear-gradient(160deg, #142242, #256c7d);
     color: #EFEFEF;
   }
-  .description, .card p {
+
+  .description,
+  .card p {
     color: #E6E6E6;
   }
+
   .logo img {
     filter: invert(1);
   }
+
   .footer {
     border-top: 1px solid #eaeaea;
   }
+
   .card:hover,
   .card:focus,
   .card:active {
-  border-color: #0070f3;
-}
+    border-color: #eaeaea;
+  }
+
+  .card {
+    border-color: #256c7d;
+    background-color: #256c7d95;
+  }
 }

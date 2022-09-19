@@ -2,7 +2,7 @@
     width: 100vw;
     height: 100vh;
     color: #412300;
-    background: linear-gradient(160deg, #ffd866, #ff794d);
+    background: linear-gradient(160deg, #ffecb9, #ffb5a0);
     font-family: 'Nunito', sans-serif;
     font-weight: 500;
     overflow: scroll;
@@ -61,7 +61,7 @@
     max-width: 700px;
 }
 
-.button_start {
+.buttonStart {
   background-color: transparent;
   border-radius: 10px;
   border: 1px solid #eaeaea;
@@ -74,19 +74,20 @@
   text-align: center;
   transition: color 100ms;
   vertical-align: baseline;
-  color: inherit;
+  color: #743E00;
   margin: 1rem;
   font-size: 1.2rem;
+  background-color: #eaeaea95;
 }
 
-.button_start:hover,
-.button_start:focus,
-.button_return:hover,
-.button_return:focus {
+.buttonStart:hover,
+.buttonStart:focus,
+.buttonReturn:hover,
+.buttonReturn:focus {
   border-color: #412300;
 }
 
-.button_return {
+.buttonReturn {
     background-color: #eaeaea95;
     border-radius: 10px;
     border: 1px solid #eaeaea;
@@ -103,6 +104,7 @@
     color: #743E00;
     font-size: 1rem;
     transform: rotate(180deg);
+    background-color: #eaeaea95;
 }
 
 .select {
@@ -112,7 +114,7 @@
     align-items: center;
 }
 
-.select_item { 
+.selectItem { 
     min-width: 250px;
     max-width: 600px;
     display: inline-block;

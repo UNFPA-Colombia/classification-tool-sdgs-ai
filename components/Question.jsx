@@ -8,7 +8,7 @@ export default function Question({ question, options, caption, answer, handleAns
             <p className={styles.question}>{question}</p>
             <div className={styles.select}>
                 <Select
-                    className={styles.select_item}
+                    className={styles.selectItem}
                     placeholder={caption}
                     value={answer || ''}
                     onChange={handleAnswer}

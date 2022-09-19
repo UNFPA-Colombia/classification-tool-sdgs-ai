@@ -27,6 +27,12 @@
     font-size: 3.5rem;
 }
 
+.subTitle {
+    margin: 0;
+    line-height: 1;
+    font-size: 2rem;
+}
+
 .question {
     margin-bottom: 1rem;
     font-size: 2rem;
@@ -41,6 +47,11 @@
     font-size: 1.5rem;
 }
 
+.questionCount {
+    opacity: 0.5;
+    font-size: 0.9rem;
+}
+
 .title,
 .description,
 .question {
@@ -49,8 +60,12 @@
   margin-left: 1rem;
 }
 
-.label, .description, .form__field, .form__label, .form__field:focus ~ .form__label {
+.label, .description, .formField, .formLabel, .formField:focus ~ .formLabel {
     color: #204D33;
+}
+
+.subTitle strong {
+    color: #204D3399;
 }
 
 .grid {
@@ -61,12 +76,12 @@
     max-width: 700px;
 }
 
-.form__group {
+.formGroup {
     position: relative;
     padding: 15px 0 0;
     margin: 1rem;
 }
-.form__field {
+.formField {
     font-family: inherit;
     max-width: 600px;
     border: 0;
@@ -77,28 +92,53 @@
     background: transparent;
     transition: border-color 0.2s;
 }
-.form__field::placeholder {
+
+.inputNumber {
+    font-family: inherit;
+    width: 4rem;
+    border: 0;
+    border-bottom: 2px solid #204d33;
+    outline: 0;
+    font-size: 1rem;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+    text-align: center;
+    margin: 0.5rem;
+}
+
+.inputNumber::placeholder {
+    color: #204d3395;
+}
+
+.inputNumber::-webkit-inner-spin-button {
+    opacity: 1
+}
+
+.formField::placeholder {
     color: transparent;
 }
-.form__field:placeholder-shown ~ .form__label {
+
+.formField:placeholder-shown ~ .formLabel {
     font-size: 1.3rem;
     cursor: text;
     top: 20px;
 }
-.form__label {
+
+.formLabel {
     position: absolute;
     top: 0;
     display: block;
     transition: 0.2s;
     font-size: 1rem;
 }
-.form__field:focus {
+.formField:focus {
     padding-bottom: 6px;
     font-weight: 700;
     border-width: 3px;
     border-image-slice: 1;
 }
-.form__field:focus ~ .form__label {
+.formField:focus ~ .formLabel {
     position: absolute;
     top: 0;
     display: block;
@@ -117,7 +157,7 @@
     align-items: center;  
 }
 
-.button_start {
+.buttonStart {
   background-color: transparent;
   border-radius: 10px;
   border: 1px solid #eaeaea;
@@ -134,16 +174,18 @@
   margin: 0.5rem;
   margin-top: 0rem;
   font-size: 1.2rem;
+  color: #204d33;
+  background-color: #eaeaea95;
 }
 
-.button_start:hover,
-.button_start:focus,
-.button_return:hover,
-.button_return:focus {
+.buttonStart:hover,
+.buttonStart:focus,
+.buttonReturn:hover,
+.buttonReturn:focus {
   border-color: #11291b;
 }
 
-.button_return {
+.buttonReturn {
     background-color: #eaeaea95;
     border-radius: 10px;
     border: 1px solid #eaeaea;
@@ -157,7 +199,7 @@
     text-align: center;
     transition: color 100ms;
     vertical-align: baseline;
-    color: #11291b;
+    color: #204d33;
     font-size: 1rem;
     transform: rotate(180deg);
 }
@@ -169,13 +211,13 @@
     align-items: center;
 }
 
-.select_item { 
+.selectItem { 
     min-width: 250px;
     max-width: 600px;
     display: inline-block;
     color:#11291b;
     font-size: 1rem;
-    margin: 10px;
+    margin: 0.5rem;
 }
 
 .logo{
@@ -190,15 +232,58 @@
     letter-spacing: 2px;
 }
 
+.select {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectItem { 
+    min-width: 250px;
+    max-width: 600px;
+    display: inline-block;
+    color:#412300;
+    font-size: 1rem;
+    margin: 0.5rem;
+}
+
+.buttonPrevQuestion, .buttonNextQuestion {
+    background-color: transparent;
+    border-radius: 40%;
+    border: 1px solid #eaeaea;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 0.5rem;
+    text-align: center;
+    transition: color 100ms;
+    color: #204d33;
+    font-size: 1rem;
+    margin: 1rem;
+    background-color: #eaeaea95;
+}
+
+.buttonPrevQuestion:hover, .buttonNextQuestion:hover {
+    border-color: #11291b;
+}
+
+.buttonPrevQuestion{
+    transform: rotate(180deg);
+}
+
 @media (prefers-color-scheme: dark) {
     .container {
       background: linear-gradient(160deg, #1d4325, #477933);
       color: #EFEFEF;
     }
-    .label, .description, .form__field, .form__label, .form__field:focus ~ .form__label {
+    .label, .description, .formField, .formLabel, .formField:focus ~ .formLabel {
         color: #E6E6E6;
     }
-    .form__field {
+    .subTitle strong, .inputNumber::placeholder {
+        color: #E6E6E699;
+    }
+    .formField, .inputNumber {
         border-bottom: 2px solid #E6E6E6;
     }
 }
