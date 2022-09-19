@@ -64,12 +64,10 @@
 .form__group {
     position: relative;
     padding: 15px 0 0;
-    margin-top: 10px;
-    width: 100%;
+    margin: 1rem;
 }
 .form__field {
     font-family: inherit;
-    width: 100%;
     max-width: 600px;
     border: 0;
     border-bottom: 2px solid #204d33;
@@ -108,15 +106,15 @@
     font-size: 1rem;
     font-weight: 700;
 }
-/* reset input */
-.form__field:required, .form__field:invalid {
-    box-shadow: none;
-}
 
 .item {
     margin: 0.5rem;
-    padding: 0.5rem;
-    max-width: 600px;   
+    margin-bottom: 0rem;
+    padding: 0.5rem;  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;  
 }
 
 .button_start {
@@ -127,18 +125,69 @@
   cursor: pointer;
   display: inline-block;
   font-family: inherit;
-  font-size: 1.2rem;
   padding: 10px 16px;
   position: relative;
   text-align: center;
   transition: color 100ms;
   vertical-align: baseline;
-  margin-top: 1rem;
+  color: inherit;
+  margin: 0.5rem;
+  margin-top: 0rem;
+  font-size: 1.2rem;
 }
 
 .button_start:hover,
-.button_start:focus {
+.button_start:focus,
+.button_return:hover,
+.button_return:focus {
   border-color: #11291b;
+}
+
+.button_return {
+    background-color: #eaeaea95;
+    border-radius: 10px;
+    border: 1px solid #eaeaea;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 0.3rem 0.5rem;
+    position: fixed;
+    top: 0.9rem;
+    left: 0.9rem;
+    text-align: center;
+    transition: color 100ms;
+    vertical-align: baseline;
+    color: #11291b;
+    font-size: 1rem;
+    transform: rotate(180deg);
+}
+
+.select {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.select_item { 
+    min-width: 250px;
+    max-width: 600px;
+    display: inline-block;
+    color:#11291b;
+    font-size: 1rem;
+    margin: 10px;
+}
+
+.logo{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 100;
+    font-family: sans-serif;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 2px;
 }
 
 @media (prefers-color-scheme: dark) {
