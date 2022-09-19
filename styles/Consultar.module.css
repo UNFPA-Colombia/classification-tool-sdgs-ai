@@ -1,0 +1,121 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    color: #412300;
+    background: linear-gradient(160deg, #ffd866, #ff794d);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+    overflow: scroll;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.main {
+    min-height: 100vh;
+    padding: 4rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    margin: 0;
+    line-height: 1.15;
+    font-size: 3.5rem;
+}
+
+.question {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    width: 100%;
+    text-align: center;
+    text-align: center;
+}
+
+.description {
+    margin: 2rem 0;
+    line-height: 1.5;
+    font-size: 1.5rem;
+}
+
+.title,
+.description,
+.question {
+  text-align: center;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+.label, .description {
+    color: #743E00;
+}
+
+.grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 700px;
+}
+
+.button_return {
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+.button_start {
+    margin: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.button_start, .button_return {
+  background-color: transparent;
+  border-radius: 10px;
+  border: 1px solid #eaeaea;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  transition: color 100ms;
+  vertical-align: baseline;
+  color: inherit;
+}
+
+.button_start:hover,
+.button_start:focus,
+.button_return:hover,
+.button_return:focus {
+  border-color: #412300;
+}
+
+.select {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.select_item { 
+    min-width: 250px;
+    max-width: 600px;
+    display: inline-block;
+    color:#412300;
+    font-size: 1rem;
+    margin: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .container {
+      background: linear-gradient(160deg, #664c00, #b32c00);
+      color: #EFEFEF;
+    }
+    .label, .description {
+        color: #E6E6E6;
+    }
+}
