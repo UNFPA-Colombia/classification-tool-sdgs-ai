@@ -4,7 +4,7 @@ import departamentosJson from '../../json/departamentos.json';
 
 import Head from 'next/head';
 import Link from 'next/link';
-import Select from 'react-select';
+import DoubleQuestion from '../../components/DoubleQuestion';
 import styles from '../../styles/Consultar.module.css';
 
 export default function Consultar({ municipios, departamentos }) {
@@ -23,28 +23,12 @@ export default function Consultar({ municipios, departamentos }) {
     function showButton() {
         if (municipio) {
             return (
-                <Link href={`/${municipio.value}/`}><button className={styles.button_start} role="button">Consultar</button></Link>
+                <Link href={`/${municipio.value}/`}><button className={styles.buttonStart} role="button">Consultar</button></Link>
             );
         }
     }
 
-    function showMunicipio() {
-        if (departamento) {
-            const opciones = municipios.filter(municipio => municipio.departamento === departamento.departamento);
-            return (
-                <Select
-                    className={styles.select_item}
-                    placeholder="Municipio"
-                    value={municipio || ''}
-                    onChange={changeMunicipio}
-                    options={opciones}
-                    isClearable={true}
-                    isSearchable={true}
-                />
-            );
-        }
-    }
-
+    let opciones = departamento ? municipios.filter(municipio => municipio.departamento === departamento.departamento) : [];
     return (
         <div className={styles.container}>
             <Head>
@@ -54,7 +38,7 @@ export default function Consultar({ municipios, departamentos }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Link href="/"><button className={styles.button_return} role="button">&#10140;</button></Link>
+            <Link href="/"><button className={styles.buttonReturn} role="button">&#10140;</button></Link>
             <div className={styles.logo}>
                 ODS-IA
             </div>
@@ -62,20 +46,18 @@ export default function Consultar({ municipios, departamentos }) {
             <div className={styles.main}>
                 <h1 className={styles.title}>Consultar resultados &#x1F50E;</h1>
                 <p className={styles.description}>Puedes consultar los ODSs mas relevantes para las personas de tu ciudad y municipio, o de cualquier region del país que selecciones.</p>
-                <p className={styles.question}>¡Cuéntanos que region quieres consultar!</p>
-                <div className={styles.select}>
-                    <Select
-                        className={styles.select_item}
-                        placeholder="Departamento"
-                        instanceId={useId()}
-                        value={departamento}
-                        onChange={changeDepartamento}
-                        options={departamentos}
-                        isClearable={true}
-                        isSearchable={true}
-                    />
-                    {showMunicipio()}
-                </div>
+                <DoubleQuestion
+                    question="¡Cuéntanos que region quieres consultar!"
+                    options={departamentos}
+                    caption="Departamento"
+                    answer={departamento}
+                    handleAnswer={changeDepartamento}
+                    options1={opciones}
+                    caption1="Municipio"
+                    answer1={municipio}
+                    handleAnswer1={changeMunicipio}
+                    styles={styles}
+                />
                 {showButton()}
             </div>
         </div>
