@@ -23,7 +23,7 @@ export default function Consultar({ municipios, departamentos }) {
     function showButton() {
         if (municipio) {
             return (
-                <Link href={`/${municipio.divipola}/`}><button className={styles.button_start} role="button">Consultar</button></Link>
+                <Link href={`/${municipio.value}/`}><button className={styles.button_start} role="button">Consultar</button></Link>
             );
         }
     }
@@ -48,12 +48,16 @@ export default function Consultar({ municipios, departamentos }) {
     return (
         <div className={styles.container}>
             <Head>
-                <title>ODS-IA participar</title>
+                <title>ODS-IA consultar</title>
                 <meta name="description" content="Consulta en ODS-IA los ODSs más relevantes para las personas de tu ciudad o municipio." />
                 <meta name="keywords" content="IA, Objetivos de Desarrollo Sostenibles, UNFPA, Colombia, consulta"></meta>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
+            <Link href="/"><button className={styles.button_return} role="button">&#10140;</button></Link>
+            <div className={styles.logo}>
+                ODS-IA
+            </div>
 
             <div className={styles.main}>
                 <h1 className={styles.title}>Consultar resultados &#x1F50E;</h1>
@@ -71,9 +75,8 @@ export default function Consultar({ municipios, departamentos }) {
                         isSearchable={true}
                     />
                     {showMunicipio()}
-                    {showButton()}
                 </div>
-                <Link href="/"><button className={styles.button_return} role="button">Regresar</button></Link>
+                {showButton()}
             </div>
         </div>
 

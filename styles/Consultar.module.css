@@ -61,17 +61,7 @@
     max-width: 700px;
 }
 
-.button_return {
-    margin-top: 1rem;
-    font-size: 1rem;
-}
-
 .button_start {
-    margin: 0.5rem;
-    font-size: 1.2rem;
-}
-
-.button_start, .button_return {
   background-color: transparent;
   border-radius: 10px;
   border: 1px solid #eaeaea;
@@ -85,6 +75,8 @@
   transition: color 100ms;
   vertical-align: baseline;
   color: inherit;
+  margin: 1rem;
+  font-size: 1.2rem;
 }
 
 .button_start:hover,
@@ -92,6 +84,25 @@
 .button_return:hover,
 .button_return:focus {
   border-color: #412300;
+}
+
+.button_return {
+    background-color: #eaeaea95;
+    border-radius: 10px;
+    border: 1px solid #eaeaea;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 0.3rem 0.5rem;
+    position: fixed;
+    top: 0.9rem;
+    left: 0.9rem;
+    text-align: center;
+    transition: color 100ms;
+    vertical-align: baseline;
+    color: #743E00;
+    font-size: 1rem;
+    transform: rotate(180deg);
 }
 
 .select {
@@ -108,6 +119,18 @@
     color:#412300;
     font-size: 1rem;
     margin: 0.5rem;
+}
+
+.logo{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 100;
+    font-family: sans-serif;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 2px;
 }
 
 @media (prefers-color-scheme: dark) {
