@@ -19,6 +19,15 @@ export default function Preguntas() {
     const [genero, setGenero] = useState(undefined);
     const [zona, setZona] = useState(undefined);
 
+    const preguntas = [
+        { pregunta: "¿Qué es lo que mas te gusta de MUNICIPIO?", pista: "Lo que má me gusta de MUNICIPIO es..." },
+        { pregunta: "¿Cual crees que es el principal problema de MUNICIPIO?", pista: "El principal problema de MUNICIPIO es..." },
+        { pregunta: "¿Cómo sueñas MUNICIPIO en el año 2050?", pista: "En el año 2050 MUNICIPIO será..." },
+        { pregunta: "¿Como lograrías que MUNICIPIO sea un lugar mejor para vivir?", pista: "Para que MUNICIPIO sea un lugar mejor para vivir..." },
+    ];
+
+    const [respuestas, setRespuestas] = useState(Array(preguntas.length).fill(''));
+
     const [question, setQuestion] = useState(1);
     const maxQuestions = 4;
 
@@ -37,27 +46,6 @@ export default function Preguntas() {
         };
     });
 
-    function changeDepartamento(value) {
-        setDepartamento(value);
-        setMunicipio(undefined);
-    }
-
-    function changeMunicipio(value) {
-        setMunicipio(value);
-    }
-
-    function changeGenero(value) {
-        setGenero(value);
-    }
-
-    function changeEdad(value) {
-        setEdad(value.target.value);
-    }
-
-    function changeZona(value) {
-        setZona(value);
-    }
-
     function nextQuestion() {
         setQuestion(question + 1);
     }
@@ -67,11 +55,43 @@ export default function Preguntas() {
     }
 
     function showButtonNext() {
-        if (question < maxQuestions) {
-            return (
-                <button className={styles.buttonNextQuestion} role="button" onClick={nextQuestion}>&#10140;</button>
-            );
-        } 
+        const next = <button className={styles.buttonNextQuestion} role="button" onClick={nextQuestion}>&#10140;</button>;
+        const nextD = <button className={styles.buttonNextQuestion} role="button" onClick={nextQuestion} disabled>&#10140;</button>;
+        switch (question) {
+            case 1:
+                if (genero) {
+                    return next;
+                }
+                return nextD;
+            case 2:
+                if (edad && edad > 5 && edad < 100) {
+                    return next;
+                }
+                return nextD;
+            case 3:
+                if (municipio) {
+                    return next;
+                }
+                return nextD;
+            case 4:
+                if (zona) {
+                    return next;
+                }
+                return nextD;
+            case 5:
+                return (
+                    <button className={styles.buttonNextQuestion} role="button" onClick={nextQuestion}>&#10004;</button>
+                );
+            case maxQuestions + preguntas.length + 1:
+                return (
+                    <Link href="/"><button className={styles.buttonNextQuestion} role="button" >&#10004;</button></Link>
+                );
+            default:
+                if (question < maxQuestions + preguntas.length + 1 && respuestas[question - (maxQuestions + 2)].length > 10) {
+                    return next;
+                }
+                return nextD;
+        }
     }
 
     function showButtonBack() {
@@ -79,7 +99,7 @@ export default function Preguntas() {
             return (
                 <button className={styles.buttonPrevQuestion} role="button" onClick={prevQuestion}>&#10140;</button>
             );
-        } 
+        }
     }
 
     function showQuestion() {
@@ -89,13 +109,13 @@ export default function Preguntas() {
                     { value: 'Hombre', label: 'Hombre' },
                     { value: 'Mujer', label: 'Mujer' },
                     { value: 'Otro', label: 'Otro' }
-                ]
+                ];
                 return <Question
                     question="¿Con cual genero te identificas?"
                     options={options}
                     caption="Genero"
                     answer={genero}
-                    handleAnswer={changeGenero}
+                    handleAnswer={(value) => { setGenero(value) }}
                     styles={styles}
                 />;
             }
@@ -108,7 +128,7 @@ export default function Preguntas() {
                             type="number"
                             value={edad}
                             placeholder="Edad"
-                            onChange={changeEdad}
+                            onChange={(value) => { setEdad(value.target.value) }}
                             min="5"
                             max="100"
                         />
@@ -121,11 +141,14 @@ export default function Preguntas() {
                     options={departamentos}
                     caption="Departamento"
                     answer={departamento}
-                    handleAnswer={changeDepartamento}
+                    handleAnswer={(value) => {
+                        setDepartamento(value);
+                        setMunicipio(undefined);
+                    }}
                     options1={options}
                     caption1="Municipio"
                     answer1={municipio}
-                    handleAnswer1={changeMunicipio}
+                    handleAnswer1={(value) => { setMunicipio(value) }}
                     styles={styles}
                 />;
             }
@@ -133,19 +156,64 @@ export default function Preguntas() {
                 const options = [
                     { value: 'Rural', label: 'Rural' },
                     { value: 'Urbana', label: 'Urbana' }
-                ]
+                ];
                 return <Question
                     question="¿En que tipo de zona vives?"
                     options={options}
                     caption="Zona"
                     answer={zona}
-                    handleAnswer={changeZona}
+                    handleAnswer={(value) => { setZona(value) }}
                     styles={styles}
-                />;;
+                />;
             default:
                 return <></>;
         }
     }
+
+    function showQuestionText() {
+        const pregunta = preguntas[question - (maxQuestions + 2)].pregunta.replace('MUNICIPIO', municipio.label)
+        const pista = preguntas[question - (maxQuestions + 2)].pista.replace('MUNICIPIO', municipio.label)
+        return (<>
+            <p className={styles.question}>{pregunta}</p>
+            <textarea className={styles.textResponse} placeholder={pista} value={respuestas[question - (maxQuestions + 2)]} onChange={(value) => {
+                const newRespuestas = [...respuestas];
+                newRespuestas[question - (maxQuestions + 2)] = value.target.value;
+                setRespuestas(newRespuestas);
+            }} maxLength="500">
+            </textarea>
+        </>);
+    }
+
+    function showSection() {
+        if (question <= maxQuestions) {
+            return (<>
+                <h1 className={styles.subTitle}><strong>{name}</strong> cuéntanos un poco mas de ti...</h1>
+                <p className={styles.description}>No compartiremos esta información con nadie y solo la usaremos para clasificar tus respuestas. No guardaremos tu nombre.</p>
+                {showQuestion()}
+            </>);
+        }
+        else if (question === maxQuestions + 1) {
+            return (<>
+                <h1 className={styles.subTitle}>¿Hasta ahora es correcta esta información <strong>{name}</strong>?</h1>
+                <p className={styles.description}>Si hay algún error puedes regresar y corregirlo.</p>
+                <div className={styles.summary}>
+                    <strong>Genero:</strong> {genero ? genero.label : ''}<br />
+                    <strong>Edad:</strong> {edad}<br />
+                    <strong>Departamento:</strong> {departamento ? departamento.label : ''}<br />
+                    <strong>Municipio:</strong> {municipio ? municipio.label : ''}<br />
+                    <strong>Zona:</strong> {zona ? zona.label : ''}<br />
+                </div>
+            </>);
+        }
+        else if (question <= maxQuestions + preguntas.length + 1) {
+            return (<>
+                <h1 className={styles.subTitle}><strong>{name}</strong> cuéntanos sobre tus experiencias, preocupaciones y expectativas...</h1>
+                {showQuestionText()}
+            </>);
+        }
+    }
+
+
 
     return (
         <div className={styles.container}>
@@ -160,14 +228,12 @@ export default function Preguntas() {
                 ODS-IA
             </div>
             <div className={styles.main}>
-                <h1 className={styles.subTitle}><strong>{name}</strong> cuéntanos un poco mas de ti...</h1>
-                <p className={styles.description}>No compartiremos esta información con nadie y solo la usaremos para clasificar tus respuestas. No guardaremos tu nombre.</p>
-                {showQuestion()}
+                {showSection()}
                 <div className={styles.select}>
                     {showButtonBack()}
                     {showButtonNext()}
                 </div>
-                <p className={styles.questionCount}>{`${question}/${maxQuestions}`}</p>
+                <p className={styles.questionCount}>{`${question}/${maxQuestions + preguntas.length + 1}`}</p>
             </div>
         </div>
     );

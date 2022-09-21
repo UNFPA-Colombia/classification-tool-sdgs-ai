@@ -55,7 +55,8 @@
 
 .title,
 .description,
-.question {
+.question,
+.subTitle {
   text-align: center;
   margin-right: 1rem;
   margin-left: 1rem;
@@ -67,6 +68,17 @@
 
 .subTitle strong {
     color: #204D3399;
+}
+
+.summary {
+    line-height: 1.5;
+    font-size: 1.2rem;
+    padding: 1rem;
+    margin: 1rem;
+    margin-bottom: 2rem;
+    background-color: #eaeaea95;
+    border-radius: 10px;
+    color: #204D33;
 }
 
 .grid {
@@ -217,7 +229,6 @@
     max-width: 600px;
     display: inline-block;
     color:#11291b;
-    font-size: 1rem;
     margin: 0.5rem;
 }
 
@@ -244,9 +255,32 @@
     min-width: 250px;
     max-width: 600px;
     display: inline-block;
-    color:#412300;
-    font-size: 1rem;
     margin: 0.5rem;
+    color: #204d33;
+}
+
+.textResponse {
+    width: 80%;
+    max-width: 800px;
+    height: 14rem;
+    resize: none;
+    margin: 2rem;
+    background-color: #eaeaea95;
+    border-radius: 10px;
+    color: #204D33;
+    padding: 1rem;
+    border-color: #11291b;
+    font-family: inherit;
+    font-size: 1.2rem;
+}
+
+.textResponse:focus {
+    box-shadow: 0 0 5px #204D33;
+    outline: none !important;
+}
+
+.textResponse::placeholder {
+    color: #204D3399;
 }
 
 .buttonPrevQuestion, .buttonNextQuestion {
@@ -265,7 +299,14 @@
     background-color: #eaeaea95;
 }
 
-.buttonPrevQuestion:hover, .buttonNextQuestion:hover {
+.buttonPrevQuestion:disabled, .buttonNextQuestion:disabled {
+    color: #204d3399;
+    cursor: initial;
+}
+
+
+
+.buttonPrevQuestion:enabled:hover, .buttonNextQuestion:enabled:hover {
     border-color: #11291b;
 }
 
@@ -286,5 +327,12 @@
     }
     .formField, .inputNumber {
         border-bottom: 2px solid #E6E6E6;
+    }
+    .textResponse::placeholder {
+        color: #E6E6E699;
+    }
+    .summary, .textResponse{
+        background-color: #11291b99;
+        color: #E6E6E6;
     }
 }
