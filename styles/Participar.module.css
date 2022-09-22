@@ -73,12 +73,15 @@
 .summary {
     line-height: 1.5;
     font-size: 1.2rem;
-    padding: 1rem;
+    padding: 1.5rem;
+    padding-top: 0;
+    padding-bottom: 0;
     margin: 1rem;
     margin-bottom: 2rem;
     background-color: #eaeaea95;
     border-radius: 10px;
     color: #204D33;
+    max-width: 800px;
 }
 
 .grid {
@@ -285,7 +288,7 @@
 
 .buttonPrevQuestion, .buttonNextQuestion {
     background-color: transparent;
-    border-radius: 40%;
+    border-radius: 0.7rem;
     border: 1px solid #eaeaea;
     box-sizing: border-box;
     cursor: pointer;
@@ -297,6 +300,7 @@
     font-size: 1rem;
     margin: 1rem;
     background-color: #eaeaea95;
+    min-width: 2.5rem;
 }
 
 .buttonPrevQuestion:disabled, .buttonNextQuestion:disabled {

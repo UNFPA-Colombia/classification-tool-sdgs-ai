@@ -78,16 +78,16 @@ export default function Preguntas() {
                     return next;
                 }
                 return nextD;
-            case 5:
+            case maxQuestions + 1:
                 return (
-                    <button className={styles.buttonNextQuestion} role="button" onClick={nextQuestion}>&#10004;</button>
+                    <button className={styles.buttonNextQuestion} role="button" onClick={nextQuestion}>&#10003;</button>
                 );
-            case maxQuestions + preguntas.length + 1:
+            case maxQuestions + preguntas.length + 2:
                 return (
-                    <Link href="/"><button className={styles.buttonNextQuestion} role="button" >&#10004;</button></Link>
+                    <Link href="/"><button className={styles.buttonNextQuestion} role="button" >&#10003; Enviar</button></Link>
                 );
             default:
-                if (question < maxQuestions + preguntas.length + 1 && respuestas[question - (maxQuestions + 2)].length > 10) {
+                if (question < maxQuestions + preguntas.length + 2 && respuestas[question - (maxQuestions + 2)].length > 10) {
                     return next;
                 }
                 return nextD;
@@ -184,12 +184,27 @@ export default function Preguntas() {
         </>);
     }
 
+    function showQuestionSummary() {
+        const summary = [];
+        for (let i = 0; i < preguntas.length; i++) {
+            summary.push(<>
+                <p><strong>{preguntas[i].pregunta.replace('MUNICIPIO', municipio.label)}</strong> <br/>{respuestas[i]}</p>
+            </>);
+        }
+        return summary;
+    }
+
     function showSection() {
         if (question <= maxQuestions) {
             return (<>
                 <h1 className={styles.subTitle}><strong>{name}</strong> cuéntanos un poco mas de ti...</h1>
                 <p className={styles.description}>No compartiremos esta información con nadie y solo la usaremos para clasificar tus respuestas. No guardaremos tu nombre.</p>
                 {showQuestion()}
+                <div className={styles.select}>
+                    {showButtonBack()}
+                    {showButtonNext()}
+                </div>
+                <p className={styles.questionCount}>{`${question}/${maxQuestions + preguntas.length}`}</p>
             </>);
         }
         else if (question === maxQuestions + 1) {
@@ -197,11 +212,15 @@ export default function Preguntas() {
                 <h1 className={styles.subTitle}>¿Hasta ahora es correcta esta información <strong>{name}</strong>?</h1>
                 <p className={styles.description}>Si hay algún error puedes regresar y corregirlo.</p>
                 <div className={styles.summary}>
-                    <strong>Genero:</strong> {genero ? genero.label : ''}<br />
-                    <strong>Edad:</strong> {edad}<br />
-                    <strong>Departamento:</strong> {departamento ? departamento.label : ''}<br />
-                    <strong>Municipio:</strong> {municipio ? municipio.label : ''}<br />
-                    <strong>Zona:</strong> {zona ? zona.label : ''}<br />
+                    <p><strong>Genero:</strong> {genero ? genero.label : ''}</p>
+                    <p><strong>Edad:</strong> {edad}</p>
+                    <p><strong>Departamento:</strong> {departamento ? departamento.label : ''}</p>
+                    <p><strong>Municipio:</strong> {municipio ? municipio.label : ''}</p>
+                    <p><strong>Zona:</strong> {zona ? zona.label : ''}</p>
+                </div>
+                <div className={styles.select}>
+                    {showButtonBack()}
+                    {showButtonNext()}
                 </div>
             </>);
         }
@@ -209,6 +228,24 @@ export default function Preguntas() {
             return (<>
                 <h1 className={styles.subTitle}><strong>{name}</strong> cuéntanos sobre tus experiencias, preocupaciones y expectativas...</h1>
                 {showQuestionText()}
+                <div className={styles.select}>
+                    {showButtonBack()}
+                    {showButtonNext()}
+                </div>
+                <p className={styles.questionCount}>{`${question - 1}/${maxQuestions + preguntas.length}`}</p>
+            </>);
+        }
+        else if (question == maxQuestions + preguntas.length + 2) {
+            return (<>
+                <h1 className={styles.subTitle}>¡Revisa tus respuestas <strong>{name}</strong>!</h1>
+                <p className={styles.description}>Si hay algún error puedes regresar y corregirlo.</p>
+                <div className={styles.summary}>
+                    {showQuestionSummary()}
+                </div>
+                <div className={styles.select}>
+                    {showButtonBack()}
+                    {showButtonNext()}
+                </div>
             </>);
         }
     }
@@ -229,11 +266,6 @@ export default function Preguntas() {
             </div>
             <div className={styles.main}>
                 {showSection()}
-                <div className={styles.select}>
-                    {showButtonBack()}
-                    {showButtonNext()}
-                </div>
-                <p className={styles.questionCount}>{`${question}/${maxQuestions + preguntas.length + 1}`}</p>
             </div>
         </div>
     );
