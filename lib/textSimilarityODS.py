@@ -1,12 +1,13 @@
 # imports
+import sys
 from os import path
+import json
+import numpy as np
 import pandas as pd
 from nltk.corpus import stopwords
 from contexto.limpieza import *
 from contexto.vectorizacion import *
 from contexto.comparacion import Similitud
-import numpy as np
-
 
 basepath = path.dirname(path.realpath(__file__))
 pd.set_option('display.max_columns', None)
@@ -34,11 +35,17 @@ def getGoals(texto):
 
     coseno_word2vec_m = s_word2vec_m.coseno(golasClean, limpieza_texto(texto))
     goalId = np.argsort(coseno_word2vec_m.flatten())[::-1][:3]
-    goalSim = sorted(coseno_word2vec_m.flatten(), reverse=True)[:3]
+    goalSim = np.sort(coseno_word2vec_m.flatten())[::-1][:3]
     return (goalId, goalSim)
 
 
 if __name__ == '__main__':
-    test = getGoals('La contaminación del aire.')
-    fullGoals[fullGoals.id == test[0][0]+1]['met_conc']
-    print(test)
+    result = []
+    for i in range(1, len(sys.argv)):
+        ids, sims = getGoals(sys.argv[i])
+        ids = (ids+1).tolist()
+        sims = sims.tolist()
+        goals = fullGoals.loc[ids, 'id_objetivo'].tolist()
+        result.append({'ids': ids, 'sims': sims, 'goals': goals})
+    json.dump(result, sys.stdout)
+    sys.stdout.flush()
