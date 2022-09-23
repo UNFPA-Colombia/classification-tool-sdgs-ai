@@ -57,12 +57,16 @@
 .description,
 .question,
 .subTitle {
-  text-align: center;
-  margin-right: 1rem;
-  margin-left: 1rem;
+    text-align: center;
+    margin-right: 1rem;
+    margin-left: 1rem;
 }
 
-.label, .description, .formField, .formLabel, .formField:focus ~ .formLabel {
+.label,
+.description,
+.formField,
+.formLabel,
+.formField:focus~.formLabel {
     color: #204D33;
 }
 
@@ -97,6 +101,7 @@
     padding: 15px 0 0;
     margin: 1rem;
 }
+
 .formField {
     font-family: inherit;
     max-width: 600px;
@@ -135,7 +140,7 @@
     color: transparent;
 }
 
-.formField:placeholder-shown ~ .formLabel {
+.formField:placeholder-shown~.formLabel {
     font-size: 1.3rem;
     cursor: text;
     top: 20px;
@@ -148,13 +153,15 @@
     transition: 0.2s;
     font-size: 1rem;
 }
+
 .formField:focus {
     padding-bottom: 6px;
     font-weight: 700;
     border-width: 3px;
     border-image-slice: 1;
 }
-.formField:focus ~ .formLabel {
+
+.formField:focus~.formLabel {
     position: absolute;
     top: 0;
     display: block;
@@ -166,39 +173,39 @@
 .item {
     margin: 0.5rem;
     margin-bottom: 0rem;
-    padding: 0.5rem;  
+    padding: 0.5rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
 }
 
 .buttonStart {
-  background-color: transparent;
-  border-radius: 10px;
-  border: 1px solid #eaeaea;
-  box-sizing: border-box;
-  cursor: pointer;
-  display: inline-block;
-  font-family: inherit;
-  padding: 10px 16px;
-  position: relative;
-  text-align: center;
-  transition: color 100ms;
-  vertical-align: baseline;
-  color: inherit;
-  margin: 0.5rem;
-  margin-top: 0rem;
-  font-size: 1.2rem;
-  color: #204d33;
-  background-color: #eaeaea95;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid #eaeaea;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font-family: inherit;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    transition: color 100ms;
+    vertical-align: baseline;
+    color: inherit;
+    margin: 0.5rem;
+    margin-top: 0rem;
+    font-size: 1.2rem;
+    color: #204d33;
+    background-color: #eaeaea95;
 }
 
 .buttonStart:hover,
 .buttonStart:focus,
 .buttonReturn:hover,
 .buttonReturn:focus {
-  border-color: #11291b;
+    border-color: #11291b;
 }
 
 .buttonReturn {
@@ -227,15 +234,15 @@
     align-items: center;
 }
 
-.selectItem { 
+.selectItem {
     min-width: 250px;
     max-width: 600px;
     display: inline-block;
-    color:#11291b;
+    color: #11291b;
     margin: 0.5rem;
 }
 
-.logo{
+.logo {
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -243,7 +250,7 @@
     font-size: 13px;
     font-weight: 100;
     font-family: sans-serif;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
     letter-spacing: 2px;
 }
 
@@ -254,7 +261,7 @@
     align-items: center;
 }
 
-.selectItem { 
+.selectItem {
     min-width: 250px;
     max-width: 600px;
     display: inline-block;
@@ -286,7 +293,9 @@
     color: #204D3399;
 }
 
-.buttonPrevQuestion, .buttonNextQuestion {
+.buttonPrevQuestion,
+.buttonNextQuestion,
+.listenButton {
     background-color: transparent;
     border-radius: 0.7rem;
     border: 1px solid #eaeaea;
@@ -298,44 +307,75 @@
     transition: color 100ms;
     color: #204d33;
     font-size: 1rem;
-    margin: 1rem;
     background-color: #eaeaea95;
     min-width: 2.5rem;
 }
 
-.buttonPrevQuestion:disabled, .buttonNextQuestion:disabled {
+.buttonPrevQuestion,
+.buttonNextQuestion {
+    margin: 1rem;
+}
+
+.listenButton {
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+.buttonPrevQuestion:disabled,
+.buttonNextQuestion:disabled {
     color: #204d3399;
     cursor: initial;
 }
 
-
-
-.buttonPrevQuestion:enabled:hover, .buttonNextQuestion:enabled:hover {
+.buttonPrevQuestion:enabled:hover,
+.buttonNextQuestion:enabled:hover,
+.listenButton:hover {
     border-color: #11291b;
 }
 
-.buttonPrevQuestion{
+.buttonPrevQuestion {
     transform: rotate(180deg);
+}
+
+.noAudioAlert {
+    color: #204d3399;
+    font-size: 0.8rem;
+    margin: 4rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
 @media (prefers-color-scheme: dark) {
     .container {
-      background: linear-gradient(160deg, #1d4325, #477933);
-      color: #EFEFEF;
+        background: linear-gradient(160deg, #1d4325, #477933);
+        color: #EFEFEF;
     }
-    .label, .description, .formField, .formLabel, .formField:focus ~ .formLabel {
+
+    .label,
+    .description,
+    .formField,
+    .formLabel,
+    .formField:focus~.formLabel {
         color: #E6E6E6;
     }
-    .subTitle strong, .inputNumber::placeholder {
+
+    .subTitle strong,
+    .inputNumber::placeholder {
         color: #E6E6E699;
     }
-    .formField, .inputNumber {
+
+    .formField,
+    .inputNumber {
         border-bottom: 2px solid #E6E6E6;
     }
-    .textResponse::placeholder {
+
+    .textResponse::placeholder, .noAudioAlert {
         color: #E6E6E699;
     }
-    .summary, .textResponse{
+
+    .summary,
+    .textResponse {
         background-color: #11291b99;
         color: #E6E6E6;
     }

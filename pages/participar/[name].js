@@ -9,6 +9,7 @@ import Image from 'next/image'
 import styles from '../../styles/Participar.module.css'
 import DoubleQuestion from '../../components/DoubleQuestion';
 import Question from '../../components/Question';
+import TextAudioQuestion from '../../components/TextAudioQuestion';
 
 export default function Preguntas() {
     const router = useRouter();
@@ -176,12 +177,17 @@ export default function Preguntas() {
         const pista = preguntas[question - (maxQuestions + 2)].pista.replace('MUNICIPIO', municipio.label)
         return (<>
             <p className={styles.question}>{pregunta}</p>
-            <textarea className={styles.textResponse} placeholder={pista} value={respuestas[question - (maxQuestions + 2)]} onChange={(value) => {
-                const newRespuestas = [...respuestas];
-                newRespuestas[question - (maxQuestions + 2)] = value.target.value;
-                setRespuestas(newRespuestas);
-            }} maxLength="500">
-            </textarea>
+            <TextAudioQuestion
+                styles={styles}
+                caption={pista}
+                answer={respuestas[question - (maxQuestions + 2)]}
+                handleAnswer={(value) => {
+                    const newRespuestas = [...respuestas];
+                    newRespuestas[question - (maxQuestions + 2)] = value;
+                    setRespuestas(newRespuestas);
+                }}
+                limit={600}
+            />
         </>);
     }
 
@@ -250,8 +256,6 @@ export default function Preguntas() {
             </>);
         }
     }
-
-
 
     return (
         <div className={styles.container}>
