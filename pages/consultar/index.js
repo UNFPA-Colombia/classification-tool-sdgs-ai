@@ -4,6 +4,7 @@ import departamentosJson from '../../json/departamentos.json';
 
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import DoubleQuestion from '../../components/DoubleQuestion';
 import styles from '../../styles/Consultar.module.css';
 
@@ -40,7 +41,9 @@ export default function Consultar({ municipios, departamentos }) {
 
             <Link href="/"><button className={styles.buttonReturn} role="button">&#10140;</button></Link>
             <div className={styles.logo}>
-                ODS-IA
+                <span >
+                    <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={10} height={10} />
+                </span> DS-IA
             </div>
 
             <div className={styles.main}>

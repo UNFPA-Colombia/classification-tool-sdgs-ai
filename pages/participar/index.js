@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from '../../styles/Participar.module.css';
 
 export default function Participar() {
@@ -29,7 +30,9 @@ export default function Participar() {
             </Head>
             <Link href="/"><button className={styles.buttonReturn} role="button">&#10140;</button></Link>
             <div className={styles.logo}>
-                ODS-IA
+                <span >
+                    <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={10} height={10} />
+                </span> DS-IA
             </div>
             <div className={styles.main}>
                 <h1 className={styles.title}>Participar &#9995;</h1>

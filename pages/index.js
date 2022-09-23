@@ -14,12 +14,19 @@ export default function Home() {
       </Head>
 
       <div className={styles.logoODSIA}>
-                ODS-IA
+      <span >
+              <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={10} height={10} />
+      </span> DS-IA
       </div>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          ¡Bienvenido a <strong>ODS-IA</strong> del <a href="https://colombia.unfpa.org" target="_blank" rel="noopener noreferrer">UNFPA!</a>
+          ¡Bienvenido a <strong>
+            <span >
+              <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={54} height={54} />
+            </span>
+            DS-IA
+          </strong> del <a href="https://colombia.unfpa.org" target="_blank" rel="noopener noreferrer">UNFPA!</a>
         </h1>
 
         <p className={styles.description}>
@@ -36,19 +43,19 @@ export default function Home() {
           </Link>
 
           <Link href="/consultar">
-          <a className={styles.card}>
-            <h2>Resultados &#x1F50E;</h2>
-            <p>Consulta los ODSs más relevantes para las personas de tu ciudad o municipio.</p>
-          </a>
+            <a className={styles.card}>
+              <h2>Resultados &#x1F50E;</h2>
+              <p>Consulta los ODSs más relevantes para las personas de tu ciudad o municipio.</p>
+            </a>
           </Link>
 
           <Link href="/conocer">
-          <a className={styles.card}>
-            <h2>Conocer más &#x1F4DA;</h2>
-            <p>
-              Conoce más de esta iniciativa y sobre que son los Objetivos de Desarrollo Sostenibles.
-            </p>
-          </a>
+            <a className={styles.card}>
+              <h2>Conocer más &#x1F4DA;</h2>
+              <p>
+                Conoce más de esta iniciativa y sobre que son los Objetivos de Desarrollo Sostenibles.
+              </p>
+            </a>
           </Link>
         </div>
 

@@ -5,6 +5,7 @@ import departamentosJson from '../../json/departamentos.json';
 
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import styles from '../../styles/Participar.module.css'
 import DoubleQuestion from '../../components/DoubleQuestion';
 import Question from '../../components/Question';
@@ -188,7 +189,7 @@ export default function Preguntas() {
         const summary = [];
         for (let i = 0; i < preguntas.length; i++) {
             summary.push(<>
-                <p><strong>{preguntas[i].pregunta.replace('MUNICIPIO', municipio.label)}</strong> <br/>{respuestas[i]}</p>
+                <p><strong>{preguntas[i].pregunta.replace('MUNICIPIO', municipio.label)}</strong> <br />{respuestas[i]}</p>
             </>);
         }
         return summary;
@@ -262,7 +263,9 @@ export default function Preguntas() {
             </Head>
             <Link href="/participar"><button className={styles.buttonReturn} role="button">&#10140;</button></Link>
             <div className={styles.logo}>
-                ODS-IA
+                <span >
+                    <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={10} height={10} />
+                </span> DS-IA
             </div>
             <div className={styles.main}>
                 {showSection()}
