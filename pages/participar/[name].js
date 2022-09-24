@@ -33,6 +33,8 @@ export default function Preguntas() {
     const [question, setQuestion] = useState(1);
     const maxQuestions = 4;
 
+    const [posting, setPosting] = useState(0); // 0: not posted, 1: posting, 2: posted 3: error
+
     const municipios = municipiosJson.map((municipio) => {
         return {
             label: municipio.nombre,
@@ -54,6 +56,40 @@ export default function Preguntas() {
 
     function prevQuestion() {
         setQuestion(question - 1);
+    }
+
+    function postAnswers() {
+        const reqBody = {
+            nombre: name,
+            departamento: departamento.departamento,
+            municipio: municipio.value,
+            edad: edad,
+            genero: genero.value,
+            zona: zona.value,
+            respuestas: respuestas,
+        };
+        console.log(reqBody);
+        setPosting(1);
+        fetch('/api/procesamiento', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(reqBody),
+        }).then((response) => {
+            if (response.ok) {
+                setPosting(2);
+                return response.json();
+            } else {
+                setPosting(3);
+            }
+        })
+            .then((data) => {
+                console.log('Success:', data, data.status);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
 
     function showButtonNext() {
@@ -86,7 +122,7 @@ export default function Preguntas() {
                 );
             case maxQuestions + preguntas.length + 2:
                 return (
-                    <Link href="/"><button className={styles.buttonNextQuestion} role="button" >&#10003; Enviar</button></Link>
+                    <button className={styles.buttonNextQuestion} role="button" onClick={postAnswers}>&#10003; Enviar</button>
                 );
             default:
                 if (question < maxQuestions + preguntas.length + 2 && respuestas[question - (maxQuestions + 2)].length > 10) {
@@ -108,9 +144,9 @@ export default function Preguntas() {
         switch (question) {
             case 1: {
                 const options = [
-                    { value: 'Hombre', label: 'Hombre' },
-                    { value: 'Mujer', label: 'Mujer' },
-                    { value: 'Otro', label: 'Otro' }
+                    { value: 'H', label: 'Hombre' },
+                    { value: 'M', label: 'Mujer' },
+                    { value: 'O', label: 'Otro' }
                 ];
                 return <Question
                     question="¿Con cual genero te identificas?"
@@ -156,8 +192,8 @@ export default function Preguntas() {
             }
             case 4:
                 const options = [
-                    { value: 'Rural', label: 'Rural' },
-                    { value: 'Urbana', label: 'Urbana' }
+                    { value: 'R', label: 'Rural' },
+                    { value: 'U', label: 'Urbana' }
                 ];
                 return <Question
                     question="¿En que tipo de zona vives?"
@@ -195,10 +231,28 @@ export default function Preguntas() {
         const summary = [];
         for (let i = 0; i < preguntas.length; i++) {
             summary.push(<>
-                <p><strong>{preguntas[i].pregunta.replace('MUNICIPIO', municipio.label)}</strong> <br />{respuestas[i]}</p>
+                <p key={i}><strong>{preguntas[i].pregunta.replace('MUNICIPIO', municipio.label)}</strong> <br />{respuestas[i]}</p>
             </>);
         }
         return summary;
+    }
+
+    function showPosting() {
+        switch (posting) {
+            case 0:
+                return (<>
+                    {showButtonBack()}
+                    {showButtonNext()}
+                </>);
+            case 1:
+                return <p className={styles.posting}>Enviando...</p>;
+            case 2:
+                return <p className={styles.posting}>Enviado</p>;
+            case 3:
+                return <p className={styles.posting}>Error</p>;
+            default:
+                return <></>;
+        }
     }
 
     function showSection() {
@@ -242,7 +296,7 @@ export default function Preguntas() {
                 <p className={styles.questionCount}>{`${question - 1}/${maxQuestions + preguntas.length}`}</p>
             </>);
         }
-        else if (question == maxQuestions + preguntas.length + 2) {
+        else if (question === maxQuestions + preguntas.length + 2) {
             return (<>
                 <h1 className={styles.subTitle}>¡Revisa tus respuestas <strong>{name}</strong>!</h1>
                 <p className={styles.description}>Si hay algún error puedes regresar y corregirlo.</p>
@@ -250,8 +304,7 @@ export default function Preguntas() {
                     {showQuestionSummary()}
                 </div>
                 <div className={styles.select}>
-                    {showButtonBack()}
-                    {showButtonNext()}
+                    {showPosting()}
                 </div>
             </>);
         }
@@ -265,7 +318,7 @@ export default function Preguntas() {
                 <meta name="keywords" content="IA, Objetivos de Desarrollo Sostenibles, UNFPA, Colombia"></meta>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Link href="/participar"><button className={styles.buttonReturn} role="button">&#10140;</button></Link>
+            {posting === 0 ? <Link href="/participar"><button className={styles.buttonReturn} role="button">&#10140;</button></Link> : <></>}
             <div className={styles.logo}>
                 <span >
                     <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={10} height={10} />

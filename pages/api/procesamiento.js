@@ -5,19 +5,25 @@ const Joi = require('joi');
 export default async function handler(req, res) {
     if (req.method === 'POST') {
         return new Promise(function (resolve, reject) {
-            const schema = Joi.array().items(
-                Joi.string().min(10).max(1000)
-            ).required();
+            const schema = Joi.object({
+                nombre: Joi.string().min(2).max(25).required(),
+                departamento: Joi.string().pattern(/^[0-9]+$/, 'numbers').length(2).required(),
+                municipio: Joi.string().pattern(/^[0-9]+$/, 'numbers').length(5).required(),
+                edad: Joi.number().integer().min(0).max(120).required(),
+                genero: Joi.string().valid('H', 'M', 'O').required(),
+                zona: Joi.string().valid('U', 'R').required(),
+                respuestas: Joi.array().items( Joi.string().min(10).max(1000) ).required(),
+        });
 
             const { error, value } = schema.validate(req.body);
 
             if (error) {
-                res.status(400).send(err);
+                res.status(400).send(error);
                 resolve();
             } else {
                 const libDirectory = path.join(process.cwd(), 'lib');
                 const pythonPath = libDirectory + '/virtualenv9/bin/python'; // path to python 3.9.13 virtual environment with all required libraries
-                const pythonProcess = spawn(pythonPath, [libDirectory + '/textSimilarityODS.py', ...value]);
+                const pythonProcess = spawn(pythonPath, [libDirectory + '/textSimilarityODS.py', ...value.respuestas]);
     
                 pythonProcess.stdout.on('data', (data) => {
                     res.setHeader('content-type', 'application/json');
