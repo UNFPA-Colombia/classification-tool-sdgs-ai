@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Objetivos {
+  id          Int     @id @db.SmallInt
+  nombre      String  @db.VarChar(50)
+  descripcion String  @db.VarChar(1000)
+  url         String  @db.VarChar(255)
+  img         String  @db.VarChar(255)
+  metas       Metas[]
+}
+
+model Metas {
+  id             String           @id @db.VarChar(2)
+  descripcion    String           @db.VarChar(1000)
+  img            String           @db.VarChar(255)
+  url            String           @db.VarChar(255)
+  objetivos      Objetivos        @relation(fields: [objetivoId], references: [id])
+  objetivoId     Int
+  metasRespuesta MetasRespuestas[]
+}
+
+model Grupos {
+  id        String      @id @default(uuid())
+  nombre    String
+  preguntas Preguntas[]
+  encuestas Encuestas[]
+}
+
+model Preguntas {
+  id         Int         @id
+  pregunta   String      @db.VarChar(255)
+  pista      String      @db.VarChar(255)
+  grupo      Grupos      @relation(fields: [grupoId], references: [id])
+  grupoId    String
+  respuestas Respuesta[]
+}
+
+model Municipios {
+  divipola             String        @id @db.VarChar(5)
+  municipio            String        @db.VarChar(50)
+  departamento         Departamentos @relation(fields: [departamentoDivipola], references: [divipola])
+  departamentoDivipola String
+  encuestas            Encuestas[]
+}
+
+model Departamentos {
+  divipola   String       @id @db.VarChar(5)
+  nombre     String       @db.VarChar(255)
+  municipios Municipios[]
+  encuestas  Encuestas[]
+}
+
+model Encuestas {
+  id                   String        @id @default(uuid())
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+  municipio            Municipios    @relation(fields: [municipioDivipola], references: [divipola])
+  municipioDivipola    String
+  departamento         Departamentos @relation(fields: [departamentoDivipola], references: [divipola])
+  departamentoDivipola String
+  zona                 String        @db.VarChar(10)
+  anioNacimiento       Int           @db.SmallInt
+  genero               String        @db.VarChar(1)
+  procesado            Boolean       @default(false)
+  Respuesta            Respuesta[]
+  grupo                Grupos        @relation(fields: [grupoId], references: [id])
+  grupoId              String
+}
+
+model Respuesta {
+  id             String           @id @default(uuid())
+  encuesta       Encuestas        @relation(fields: [encuestaId], references: [id])
+  encuestaId     String
+  pregunta       Preguntas        @relation(fields: [preguntaId], references: [id])
+  preguntaId     Int
+  respuesta      String           @db.VarChar(1000)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  procesado      Boolean          @default(false)
+  metasRespuesta MetasRespuestas[]
+}
+
+model MetasRespuestas {
+  id          String    @id @default(uuid())
+  respuesta   Respuesta @relation(fields: [respuestaId], references: [id])
+  respuestaId String
+  meta        Metas     @relation(fields: [metaId], references: [id])
+  metaId      String
+  similitud   Float     @db.Real
+  createdAt   DateTime  @default(now())
+}
