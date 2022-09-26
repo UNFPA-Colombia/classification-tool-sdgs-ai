@@ -36,6 +36,10 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
     }
 
     function postAnswers() {
+        respuestas.forEach((respuesta, index) => {
+            preguntas[index]['respuesta'] = respuesta;
+        });
+
         const reqBody = {
             grupo: grupo,
             departamento: departamento.value,
@@ -43,7 +47,12 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
             edad: edad,
             genero: genero.value,
             zona: zona.value,
-            respuestas: respuestas,
+            respuestas: preguntas.map(pregunta => {
+                return {
+                    pregunta: pregunta.id,
+                    respuesta: pregunta.respuesta
+                }
+            }),
         };
 
         setPosting(1);
@@ -56,14 +65,14 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
         }).then((response) => {
             if (response.ok) {
                 setPosting(2);
-                return response.json();
+                return response.json()
+                    .then((data) => {
+                        console.log('Success:', data);
+                    });
             } else {
                 setPosting(3);
             }
         })
-            .then((data) => {
-                console.log('Success:', data, data.status);
-            })
             .catch((error) => {
                 console.error('Error:', error);
             });
@@ -222,11 +231,20 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
                     {showButtonNext()}
                 </>);
             case 1:
-                return <p className={styles.posting}>Enviando...</p>;
+                return <>
+                    <p className={styles.posting}>Enviando...</p>{showButtonBack()}
+                    {showButtonNext()}
+                </>;
             case 2:
-                return <p className={styles.posting}>Enviado</p>;
+                return <>
+                    <p className={styles.posting}>Enviado</p>{showButtonBack()}
+                    {showButtonNext()}
+                </>;
             case 3:
-                return <p className={styles.posting}>Error</p>;
+                return <>
+                    <p className={styles.posting}>Error</p>{showButtonBack()}
+                    {showButtonNext()}
+                </>;
             default:
                 return <></>;
         }
@@ -336,13 +354,13 @@ export async function getStaticProps({ params }) {
 
     if (!grupo) {
         return {
-            redirect: { destination: '/participar/noexiste', permanent: false},
+            redirect: { destination: '/participar/noexiste', permanent: false },
         }
     }
 
     if (!grupo.activo) {
         return {
-            redirect: { destination: '/participar/inactivo', permanent: false},
+            redirect: { destination: '/participar/inactivo', permanent: false },
         }
     }
 

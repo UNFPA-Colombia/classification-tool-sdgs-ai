@@ -17,7 +17,7 @@ spanishStopwords = set(stopwords.words('spanish'))
 
 # get goals
 fullGoals = pd.read_csv(
-    path.join(basepath, 'metas_texto_v3.csv'), encoding='latin-1', sep=';')
+    path.join(basepath, 'metas_texto_v4.csv'), encoding='latin-1', sep=';')
 goals = fullGoals.terminos
 
 # text cleanup
@@ -46,6 +46,7 @@ if __name__ == '__main__':
         ids = (ids+1).tolist()
         sims = sims.tolist()
         goals = fullGoals.loc[ids, 'id_objetivo'].tolist()
-        result.append({'ids': ids, 'sims': sims, 'goals': goals})
+        targets = fullGoals.loc[ids, 'meta_id'].tolist()
+        result.append({'ids': ids, 'sims': sims, 'goals': goals, 'targets': targets})
     json.dump(result, sys.stdout)
     sys.stdout.flush()
