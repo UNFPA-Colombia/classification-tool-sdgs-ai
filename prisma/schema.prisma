@@ -11,16 +11,16 @@ model Objetivos {
   id          Int     @id @db.SmallInt
   nombre      String  @db.VarChar(50)
   descripcion String  @db.VarChar(1000)
-  url         String  @db.VarChar(255)
-  img         String  @db.VarChar(255)
+  url         String? @db.VarChar(255)
+  img         String? @db.VarChar(255)
   metas       Metas[]
 }
 
 model Metas {
   id             String            @id @db.VarChar(2)
   descripcion    String            @db.VarChar(1000)
-  img            String            @db.VarChar(255)
-  url            String            @db.VarChar(255)
+  img            String?           @db.VarChar(255)
+  url            String?           @db.VarChar(255)
   objetivos      Objetivos         @relation(fields: [objetivoId], references: [id])
   objetivoId     Int
   metasRespuesta MetasRespuestas[]
@@ -28,13 +28,13 @@ model Metas {
 
 model Grupos {
   nombre          String            @id
-  descripcion     String            @db.VarChar(255)
+  descripcion     String?           @db.VarChar(255)
   encuestas       Encuestas[]
   preguntasGrupos PreguntasGrupos[]
 }
 
 model Preguntas {
-  id              Int              @id @default(autoincrement()) @db.SmallInt
+  id              Int               @id @default(autoincrement()) @db.SmallInt
   pregunta        String            @db.VarChar(255)
   pista           String            @db.VarChar(255)
   respuestas      Respuestas[]
@@ -73,7 +73,7 @@ model Encuestas {
   municipioDivipola    String
   departamento         Departamentos @relation(fields: [departamentoDivipola], references: [divipola])
   departamentoDivipola String
-  localidadBarrio      String        @db.VarChar(50)
+  localidadBarrio      String?       @db.VarChar(50)
   zona                 String        @db.VarChar(10)
   anioNacimiento       Int           @db.SmallInt
   genero               String        @db.VarChar(1)
