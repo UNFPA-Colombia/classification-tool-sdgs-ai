@@ -1,11 +1,8 @@
-import path from 'path';
-import { promises as fs } from 'fs';
+import prisma from '../../lib/prisma';
 
 export default async function handler(req, res) {
 
-  const directory = path.join(process.cwd(), 'json');
-  let departamentos = await fs.readFile(directory + '/departamentos.json', 'utf8');
-  departamentos = JSON.parse(departamentos);
+  const departamentos = await prisma.Departamentos.findMany();
 
   res.status(200).send(departamentos);
 }

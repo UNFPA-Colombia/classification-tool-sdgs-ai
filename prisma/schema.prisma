@@ -17,11 +17,11 @@ model Objetivos {
 }
 
 model Metas {
-  id             String           @id @db.VarChar(2)
-  descripcion    String           @db.VarChar(1000)
-  img            String           @db.VarChar(255)
-  url            String           @db.VarChar(255)
-  objetivos      Objetivos        @relation(fields: [objetivoId], references: [id])
+  id             String            @id @db.VarChar(2)
+  descripcion    String            @db.VarChar(1000)
+  img            String            @db.VarChar(255)
+  url            String            @db.VarChar(255)
+  objetivos      Objetivos         @relation(fields: [objetivoId], references: [id])
   objetivoId     Int
   metasRespuesta MetasRespuestas[]
 }
@@ -44,7 +44,7 @@ model Preguntas {
 
 model Municipios {
   divipola             String        @id @db.VarChar(5)
-  municipio            String        @db.VarChar(50)
+  nombre               String        @db.VarChar(50)
   departamento         Departamentos @relation(fields: [departamentoDivipola], references: [divipola])
   departamentoDivipola String
   encuestas            Encuestas[]
@@ -75,15 +75,15 @@ model Encuestas {
 }
 
 model Respuesta {
-  id             String           @id @default(uuid())
-  encuesta       Encuestas        @relation(fields: [encuestaId], references: [id])
+  id             String            @id @default(uuid())
+  encuesta       Encuestas         @relation(fields: [encuestaId], references: [id])
   encuestaId     String
-  pregunta       Preguntas        @relation(fields: [preguntaId], references: [id])
+  pregunta       Preguntas         @relation(fields: [preguntaId], references: [id])
   preguntaId     Int
-  respuesta      String           @db.VarChar(1000)
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
-  procesado      Boolean          @default(false)
+  respuesta      String            @db.VarChar(1000)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  procesado      Boolean           @default(false)
   metasRespuesta MetasRespuestas[]
 }
 
