@@ -12,7 +12,7 @@ import TextAudioQuestion from '../../components/TextAudioQuestion';
 
 export default function Preguntas({ municipios, departamentos, preguntas }) {
     const router = useRouter();
-    const { name } = router.query;
+    const { grupo } = router.query;
 
     const [departamento, setDepartamento] = useState(undefined);
     const [municipio, setMunicipio] = useState(undefined);
@@ -37,7 +37,7 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
 
     function postAnswers() {
         const reqBody = {
-            nombre: name,
+            grupo: grupo,
             departamento: departamento.value,
             municipio: municipio.value,
             edad: edad,
@@ -208,7 +208,7 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
         const summary = [];
         for (let i = 0; i < preguntas.length; i++) {
             summary.push(<>
-                <p key={i}><strong>{preguntas[i].pregunta.replace('MUNICIPIO', municipio.label)}</strong> <br />{respuestas[i]}</p>
+                <p key={i}><strong>{preguntas[i].pregunta.replace('MUNICIPIO', municipio.label).replace('DEPARTAMENTO', departamento.label)}</strong> <br />{respuestas[i]}</p>
             </>);
         }
         return summary;
@@ -290,7 +290,7 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
     return (
         <div className={styles.container}>
             <Head>
-                <title>ODS-IA: {name}</title>
+                <title>ODS-IA: participar</title>
                 <meta name="description" content="Participa en ODS-IA y ayúdanos a comprender el territorio de manera colectiva." />
                 <meta name="keywords" content="IA, Objetivos de Desarrollo Sostenibles, UNFPA, Colombia"></meta>
                 <link rel="icon" href="/favicon.ico" />
@@ -314,7 +314,7 @@ export async function getStaticPaths() {
     grupos = grupos.map((grupo) => {
         return {
             params: {
-                name: grupo.nombre
+                grupo: grupo.nombre
             }
         }
     });
@@ -329,7 +329,7 @@ export async function getStaticProps({ params }) {
 
     let grupo = await prisma.Grupos.findUnique({
         where:
-            { nombre: params.name },
+            { nombre: params.grupo },
         include:
             { preguntasGrupos: { include: { pregunta: true } } },
     });

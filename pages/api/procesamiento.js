@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         return new Promise(function (resolve, reject) {
             const schema = Joi.object({
-                nombre: Joi.string().min(2).max(25).required(),
+                grupo: Joi.string().min(2).max(50).required(),
                 departamento: Joi.string().pattern(/^[0-9]+$/, 'numbers').length(5).required(),
                 municipio: Joi.string().pattern(/^[0-9]+$/, 'numbers').length(5).required(),
                 edad: Joi.number().integer().min(1900).max(2030).required(),
