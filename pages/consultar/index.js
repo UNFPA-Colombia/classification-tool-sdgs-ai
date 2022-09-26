@@ -1,6 +1,5 @@
 import { useState, useId } from 'react';
-import municipiosJson from '../../json/municipios.json';
-import departamentosJson from '../../json/departamentos.json';
+import prisma from '../../lib/prisma';
 
 import Head from 'next/head';
 import Link from 'next/link';
@@ -29,7 +28,7 @@ export default function Consultar({ municipios, departamentos }) {
         }
     }
 
-    let opciones = departamento ? municipios.filter(municipio => municipio.departamento === departamento.departamento) : [];
+    let opciones = departamento ? municipios.filter(municipio => municipio.departamento === departamento.value) : [];
     return (
         <div className={styles.container}>
             <Head>
@@ -69,18 +68,21 @@ export default function Consultar({ municipios, departamentos }) {
 }
 
 export async function getStaticProps() {
-    const municipios = municipiosJson.map((municipio) => {
+    
+    let municipios = await prisma.Municipios.findMany();
+    municipios = municipios.map((municipio) => {
         return {
             label: municipio.nombre,
             value: municipio.divipola,
-            departamento: municipio.divipola_departamento,
+            departamento: municipio.departamentoDivipola,
         };
     });
-    const departamentos = departamentosJson.map((departamento) => {
+
+    let departamentos = await prisma.Departamentos.findMany();
+    departamentos = departamentos.map((departamento) => {
         return {
             label: departamento.nombre,
             value: departamento.divipola,
-            departamento: departamento.divipola.substring(0, 2),
         };
     });
 

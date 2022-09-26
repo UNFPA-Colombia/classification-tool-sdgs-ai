@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react';
-import municipiosJson from '../../json/municipios.json';
-import departamentosJson from '../../json/departamentos.json';
+import prisma from '../../lib/prisma';
 
 import Head from 'next/head'
 import Link from 'next/link'
@@ -11,7 +10,7 @@ import DoubleQuestion from '../../components/DoubleQuestion';
 import Question from '../../components/Question';
 import TextAudioQuestion from '../../components/TextAudioQuestion';
 
-export default function Preguntas() {
+export default function Preguntas({ municipios, departamentos, preguntas }) {
     const router = useRouter();
     const { name } = router.query;
 
@@ -21,34 +20,12 @@ export default function Preguntas() {
     const [genero, setGenero] = useState(undefined);
     const [zona, setZona] = useState(undefined);
 
-    const preguntas = [
-        { pregunta: "¿Qué es lo que mas te gusta de MUNICIPIO?", pista: "Lo que má me gusta de MUNICIPIO es..." },
-        { pregunta: "¿Cual crees que es el principal problema de MUNICIPIO?", pista: "El principal problema de MUNICIPIO es..." },
-        { pregunta: "¿Cómo sueñas MUNICIPIO en el año 2050?", pista: "En el año 2050 MUNICIPIO será..." },
-        { pregunta: "¿Como lograrías que MUNICIPIO sea un lugar mejor para vivir?", pista: "Para que MUNICIPIO sea un lugar mejor para vivir..." },
-    ];
-
     const [respuestas, setRespuestas] = useState(Array(preguntas.length).fill(''));
 
     const [question, setQuestion] = useState(1);
     const maxQuestions = 4;
 
     const [posting, setPosting] = useState(0); // 0: not posted, 1: posting, 2: posted 3: error
-
-    const municipios = municipiosJson.map((municipio) => {
-        return {
-            label: municipio.nombre,
-            value: municipio.divipola,
-            departamento: municipio.divipola_departamento,
-        };
-    });
-    const departamentos = departamentosJson.map((departamento) => {
-        return {
-            label: departamento.nombre,
-            value: departamento.divipola,
-            departamento: departamento.divipola.substring(0, 2),
-        };
-    });
 
     function nextQuestion() {
         setQuestion(question + 1);
@@ -61,14 +38,14 @@ export default function Preguntas() {
     function postAnswers() {
         const reqBody = {
             nombre: name,
-            departamento: departamento.departamento,
+            departamento: departamento.value,
             municipio: municipio.value,
             edad: edad,
             genero: genero.value,
             zona: zona.value,
             respuestas: respuestas,
         };
-        console.log(reqBody);
+
         setPosting(1);
         fetch('/api/procesamiento', {
             method: 'POST',
@@ -102,7 +79,7 @@ export default function Preguntas() {
                 }
                 return nextD;
             case 2:
-                if (edad && edad > 5 && edad < 100) {
+                if (edad && edad > 1899 && edad < 2031) {
                     return next;
                 }
                 return nextD;
@@ -159,21 +136,21 @@ export default function Preguntas() {
             }
             case 2:
                 return <>
-                    <p className={styles.question}>¿Cuantos años tienes?</p>
+                    <p className={styles.question}>¿En qué año naciste?</p>
                     <div className={styles.select}>
                         <input
                             className={styles.inputNumber}
                             type="number"
                             value={edad}
-                            placeholder="Edad"
+                            placeholder="Año"
                             onChange={(value) => { setEdad(value.target.value) }}
-                            min="5"
-                            max="100"
+                            min="1900"
+                            max="2030"
                         />
                     </div>
                 </>;
             case 3: {
-                const options = departamento ? municipios.filter(municipio => municipio.departamento === departamento.departamento) : [];
+                const options = departamento ? municipios.filter(municipio => municipio.departamento === departamento.value) : [];
                 return <DoubleQuestion
                     question="¿Donde vives?"
                     options={departamentos}
@@ -209,8 +186,8 @@ export default function Preguntas() {
     }
 
     function showQuestionText() {
-        const pregunta = preguntas[question - (maxQuestions + 2)].pregunta.replace('MUNICIPIO', municipio.label)
-        const pista = preguntas[question - (maxQuestions + 2)].pista.replace('MUNICIPIO', municipio.label)
+        const pregunta = preguntas[question - (maxQuestions + 2)].pregunta.replace('MUNICIPIO', municipio.label).replace('DEPARTAMENTO', departamento.label)
+        const pista = preguntas[question - (maxQuestions + 2)].pista.replace('MUNICIPIO', municipio.label).replace('DEPARTAMENTO', departamento.label)
         return (<>
             <p className={styles.question}>{pregunta}</p>
             <TextAudioQuestion
@@ -258,8 +235,8 @@ export default function Preguntas() {
     function showSection() {
         if (question <= maxQuestions) {
             return (<>
-                <h1 className={styles.subTitle}><strong>{name}</strong> cuéntanos un poco mas de ti...</h1>
-                <p className={styles.description}>No compartiremos esta información con nadie y solo la usaremos para clasificar tus respuestas. No guardaremos tu nombre.</p>
+                <h1 className={styles.subTitle}>Cuéntanos un poco mas de ti...</h1>
+                <p className={styles.description}>No compartiremos esta información con nadie y solo la usaremos para clasificar tus respuestas.</p>
                 {showQuestion()}
                 <div className={styles.select}>
                     {showButtonBack()}
@@ -270,11 +247,11 @@ export default function Preguntas() {
         }
         else if (question === maxQuestions + 1) {
             return (<>
-                <h1 className={styles.subTitle}>¿Hasta ahora es correcta esta información <strong>{name}</strong>?</h1>
+                <h1 className={styles.subTitle}>¿Hasta ahora es correcta esta información?</h1>
                 <p className={styles.description}>Si hay algún error puedes regresar y corregirlo.</p>
                 <div className={styles.summary}>
                     <p><strong>Genero:</strong> {genero ? genero.label : ''}</p>
-                    <p><strong>Edad:</strong> {edad}</p>
+                    <p><strong>Año de nacimiento:</strong> {edad}</p>
                     <p><strong>Departamento:</strong> {departamento ? departamento.label : ''}</p>
                     <p><strong>Municipio:</strong> {municipio ? municipio.label : ''}</p>
                     <p><strong>Zona:</strong> {zona ? zona.label : ''}</p>
@@ -287,7 +264,7 @@ export default function Preguntas() {
         }
         else if (question <= maxQuestions + preguntas.length + 1) {
             return (<>
-                <h1 className={styles.subTitle}><strong>{name}</strong> cuéntanos sobre tus experiencias, preocupaciones y expectativas...</h1>
+                <h1 className={styles.subTitle}>Cuéntanos sobre tus experiencias, preocupaciones y expectativas...</h1>
                 {showQuestionText()}
                 <div className={styles.select}>
                     {showButtonBack()}
@@ -298,7 +275,7 @@ export default function Preguntas() {
         }
         else if (question === maxQuestions + preguntas.length + 2) {
             return (<>
-                <h1 className={styles.subTitle}>¡Revisa tus respuestas <strong>{name}</strong>!</h1>
+                <h1 className={styles.subTitle}>¡Revisa tus respuestas!</h1>
                 <p className={styles.description}>Si hay algún error puedes regresar y corregirlo.</p>
                 <div className={styles.summary}>
                     {showQuestionSummary()}
@@ -331,3 +308,65 @@ export default function Preguntas() {
     );
 }
 
+export async function getStaticPaths() {
+
+    let grupos = await prisma.Grupos.findMany();
+    grupos = grupos.map((grupo) => {
+        return {
+            params: {
+                name: grupo.nombre
+            }
+        }
+    });
+
+    return {
+        paths: grupos,
+        fallback: 'blocking',
+    }
+}
+
+export async function getStaticProps({ params }) {
+
+    let grupo = await prisma.Grupos.findUnique({
+        where:
+            { nombre: params.name },
+        include:
+            { preguntasGrupos: { include: { pregunta: true } } },
+    });
+
+    if (!grupo) {
+        return {
+            redirect: { destination: '/participar/noexiste', permanent: false},
+        }
+    }
+
+    if (!grupo.activo) {
+        return {
+            redirect: { destination: '/participar/inactivo', permanent: false},
+        }
+    }
+
+    let preguntas = grupo.preguntasGrupos.map((preguntaGrupo) => {
+        return preguntaGrupo.pregunta;
+    });
+
+    let municipios = await prisma.Municipios.findMany();
+    municipios = municipios.map((municipio) => {
+        return {
+            label: municipio.nombre,
+            value: municipio.divipola,
+            departamento: municipio.departamentoDivipola,
+        };
+    });
+
+    let departamentos = await prisma.Departamentos.findMany();
+    departamentos = departamentos.map((departamento) => {
+        return {
+            label: departamento.nombre,
+            value: departamento.divipola,
+        };
+    });
+
+    return { props: { municipios, departamentos, preguntas } };
+
+}

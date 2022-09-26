@@ -29,6 +29,7 @@ model Metas {
 model Grupos {
   nombre          String            @id
   descripcion     String?           @db.VarChar(255)
+  activo          Boolean           @default(true)
   encuestas       Encuestas[]
   preguntasGrupos PreguntasGrupos[]
 }

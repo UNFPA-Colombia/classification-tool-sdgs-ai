@@ -5,7 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../../styles/Participar.module.css';
 
-export default function Participar() {
+export default function Inactivo() {
+
     const [codigo, setCodigo] = useState('');
 
     function handleInputChange(e) {
@@ -27,7 +28,7 @@ export default function Participar() {
     return (
         <div className={styles.container}>
             <Head>
-                <title>ODS-IA participar</title>
+                <title>ODS-IA participar no encontrado</title>
                 <meta name="description" content="Participa en ODS-IA y ayúdanos a comprender el territorio de manera colectiva." />
                 <meta name="keywords" content="IA, Objetivos de Desarrollo Sostenibles, UNFPA, Colombia, participa"></meta>
                 <link rel="icon" href="/favicon.ico" />
@@ -39,9 +40,8 @@ export default function Participar() {
                 </span> DS-IA
             </div>
             <div className={styles.main}>
-                <h1 className={styles.title}>Participar &#9995;</h1>
-                <p className={styles.description}>Responde algunas preguntas que te permitirán saber que ODSs son los mas cercanos a tus necesidades y preocupaciones. No te demoraras más de 10 minutos y nos ayudarás a comprender el territorio de manera colectiva.</p>
-                <p className={styles.question}>¡Para empezar cuéntanos si tienes un código de grupo!</p>
+                <h1 className={styles.title}>Grupo desactivado &#128556;</h1>
+                <p className={styles.description}>Parece que el grupo que estas buscando ya no esta activo. Intenta ingresar otro código o participa sin un grupo.</p>
                 <div className={styles.item}>
                     <div className={styles.formGroup}>
                         <input type="input" className={styles.formField} placeholder="Name" name="codigo" maxLength="20" value={codigo} onChange={handleInputChange} required />
