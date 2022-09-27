@@ -17,7 +17,8 @@ model Objetivos {
 }
 
 model Metas {
-  id             String            @id @db.VarChar(2)
+  id             String            @id @db.VarChar(5)
+  key            String            @db.VarChar(2)
   descripcion    String            @db.VarChar(1000)
   img            String?           @db.VarChar(255)
   url            String?           @db.VarChar(255)
@@ -75,7 +76,7 @@ model Encuestas {
   departamento         Departamentos @relation(fields: [departamentoDivipola], references: [divipola])
   departamentoDivipola String
   localidadBarrio      String?       @db.VarChar(50)
-  zona                 String        @db.VarChar(10)
+  zona                 String        @db.VarChar(1)
   anioNacimiento       Int           @db.SmallInt
   genero               String        @db.VarChar(1)
   procesado            Boolean       @default(false)
