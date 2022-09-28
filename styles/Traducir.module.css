@@ -162,6 +162,16 @@
     text-align: center;
 }
 
+.resultado {
+    margin: 1rem;
+    margin-top: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: inline-block;
+}
+
 @media (prefers-color-scheme: dark) {
     .container {
         background: linear-gradient(160deg, #555887, #888bba);

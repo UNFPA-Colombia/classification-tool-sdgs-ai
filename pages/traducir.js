@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import prisma from '../lib/prisma';
 
 import Head from 'next/head';
 import Link from 'next/link';
@@ -7,7 +8,7 @@ import TextAudioQuestion from '../components/TextAudioQuestion';
 import Loading from '../components/Loading';
 import styles from '../styles/Traducir.module.css';
 
-export default function Traducir() {
+export default function Traducir({ objetivos }) {
 
     const [texto, setTexto] = useState('');
     const [estadoTraduccion, setEstadoTraduccion] = useState(0); // 0: not posted, 1: posting, 2: posted 3: error
@@ -39,6 +40,30 @@ export default function Traducir() {
             .catch((error) => {
                 console.error('Error:', error);
             });
+    }
+
+    function showResultadoTraduccion() {
+        const resultadosAgrupados = resultadoTraduccion.reduce(function (r, a) {
+            r[a.goal] = r[a.goal] || [];
+            r[a.goal].push(a);
+            return r;
+        }, Object.create(null));
+
+        const resultado = []
+        Object.entries(resultadosAgrupados).forEach((item, index) => {
+            const [key, value] = item;
+            const objetivo = objetivos.find((objetivo) => objetivo.id === parseInt(key));
+            if (objetivo) {
+                resultado.push(<>
+                    <div className={styles.resultado}>
+                        <a href={objetivo.url} target="_blank" rel="noreferrer">
+                        <Image src={objetivo.img} width={150} height={150} alt={`Logo del Objetivo de Desarrollo Sostenible numero ${objetivo.id}`} />
+                        </a>
+                    </div>
+                </>);
+            }
+        });
+        return resultado;
     }
 
     function showTraduccion() {
@@ -73,13 +98,7 @@ export default function Traducir() {
                 );
             }
             return (
-                <div className={styles.traduccionM}>
-                    {resultadoTraduccion.map((item, index) => {
-                        return <div key={index}>
-                            <p>Meta: {item.goal}.{item.target} Similitud: {item.sim}</p>
-                        </div>;
-                    })}
-                </div>
+                <>{showResultadoTraduccion()}</>
             );
         } else if (estadoTraduccion === 3) {
             return (
@@ -161,4 +180,11 @@ export default function Traducir() {
             </div>
         </div>
     );
+}
+
+export async function getStaticProps() {
+
+    let objetivos = await prisma.Objetivos.findMany();
+
+    return { props: { objetivos } };
 }
