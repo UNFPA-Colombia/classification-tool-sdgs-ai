@@ -12,6 +12,7 @@ export default function Traducir() {
     const [texto, setTexto] = useState('');
     const [estadoTraduccion, setEstadoTraduccion] = useState(0); // 0: not posted, 1: posting, 2: posted 3: error
     const [resultadoTraduccion, setResultadoTraduccion] = useState([]);
+    const [textoMuyCorto, setTextoMuyCorto] = useState(false);
 
     function traducirTexto() {
         setEstadoTraduccion(1);
@@ -23,11 +24,13 @@ export default function Traducir() {
             body: JSON.stringify({ data: texto }),
         }).then((response) => {
             if (response.ok) {
-                setEstadoTraduccion(2);
                 return response.json()
                     .then((data) => {
-                        console.log(data);
-                        setResultadoTraduccion(data);
+                        setResultadoTraduccion(data[0]);
+                        setEstadoTraduccion(2);
+                    }).catch((error) => {
+                        console.log(error);
+                        setEstadoTraduccion(3);
                     });
             } else {
                 setEstadoTraduccion(3);
@@ -39,11 +42,17 @@ export default function Traducir() {
     }
 
     function showTraduccion() {
-        if (estadoTraduccion === 0) {
+        if (textoMuyCorto) {
             return (
-                <div className={styles.traduccion}>
-                    <p>Traducción</p>
-                    <p>Presiona el botón para traducir el texto</p>
+                <div className={styles.mensajeTraduccion}>
+                    <p>El texto es muy corto. Por favor, escribe al menos 6 palabras.</p>
+                </div>
+            );
+        }
+        else if (estadoTraduccion === 0) {
+            return (
+                <div className={styles.mensajeTraduccion}>
+                    <p>Presiona el botón para traducir el texto.</p>
                 </div>
             );
         } else if (estadoTraduccion === 1) {
@@ -56,31 +65,54 @@ export default function Traducir() {
                 </div>
             );
         } else if (estadoTraduccion === 2) {
+            if (resultadoTraduccion.length === 0) {
+                return (
+                    <div className={styles.mensajeTraduccion}>
+                        <p>No se encontraron ODSs relacionados con el texto.</p>
+                    </div>
+                );
+            }
             return (
-                <div className={styles.traduccion}>
-                    <p>Traducción</p>
+                <div className={styles.traduccionM}>
                     {resultadoTraduccion.map((item, index) => {
                         return <div key={index}>
-                            <p>Traduccion</p>
+                            <p>Meta: {item.goal}.{item.target} Similitud: {item.sim}</p>
                         </div>;
                     })}
                 </div>
             );
         } else if (estadoTraduccion === 3) {
             return (
-                <div className={styles.traduccion}>
-                    <p>Traducción</p>
+                <div className={styles.mensajeTraduccion}>
                     <p>Ha ocurrido un error</p>
+                    <p>Por favor intenta nuevamente...</p>
                 </div>
             );
         }
     }
 
+    function wordCount() {
+        return texto.split(' ').length;
+    }
+
     function showBotonTraducir() {
         if (estadoTraduccion === 0 || estadoTraduccion === 2 || estadoTraduccion === 3) {
-            return (
-                <button className={styles.traducirButton} role="button" onClick={traducirTexto}>&#10003; Traducir</button>
-            );
+            if (wordCount() >= 6) {
+                return (
+                    <button className={styles.traducirButton} role="button" onClick={traducirTexto}>&#10003; Traducir</button>
+                );
+            } else if (texto.length < 5) {
+                return (
+                    <button className={styles.traducirButton} role="button" onClick={traducirTexto} disabled>&#10003; Traducir</button>
+                );
+            } else {
+                return (
+                    <button className={styles.traducirButton} role="button" onClick={() => {
+                        setTextoMuyCorto(true);
+                        setEstadoTraduccion(0);
+                    }}>&#10003; Traducir</button>
+                );
+            }
         } else if (estadoTraduccion === 1) {
             return (
                 <button className={styles.traducirButton} role="button" onClick={traducirTexto} disabled>&#10003; Traducir</button>
@@ -113,7 +145,10 @@ export default function Traducir() {
                             styles={styles}
                             caption={'Texto'}
                             answer={texto}
-                            handleAnswer={setTexto}
+                            handleAnswer={(value) => {
+                                setTexto(value);
+                                setTextoMuyCorto(false);
+                            }}
                             limit={600}
                         />
                         {showBotonTraducir()}

@@ -31,7 +31,7 @@
 
 .grid {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     flex-wrap: wrap;
 }
 
@@ -39,7 +39,6 @@
     margin: 1rem;
     color: inherit;
     width: 45vw;
-    overflow: hidden;
 }
 
 .logo {
@@ -67,10 +66,9 @@
     margin-top: 3rem;
 }
 
-.buttonReturn:hover,
-.buttonReturn:focus,
-.listenButton:hover {
-    border-color: #252C76;
+.mensajeTraduccion  {
+    color: #454DAC99;
+    margin-top: 2rem;
 }
 
 .buttonReturn {
@@ -103,6 +101,13 @@
     border-color: #252C76;
     font-family: inherit;
     font-size: 1.1rem;
+}
+
+.buttonReturn:hover,
+.buttonReturn:focus,
+.listenButton:hover,
+.traducirButton:hover {
+    border-color: #252C76;
 }
 
 .textResponse:focus {
@@ -139,6 +144,15 @@
     float: right;
 }
 
+.traducirButton:disabled {
+    color: #454DAC99;
+    cursor: initial;
+}
+
+.traducirButton:disabled:hover {
+    border-color: #eaeaea;
+}
+
 .noAudioAlert {
     color: #454DAC;
     font-size: 0.8rem;
@@ -155,7 +169,8 @@
     }
 
     .textResponse::placeholder,
-    .noAudioAlert {
+    .noAudioAlert,
+    .mensajeTraduccion {
         color: #E6E6E699;
     }
 
