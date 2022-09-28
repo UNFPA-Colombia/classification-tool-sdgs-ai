@@ -68,15 +68,30 @@ export default async function handler(req, res) {
                             const resProcesadas = JSON.parse(data);
                             //console.log(resProcesadas);
                             resProcesadas.forEach((resProcesada, index) => {
-                                prisma.MetasRespuestas.createMany({
-                                    data: resProcesada.target.map((target, i) => {
-                                        return {
-                                            metaId: target,
-                                            respuestaId: respuestas[index].id,
-                                            similitud: resProcesada.sims[i],
-                                        };
-                                    }),
-                                }).then((count) => {
+                                if (resProcesada.length > 0) {
+                                    prisma.MetasRespuestas.createMany({
+                                        data: resProcesada.map((res) => {
+                                            return {
+                                                metaId: `${res.goal}.${res.target}`,
+                                                respuestaId: respuestas[index].id,
+                                                similitud: res.sim,
+                                            };
+                                        }),
+                                    }).then((count) => {
+                                        prisma.Respuestas.update({
+                                            where: {
+                                                id: respuestas[index].id,
+                                            },
+                                            data: {
+                                                procesado: true,
+                                            },
+                                        }).catch((err) => {
+                                            console.log(err);
+                                        });
+                                    }).catch((err) => {
+                                        console.log(err);
+                                    });
+                                } else {
                                     prisma.Respuestas.update({
                                         where: {
                                             id: respuestas[index].id,
@@ -84,8 +99,10 @@ export default async function handler(req, res) {
                                         data: {
                                             procesado: true,
                                         },
+                                    }).catch((err) => {
+                                        console.log(err);
                                     });
-                                });
+                                };
                             });
                             prisma.Encuestas.update({
                                 where: {
@@ -94,6 +111,8 @@ export default async function handler(req, res) {
                                 data: {
                                     procesado: true,
                                 },
+                            }).catch((err) => {
+                                console.log(err);
                             });
                         });
 
