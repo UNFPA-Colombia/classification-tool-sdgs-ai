@@ -35,6 +35,13 @@ export default function Home() {
 
         <div className={styles.grid}>
 
+        <Link href="/traducir">
+            <a className={styles.card}>
+              <h2>Traducir &#128221;</h2>
+              <p>Traduce simultáneamente un texto para encontrar los ODS más relacionados con él.</p>
+            </a>
+          </Link>
+
           <Link href="/participar">
             <a className={styles.card}>
               <h2>Participar &#9995;</h2>
