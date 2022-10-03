@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import prisma from '../lib/prisma';
 
 import Head from 'next/head';
@@ -14,6 +14,19 @@ export default function Traducir({ objetivos }) {
     const [estadoTraduccion, setEstadoTraduccion] = useState(0); // 0: not posted, 1: posting, 2: posted 3: error
     const [resultadoTraduccion, setResultadoTraduccion] = useState([]);
     const [textoMuyCorto, setTextoMuyCorto] = useState(false);
+    const textoAviso = useRef(null);
+
+    useEffect(() => {
+        if (estadoTraduccion > 0) {
+            textoAviso.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [estadoTraduccion]);
+
+    useEffect(() => {
+        if (textoMuyCorto) {
+            textoAviso.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [textoMuyCorto]);
 
     function traducirTexto() {
         setEstadoTraduccion(1);
@@ -55,9 +68,9 @@ export default function Traducir({ objetivos }) {
             const objetivo = objetivos.find((objetivo) => objetivo.id === parseInt(key));
             if (objetivo) {
                 resultado.push(<>
-                    <div className={styles.resultado}>
+                    <div key={index} className={styles.resultado}>
                         <a href={objetivo.url} target="_blank" rel="noreferrer">
-                        <Image src={objetivo.img} width={150} height={150} alt={`Logo del Objetivo de Desarrollo Sostenible numero ${objetivo.id}`} />
+                            <Image src={objetivo.img} width={150} height={150} alt={`Logo del Objetivo de Desarrollo Sostenible numero ${objetivo.id}`} />
                         </a>
                     </div>
                 </>);
@@ -69,14 +82,14 @@ export default function Traducir({ objetivos }) {
     function showTraduccion() {
         if (textoMuyCorto) {
             return (
-                <div className={styles.mensajeTraduccion}>
+                <div ref={textoAviso} className={styles.mensajeTraduccion}>
                     <p>El texto es muy corto. Por favor, escribe al menos 6 palabras.</p>
                 </div>
             );
         }
         else if (estadoTraduccion === 0) {
             return (
-                <div className={styles.mensajeTraduccion}>
+                <div ref={textoAviso} className={styles.mensajeTraduccion}>
                     <p>Presiona el botón para traducir el texto.</p>
                 </div>
             );
@@ -86,23 +99,23 @@ export default function Traducir({ objetivos }) {
                     <div className={styles.logoTraduciendo}>
                         <Loading />
                     </div>
-                    <p>Traduciendo...</p>
+                    <p ref={textoAviso}>Traduciendo...</p>
                 </div>
             );
         } else if (estadoTraduccion === 2) {
             if (resultadoTraduccion.length === 0) {
                 return (
-                    <div className={styles.mensajeTraduccion}>
+                    <div ref={textoAviso} className={styles.mensajeTraduccion}>
                         <p>No se encontraron ODSs relacionados con el texto.</p>
                     </div>
                 );
             }
             return (
-                <>{showResultadoTraduccion()}</>
+                <div ref={textoAviso}>{showResultadoTraduccion()}</div>
             );
         } else if (estadoTraduccion === 3) {
             return (
-                <div className={styles.mensajeTraduccion}>
+                <div ref={textoAviso} className={styles.mensajeTraduccion}>
                     <p>Ha ocurrido un error</p>
                     <p>Por favor intenta nuevamente...</p>
                 </div>
@@ -122,7 +135,7 @@ export default function Traducir({ objetivos }) {
                 );
             } else if (texto.length < 5) {
                 return (
-                    <button className={styles.traducirButton} role="button" onClick={traducirTexto} disabled>&#10003; Traducir</button>
+                    <button className={styles.traducirButton} role="button" disabled>&#10003; Traducir</button>
                 );
             } else {
                 return (
@@ -134,7 +147,7 @@ export default function Traducir({ objetivos }) {
             }
         } else if (estadoTraduccion === 1) {
             return (
-                <button className={styles.traducirButton} role="button" onClick={traducirTexto} disabled>&#10003; Traducir</button>
+                <button className={styles.traducirButton} role="button" disabled>&#10003; Traducir</button>
             );
         }
     }
