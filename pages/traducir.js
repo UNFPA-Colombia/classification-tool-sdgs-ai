@@ -14,6 +14,7 @@ export default function Traducir({ objetivos }) {
     const [estadoTraduccion, setEstadoTraduccion] = useState(0); // 0: not posted, 1: posting, 2: posted 3: error
     const [resultadoTraduccion, setResultadoTraduccion] = useState([]);
     const [textoMuyCorto, setTextoMuyCorto] = useState(false);
+    const [detalle, setDetalle] = useState(0);
     const textoAviso = useRef(null);
 
     useEffect(() => {
@@ -30,6 +31,7 @@ export default function Traducir({ objetivos }) {
 
     function traducirTexto() {
         setEstadoTraduccion(1);
+        setDetalle(0);
         fetch('/api/traductor', {
             method: 'POST',
             headers: {
@@ -69,14 +71,46 @@ export default function Traducir({ objetivos }) {
             if (objetivo) {
                 resultado.push(<>
                     <div key={index} className={styles.resultado}>
-                        <a href={objetivo.url} target="_blank" rel="noreferrer">
+                        <button onClick={() => {
+                            setDetalle(detalle === objetivo.id ? 0 : objetivo.id);
+                        }}>
                             <Image src={objetivo.img} width={150} height={150} alt={`Logo del Objetivo de Desarrollo Sostenible numero ${objetivo.id}`} />
-                        </a>
+                        </button>
                     </div>
                 </>);
             }
         });
         return resultado;
+    }
+
+    function showDetalleResultados() {
+        if (detalle === 0) {
+            return <></>;
+        }
+        const objetivo = objetivos.find((objetivo) => objetivo.id === detalle);
+        const targets = resultadoTraduccion.filter((item) => item.goal == detalle).map((item, index) => {
+            return (<>
+                <div key={index}>
+                    <strong>{`${item.goal}.${item.target}`}</strong> {item.sim}
+                </div>
+            </>);
+        });
+        return (
+            <div className={styles.resultadoDetalle}>
+                <div className={styles.divCerrarDetalle}>
+                    <button className={styles.buttonCerrarDetalle} role="button" onClick={() => {
+                        setDetalle(0);
+                    }}>&#10006;</button>
+                </div>
+                <div className={styles.bodyDetalle}>
+                    <div className={styles.detalleObjetivo}>
+                    <a href={objetivo.url} target="_blank" rel="noreferrer"><strong>{objetivo.nombre}</strong></a><br />
+                    </div>
+                    Metas relacionadas:<br />
+                    {targets}
+                </div>
+            </div>
+        );
     }
 
     function showTraduccion() {
@@ -111,7 +145,10 @@ export default function Traducir({ objetivos }) {
                 );
             }
             return (
-                <div ref={textoAviso}>{showResultadoTraduccion()}</div>
+                <>
+                    {showDetalleResultados()}
+                    <div ref={textoAviso} className={styles.resultados}>{showResultadoTraduccion()}</div>
+                </>
             );
         } else if (estadoTraduccion === 3) {
             return (
@@ -142,6 +179,7 @@ export default function Traducir({ objetivos }) {
                     <button className={styles.traducirButton} role="button" onClick={() => {
                         setTextoMuyCorto(true);
                         setEstadoTraduccion(0);
+                        setDetalle(0);
                     }}>&#10003; Traducir</button>
                 );
             }

@@ -71,23 +71,40 @@
     margin-top: 2rem;
 }
 
-.buttonReturn {
+.buttonReturn,
+.buttonCerrarDetalle {
     background-color: #eaeaea95;
-    border-radius: 10px;
     border: 1px solid #eaeaea;
     box-sizing: border-box;
     cursor: pointer;
     font-family: inherit;
-    padding: 0.3rem 0.5rem;
-    position: fixed;
-    top: 0.9rem;
-    left: 0.9rem;
     text-align: center;
     transition: color 100ms;
     vertical-align: baseline;
     color: #454DAC;
-    font-size: 1rem;
+}
+
+.buttonCerrarDetalle{
+    border-radius: 5px;
+    padding: 0.1rem 0.3rem;
+    font-size: 0.8rem;
+}
+
+.divCerrarDetalle {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.buttonReturn {
     transform: rotate(180deg);
+    position: fixed;
+    top: 0.9rem;
+    left: 0.9rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 10px;
+    font-size: 1rem;
 }
 
 .textResponse {
@@ -173,8 +190,38 @@
     display: inline-block;
 }
 
+.resultado button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 0;
+}
+
 .resultado:hover {
     box-shadow: 0 0 5px #454DAC;
+}
+
+.resultados{
+    width: 100%;
+    text-align: center;
+    margin-left: 0.75rem;
+}
+
+.resultadoDetalle {
+    background: #dddffb70;
+    border-radius: 8px;
+    line-height: 1.5;
+}
+
+.bodyDetalle {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    margin-top: -2.5rem;
+}
+
+.detalleObjetivo {
+    padding-right: 1.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -193,6 +240,15 @@
         background-color: #252C7699;
         color: #E6E6E6;
     }
+
+    .resultadoDetalle {
+        background: #252C7630;
+        color: #E6E6E6;
+    }
+
+    .resultado:hover {
+        box-shadow: 0 0 5px #E6E6E6;
+    }
 }
 
 @media (max-width: 1000px) {
@@ -205,4 +261,6 @@
     .module {
         width: 85vw;
     }
+
+
 }
