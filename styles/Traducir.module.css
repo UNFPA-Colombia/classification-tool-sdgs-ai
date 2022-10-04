@@ -224,6 +224,13 @@
     padding-right: 1.5rem;
 }
 
+.detalleBar {
+    display: inline-block;
+    height: 0.75rem;
+    background-color: #454DAC;
+    border-radius: 0.5rem;
+}
+
 @media (prefers-color-scheme: dark) {
     .container {
         background: linear-gradient(160deg, #555887, #888bba);
@@ -244,6 +251,10 @@
     .resultadoDetalle {
         background: #252C7630;
         color: #E6E6E6;
+    }
+
+    .detalleBar {
+        background-color: #dddffb;
     }
 
     .resultado:hover {

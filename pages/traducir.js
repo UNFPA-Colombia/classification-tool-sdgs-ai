@@ -89,9 +89,15 @@ export default function Traducir({ objetivos }) {
         }
         const objetivo = objetivos.find((objetivo) => objetivo.id === detalle);
         const targets = resultadoTraduccion.filter((item) => item.goal == detalle).map((item, index) => {
+            const sim = Math.round((item.sim + Number.EPSILON) * 100);
             return (<>
                 <div key={index}>
-                    <strong>{`${item.goal}.${item.target}`}</strong> {item.sim}
+                    <span>
+                    <strong>{`${item.goal}.${item.target.length > 1 ? item.target : item.target+' '}`}</strong>&nbsp;&nbsp;{sim}%&nbsp;
+                    </span>
+                    <span className={styles.detalleBar} style={{width: sim*0.75+'%'}}>
+
+                    </span>
                 </div>
             </>);
         });
