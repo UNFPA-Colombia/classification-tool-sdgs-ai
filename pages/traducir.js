@@ -8,7 +8,7 @@ import TextAudioQuestion from '../components/TextAudioQuestion';
 import Loading from '../components/Loading';
 import styles from '../styles/Traducir.module.css';
 
-export default function Traducir({ objetivos }) {
+export default function Traducir({ objetivos, metas }) {
 
     const [texto, setTexto] = useState('');
     const [estadoTraduccion, setEstadoTraduccion] = useState(0); // 0: not posted, 1: posting, 2: posted 3: error
@@ -16,6 +16,7 @@ export default function Traducir({ objetivos }) {
     const [textoMuyCorto, setTextoMuyCorto] = useState(false);
     const [detalle, setDetalle] = useState(0);
     const textoAviso = useRef(null);
+    const detalleDiv = useRef(null);
 
     useEffect(() => {
         if (estadoTraduccion > 0) {
@@ -28,6 +29,12 @@ export default function Traducir({ objetivos }) {
             textoAviso.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [textoMuyCorto]);
+
+    useEffect(() => {
+        if (detalle > 0) {
+            detalleDiv.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [detalle]);
 
     function traducirTexto() {
         setEstadoTraduccion(1);
@@ -87,22 +94,64 @@ export default function Traducir({ objetivos }) {
         if (detalle === 0) {
             return <></>;
         }
+        if (detalle === 18) {
+            const targets = resultadoTraduccion.sort((a, b) => { a.sim - b.sim }).map((item, index) => {
+                const meta = metas.find((meta) => meta.id === item.goal + '.' + item.target);
+                const sim = Math.round((item.sim + Number.EPSILON) * 100);
+                return (<>
+                    <button key={index} className={styles.buttonMeta} onClick={() => {
+                        setDetalle(item.goal);
+                    }}>
+                        <span>
+                            <strong>{`${item.goal}.${item.target.length > 1 ? item.target : item.target + ' '}${item.goal > 9 ? '' : '\u00A0\u00A0'}`}</strong>&nbsp;&nbsp;{sim}%&nbsp;
+                        </span>
+                        <span className={styles.detalleBar} style={{ width: sim * 0.75 + '%' }}>
+
+                        </span>
+                        <br />
+                        <div className={styles.descripcionMeta}>
+                            {meta ? meta.descripcion : ''}
+                        </div>
+                    </button>
+                </>);
+            });
+            return (
+                <div ref={detalleDiv} className={styles.resultadoDetalle}>
+                    <div className={styles.divCerrarDetalle}>
+                        <button className={styles.buttonCerrarDetalle} role="button" onClick={() => {
+                            setDetalle(0);
+                        }}>&#10006;</button>
+                    </div>
+                    <div className={styles.bodyDetalle}>
+                        <div className={styles.detalleObjetivo}>
+                            <strong>Metas relacionadas:</strong><br />
+                            {targets}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
         const objetivo = objetivos.find((objetivo) => objetivo.id === detalle);
         const targets = resultadoTraduccion.filter((item) => item.goal == detalle).map((item, index) => {
             const sim = Math.round((item.sim + Number.EPSILON) * 100);
+            const meta = metas.find((meta) => meta.id === item.goal + '.' + item.target);
             return (<>
                 <div key={index}>
                     <span>
-                    <strong>{`${item.goal}.${item.target.length > 1 ? item.target : item.target+' '}`}</strong>&nbsp;&nbsp;{sim}%&nbsp;
+                        <strong>{`${item.goal}.${item.target.length > 1 ? item.target : item.target + ' '}`}</strong>&nbsp;&nbsp;{sim}%&nbsp;
                     </span>
-                    <span className={styles.detalleBar} style={{width: sim*0.75+'%'}}>
+                    <span className={styles.detalleBar} style={{ width: sim * 0.75 + '%' }}>
 
                     </span>
+                    <br />
+                    <div className={styles.descripcionMeta}>
+                        {meta ? meta.descripcion : ''}
+                    </div>
                 </div>
             </>);
         });
         return (
-            <div className={styles.resultadoDetalle}>
+            <div ref={detalleDiv} className={styles.resultadoDetalle}>
                 <div className={styles.divCerrarDetalle}>
                     <button className={styles.buttonCerrarDetalle} role="button" onClick={() => {
                         setDetalle(0);
@@ -110,7 +159,8 @@ export default function Traducir({ objetivos }) {
                 </div>
                 <div className={styles.bodyDetalle}>
                     <div className={styles.detalleObjetivo}>
-                    <a href={objetivo.url} target="_blank" rel="noreferrer"><strong>{objetivo.nombre}</strong></a><br />
+                        <a href={objetivo.url} target="_blank" rel="noreferrer"><strong>{objetivo.nombre}</strong></a><br />
+                        <div className={styles.descripcionObjetivo}>{objetivo.descripcion}</div>
                     </div>
                     Metas relacionadas:<br />
                     {targets}
@@ -146,14 +196,22 @@ export default function Traducir({ objetivos }) {
             if (resultadoTraduccion.length === 0) {
                 return (
                     <div ref={textoAviso} className={styles.mensajeTraduccion}>
-                        <p>No se encontraron ODSs relacionados con el texto.</p>
+                        <p>En este caso, el texto que has introducido no se ha podido asociar a ningún Objetivo de Desarrollo Sostenible (ODS).</p>
+                        <p>Si crees que el texto que has introducido debería estar relacionado con alguno de los Objetivos de Desarrollo Sostenible, puedes <Link href="/contacto"><a>contactarte con nosotros</a></Link> para que lo revisemos.</p>
                     </div>
                 );
             }
             return (
                 <>
                     {showDetalleResultados()}
-                    <div ref={textoAviso} className={styles.resultados}>{showResultadoTraduccion()}</div>
+                    <div ref={textoAviso} className={styles.resultados}>
+                        {showResultadoTraduccion()}
+                    </div>
+                    <div className={styles.divVerMetas}>
+                        <button className={styles.buttonVerMetas} onClick={() => {
+                            detalle === 18 ? setDetalle(0) : setDetalle(18);
+                        }}>Ver todas las metas &#127919;</button>
+                    </div>
                 </>
             );
         } else if (estadoTraduccion === 3) {
@@ -242,6 +300,7 @@ export default function Traducir({ objetivos }) {
 export async function getStaticProps() {
 
     let objetivos = await prisma.Objetivos.findMany();
+    let metas = await prisma.Metas.findMany();
 
-    return { props: { objetivos } };
+    return { props: { objetivos, metas } };
 }

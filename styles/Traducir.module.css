@@ -84,7 +84,7 @@
     color: #454DAC;
 }
 
-.buttonCerrarDetalle{
+.buttonCerrarDetalle {
     border-radius: 5px;
     padding: 0.1rem 0.3rem;
     font-size: 0.8rem;
@@ -123,7 +123,9 @@
 .buttonReturn:hover,
 .buttonReturn:focus,
 .listenButton:hover,
-.traducirButton:hover {
+.traducirButton:hover,
+.buttonCerrarDetalle:hover,
+.buttonVerMetas:hover {
     border-color: #252C76;
 }
 
@@ -137,7 +139,8 @@
 }
 
 .listenButton,
-.traducirButton {
+.traducirButton,
+.buttonVerMetas {
     background-color: transparent;
     border-radius: 0.7rem;
     border: 1px solid #eaeaea;
@@ -155,6 +158,14 @@
     margin-left: 0;
     margin-right: 0;
     min-height: 2.5rem;
+}
+
+.buttonVerMetas {
+    border-radius: 0.5rem;
+    min-height: 0rem;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    margin: 0rem;
 }
 
 .traducirButton {
@@ -208,6 +219,11 @@
     margin-left: 0.75rem;
 }
 
+.divVerMetas {
+    width: 100%;
+    text-align: center;
+}
+
 .resultadoDetalle {
     background: #dddffb70;
     border-radius: 8px;
@@ -230,6 +246,32 @@
     background-color: #454DAC;
     border-radius: 0.5rem;
 }
+
+.descripcionObjetivo,
+.descripcionMeta {
+    font-weight: 300;
+    font-size: 0.9rem;
+    padding-bottom: 2px;
+    line-height: 1.3;
+}
+
+.descripcionMeta {
+    font-size: 0.9rem;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+.buttonMeta {
+    background-color: transparent;
+    border: none;
+    border-radius: 0.5rem;
+    color: inherit;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+    text-align: left;
+}
+
 
 @media (prefers-color-scheme: dark) {
     .container {
