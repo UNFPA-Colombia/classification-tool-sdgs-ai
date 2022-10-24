@@ -109,8 +109,13 @@ export default function Traducir({ objetivos, metas }) {
 
                         </span>
                         <br />
-                        <div className={styles.descripcionMeta}>
-                            {meta ? meta.descripcion : ''}
+                        <div className={styles.containerMeta}>
+                            <div className={styles.imgMeta}>
+                                <Image src={`/targets/TARGET_${item.goal}_${item.target}.svg`} layout="fill" objectFit="cover" objectPosition="left bottom" alt={`Logo de la Meta de Desarrollo Sostenible numero ${item.goal}.${item.target}`} />
+                            </div>
+                            <div className={styles.descripcionMeta}>
+                                {meta ? meta.descripcion : ''}
+                            </div>
                         </div>
                     </button>
                 </>);
@@ -136,7 +141,7 @@ export default function Traducir({ objetivos, metas }) {
             const sim = Math.round((item.sim + Number.EPSILON) * 100);
             const meta = metas.find((meta) => meta.id === item.goal + '.' + item.target);
             return (<>
-                <div key={index}>
+                <div key={index} className={styles.contMeta}>
                     <span>
                         <strong>{`${item.goal}.${item.target.length > 1 ? item.target : item.target + ' '}`}</strong>&nbsp;&nbsp;{sim}%&nbsp;
                     </span>
@@ -144,8 +149,13 @@ export default function Traducir({ objetivos, metas }) {
 
                     </span>
                     <br />
-                    <div className={styles.descripcionMeta}>
-                        {meta ? meta.descripcion : ''}
+                    <div className={styles.containerMeta}>
+                        <div className={styles.imgMeta}>
+                            <Image src={`/targets/TARGET_${item.goal}_${item.target}.svg`} layout="fill" objectFit="cover" objectPosition="left bottom" alt={`Logo de la Meta de Desarrollo Sostenible numero ${item.goal}.${item.target}`} />
+                        </div>
+                        <div className={styles.descripcionMeta}>
+                            {meta ? meta.descripcion : ''}
+                        </div>
                     </div>
                 </div>
             </>);

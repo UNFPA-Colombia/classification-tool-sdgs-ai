@@ -264,6 +264,26 @@
     font-size: 0.9rem;
     line-height: 1.2;
     margin-bottom: 0.5rem;
+    width: calc(100% - 100px);
+    float: left;
+}
+
+.imgMeta {
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    position: relative;
+    float: left;
+    border-radius: 10px;
+    margin-right: 1rem; 
+}
+
+.containerMeta {
+    margin-top: 0.5rem;
+}
+
+.contMeta {
+    overflow: hidden;
 }
 
 .buttonMeta {
@@ -275,6 +295,8 @@
     font-size: inherit;
     font-family: inherit;
     text-align: left;
+    padding-top: 0.4rem;
+    padding-bottom: 0.3rem;
 }
 
 .logosHeader {
