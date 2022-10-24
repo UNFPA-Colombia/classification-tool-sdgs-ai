@@ -80,7 +80,7 @@ export default function Traducir({ objetivos, metas }) {
                     <div key={index} className={styles.resultado}>
                         <button onClick={() => {
                             setDetalle(detalle === objetivo.id ? 0 : objetivo.id);
-                        }}>
+                        }} >
                             <Image src={objetivo.img} width={150} height={150} alt={`Logo del Objetivo de Desarrollo Sostenible numero ${objetivo.id}`} />
                         </button>
                     </div>

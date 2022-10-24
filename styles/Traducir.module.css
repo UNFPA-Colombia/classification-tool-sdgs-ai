@@ -66,7 +66,7 @@
     margin-top: 3rem;
 }
 
-.mensajeTraduccion  {
+.mensajeTraduccion {
     color: #454DAC99;
     margin-top: 2rem;
 }
@@ -201,7 +201,6 @@
     overflow: hidden;
     display: inline-block;
     padding: 0;
-    background-size: 100% 100%;
 }
 
 .resultado button {
@@ -210,13 +209,16 @@
     cursor: pointer;
     font-family: inherit;
     padding: 0;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
 }
 
 .resultado:hover {
     box-shadow: 0 0 5px #454DAC;
 }
 
-.resultados{
+.resultados {
     width: 100%;
     text-align: center;
     margin-left: 0.75rem;
@@ -285,26 +287,26 @@
     font-family: sans-serif;
     color: rgba(255, 255, 255, 0.6);
     letter-spacing: 2px;
-  }
-  
-  .logoODSIA {
+}
+
+.logoODSIA {
     position: absolute;
     top: 8px;
     right: 75px;
     white-space: nowrap;
-  }
-  
-  .logoODSIA span{
+}
+
+.logoODSIA span {
     margin-right: 3px;
-  }
-  
-  .logoUNFPA {
+}
+
+.logoUNFPA {
     position: absolute;
     top: 0;
     right: 0px;
     height: 30px;
     width: 70px;
-  }
+}
 
 
 @media (prefers-color-scheme: dark) {
