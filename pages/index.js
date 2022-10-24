@@ -13,10 +13,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={styles.logoODSIA}>
-      <span >
-              <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={10} height={10} />
-      </span> DS-IA
+      <div className={styles.logosHeader}>
+        <div className={styles.logoODSIA}>
+          <span><Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={10} height={10} /></span>DS-IA
+        </div>
+        <div className={styles.logoUNFPA}>
+          <a href="https://colombia.unfpa.org" target="_blank" rel="noopener noreferrer"><Image src="/UNFPA_logo.png" alt="UNFPA logo" layout={'fill'} objectFit={'contain'} /></a>
+        </div>
       </div>
 
       <main className={styles.main}>
@@ -35,7 +38,7 @@ export default function Home() {
 
         <div className={styles.grid}>
 
-        <Link href="/traducir">
+          <Link href="/traducir">
             <a className={styles.card}>
               <h2>Traducir &#128221;</h2>
               <p>Traduce simultáneamente un texto para encontrar los ODS más relacionados con él.</p>

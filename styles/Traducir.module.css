@@ -166,6 +166,7 @@
     padding: 0.5rem;
     font-size: 0.9rem;
     margin: 0rem;
+    padding-bottom: 0.6rem;
 }
 
 .traducirButton {
@@ -199,6 +200,8 @@
     border-radius: 8px;
     overflow: hidden;
     display: inline-block;
+    padding: 0;
+    background-size: 100% 100%;
 }
 
 .resultado button {
@@ -271,6 +274,37 @@
     font-family: inherit;
     text-align: left;
 }
+
+.logosHeader {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 100;
+    font-family: sans-serif;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 2px;
+  }
+  
+  .logoODSIA {
+    position: absolute;
+    top: 8px;
+    right: 75px;
+    white-space: nowrap;
+  }
+  
+  .logoODSIA span{
+    margin-right: 3px;
+  }
+  
+  .logoUNFPA {
+    position: absolute;
+    top: 0;
+    right: 0px;
+    height: 30px;
+    width: 70px;
+  }
 
 
 @media (prefers-color-scheme: dark) {

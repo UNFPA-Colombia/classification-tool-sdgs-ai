@@ -126,7 +126,7 @@
   margin-left: 0.5rem;
 }
 
-.logoODSIA {
+.logosHeader {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -136,6 +136,25 @@
   font-family: sans-serif;
   color: rgba(255, 255, 255, 0.6);
   letter-spacing: 2px;
+}
+
+.logoODSIA {
+  position: absolute;
+  top: 8px;
+  right: 75px;
+  white-space: nowrap;
+}
+
+.logoODSIA span{
+  margin-right: 3px;
+}
+
+.logoUNFPA {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  height: 30px;
+  width: 70px;
 }
 
 @media (prefers-color-scheme: dark) {

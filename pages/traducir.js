@@ -263,11 +263,16 @@ export default function Traducir({ objetivos, metas }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Link href="/"><button className={styles.buttonReturn} role="button">&#10140;</button></Link>
-            <div className={styles.logo}>
-                <span >
-                    <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={10} height={10} />
-                </span> DS-IA
+
+            <div className={styles.logosHeader}>
+                <div className={styles.logoODSIA}>
+                    <span><Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={10} height={10} /></span>DS-IA
+                </div>
+                <div className={styles.logoUNFPA}>
+                    <a href="https://colombia.unfpa.org" target="_blank" rel="noopener noreferrer"><Image src="/UNFPA_logo.png" alt="UNFPA logo" layout={'fill'} objectFit={'contain'} /></a>
+                </div>
             </div>
+
             <div className={styles.main}>
                 <h1 className={styles.title}>
                     Traductor de <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={44} height={44} />DSs
