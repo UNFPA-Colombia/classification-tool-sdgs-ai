@@ -15,6 +15,7 @@ export default function Traducir({ objetivos, metas }) {
     const [resultadoTraduccion, setResultadoTraduccion] = useState([]);
     const [textoMuyCorto, setTextoMuyCorto] = useState(false);
     const [detalle, setDetalle] = useState(0);
+    const [agruparMetas, setAgruparMetas] = useState(false);
     const textoAviso = useRef(null);
     const detalleDiv = useRef(null);
 
@@ -64,7 +65,7 @@ export default function Traducir({ objetivos, metas }) {
             });
     }
 
-    function showResultadoTraduccion() {
+    function showResultadoTraduccionObjetivos() {
         const resultadosAgrupados = resultadoTraduccion.reduce(function (r, a) {
             r[a.goal] = r[a.goal] || [];
             r[a.goal].push(a);
@@ -81,13 +82,28 @@ export default function Traducir({ objetivos, metas }) {
                         <button onClick={() => {
                             setDetalle(detalle === objetivo.id ? 0 : objetivo.id);
                         }} >
-                            <Image src={objetivo.img} width={150} height={150} alt={`Logo del Objetivo de Desarrollo Sostenible numero ${objetivo.id}`} />
+                            <Image src={objetivo.img} layout="fill" objectFit="cover" alt={`Logo del Objetivo de Desarrollo Sostenible numero ${objetivo.id}`} />
                         </button>
                     </div>
                 </>);
             }
         });
         return resultado;
+    }
+
+    function showResultadoTraduccionMetas() {
+        const targets = resultadoTraduccion.sort((a, b) => { a.sim - b.sim }).map((item, index) => {
+            const meta = metas.find((meta) => meta.id === item.goal + '.' + item.target);
+            const sim = Math.round((item.sim + Number.EPSILON) * 100);
+            return (<>
+                <button key={index} className={styles.buttonMetaExt} onClick={() => {
+                    setDetalle(item.goal);
+                }}>
+                    <Image src={`/targets/TARGET_${item.goal}_${item.target}.svg`} layout="fill" objectFit="cover" objectPosition="left bottom" alt={`Logo de la Meta de Desarrollo Sostenible numero ${item.goal}.${item.target}`} />
+                </button>
+            </>);
+        });
+        return targets;
     }
 
     function showDetalleResultados() {
@@ -213,11 +229,14 @@ export default function Traducir({ objetivos, metas }) {
             }
             return (
                 <>
-                    {showDetalleResultados()}
                     <div ref={textoAviso} className={styles.resultados}>
-                        {showResultadoTraduccion()}
+                        {agruparMetas ? showResultadoTraduccionObjetivos() : showResultadoTraduccionMetas()}
                     </div>
                     <div className={styles.divVerMetas}>
+                        <button className={styles.buttonVerMetas} onClick={() => {
+                            agruparMetas ? setAgruparMetas(false) : setAgruparMetas(true);
+                        }}>{agruparMetas ? <>Desagrupar metas &#128209;</> : <>Agrupar por objetivos &#128450;</>}</button>
+                        &nbsp;&nbsp;&nbsp;
                         <button className={styles.buttonVerMetas} onClick={() => {
                             detalle === 18 ? setDetalle(0) : setDetalle(18);
                         }}>Ver todas las metas &#127919;</button>
@@ -305,6 +324,12 @@ export default function Traducir({ objetivos, metas }) {
                     <div className={styles.module}>
                         <h3 className={styles.subTitle}>Traducción</h3>
                         {showTraduccion()}
+
+                    </div>
+                    <div style={{width:"100%"}}>
+                    <div className={styles.moduleDetails}>
+                        {showDetalleResultados()}
+                    </div>
                     </div>
                 </div>
             </div>

@@ -41,6 +41,13 @@
     width: 45vw;
 }
 
+.moduleDetails {
+    color: inherit;
+    width: 80vw;
+    margin: auto;
+    margin-top: 1rem;
+}
+
 .logo {
     position: absolute;
     top: 1rem;
@@ -212,16 +219,17 @@
     width: 120px;
     height: 120px;
     overflow: hidden;
+    position: relative;
 }
 
-.resultado:hover {
+.resultado:hover,
+.buttonMetaExt:hover {
     box-shadow: 0 0 5px #454DAC;
 }
 
 .resultados {
     width: 100%;
     text-align: center;
-    margin-left: 0.75rem;
 }
 
 .divVerMetas {
@@ -275,7 +283,7 @@
     position: relative;
     float: left;
     border-radius: 10px;
-    margin-right: 1rem; 
+    margin-right: 1rem;
 }
 
 .containerMeta {
@@ -284,9 +292,11 @@
 
 .contMeta {
     overflow: hidden;
+    padding-bottom: 0.7rem;
 }
 
-.buttonMeta {
+.buttonMeta,
+.buttonMetaExt {
     background-color: transparent;
     border: none;
     border-radius: 0.5rem;
@@ -297,6 +307,17 @@
     text-align: left;
     padding-top: 0.4rem;
     padding-bottom: 0.3rem;
+}
+
+.buttonMetaExt {
+    padding: 0;
+    width: 100px;
+    height: 122px;
+    margin-left: 1rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0;
 }
 
 .logosHeader {
@@ -357,7 +378,8 @@
         background-color: #dddffb;
     }
 
-    .resultado:hover {
+    .resultado:hover,
+    .buttonMetaExt:hover {
         box-shadow: 0 0 5px #E6E6E6;
     }
 }
@@ -369,9 +391,9 @@
         align-items: center;
     }
 
-    .module {
+    .module,
+    .moduleDetails {
         width: 85vw;
     }
-
 
 }
