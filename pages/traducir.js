@@ -185,11 +185,17 @@ export default function Traducir({ objetivos, metas }) {
                     }}>&#10006;</button>
                 </div>
                 <div className={styles.bodyDetalle}>
-                    <div className={styles.detalleObjetivo}>
-                        <a href={objetivo.url} target="_blank" rel="noreferrer"><strong>{objetivo.nombre}</strong></a><br />
-                        <div className={styles.descripcionObjetivo}>{objetivo.descripcion}</div>
+                    <div className={styles.contMeta}>
+                        <div className={styles.logoObjetivo}>
+                            <a href={objetivo.url} target="_blank" rel="noreferrer"><Image src={objetivo.img} layout="fill" objectFit="cover" alt={`Logo del Objetivo de Desarrollo Sostenible numero ${objetivo.id}`} /></a>
+                        </div>
+
+                        <div className={styles.detalleObjetivo}>
+                            <a href={objetivo.url} target="_blank" rel="noreferrer"><strong>{objetivo.nombre}</strong></a><br />
+                            <div className={styles.descripcionObjetivo}>{objetivo.descripcion}</div>
+                        </div>
                     </div>
-                    Metas relacionadas:<br />
+                    <strong>Metas relacionadas:</strong><br />
                     {targets}
                 </div>
             </div>
