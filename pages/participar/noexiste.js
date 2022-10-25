@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../../styles/Participar.module.css';
+import LogosHeader from '../../components/LogosHeader';
 
 export default function NoExiste() {
 
@@ -20,7 +21,7 @@ export default function NoExiste() {
             );
         } else {
             return (
-            <Link href={`/participar/predeterminado`}><button className={styles.buttonStart} role="button">Empezar sin código</button></Link>
+                <Link href={`/participar/predeterminado`}><button className={styles.buttonStart} role="button">Empezar sin código</button></Link>
             );
         }
     }
@@ -34,11 +35,9 @@ export default function NoExiste() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Link href="/"><button className={styles.buttonReturn} role="button">&#10140;</button></Link>
-            <div className={styles.logo}>
-                <span >
-                    <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={10} height={10} />
-                </span> DS-IA
-            </div>
+
+            <LogosHeader />
+
             <div className={styles.main}>
                 <h1 className={styles.title}>Grupo no encontrado &#128533;</h1>
                 <p className={styles.description}>Parece que el grupo que estas buscando no existe. Intenta ingresar el código nuevamente o participa sin un grupo.</p>

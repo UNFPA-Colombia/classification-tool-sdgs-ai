@@ -9,6 +9,7 @@ import styles from '../../styles/Participar.module.css'
 import DoubleQuestion from '../../components/DoubleQuestion';
 import Question from '../../components/Question';
 import TextAudioQuestion from '../../components/TextAudioQuestion';
+import LogosHeader from '../../components/LogosHeader';
 
 export default function Preguntas({ municipios, departamentos, preguntas }) {
     const router = useRouter();
@@ -314,11 +315,9 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {posting === 0 ? <Link href="/participar"><button className={styles.buttonReturn} role="button">&#10140;</button></Link> : <></>}
-            <div className={styles.logo}>
-                <span >
-                    <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={10} height={10} />
-                </span> DS-IA
-            </div>
+
+            <LogosHeader />
+
             <div className={styles.main}>
                 {showSection()}
             </div>

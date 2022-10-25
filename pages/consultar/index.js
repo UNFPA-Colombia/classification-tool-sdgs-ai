@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import DoubleQuestion from '../../components/DoubleQuestion';
 import styles from '../../styles/Consultar.module.css';
+import LogosHeader from '../../components/LogosHeader';
 
 export default function Consultar({ municipios, departamentos }) {
     const [departamento, setDepartamento] = useState(undefined);
@@ -39,11 +40,8 @@ export default function Consultar({ municipios, departamentos }) {
             </Head>
 
             <Link href="/"><button className={styles.buttonReturn} role="button">&#10140;</button></Link>
-            <div className={styles.logo}>
-                <span >
-                    <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={10} height={10} />
-                </span> DS-IA
-            </div>
+
+            <LogosHeader />
 
             <div className={styles.main}>
                 <h1 className={styles.title}>Consultar resultados &#x1F50E;</h1>
@@ -68,7 +66,7 @@ export default function Consultar({ municipios, departamentos }) {
 }
 
 export async function getStaticProps() {
-    
+
     let municipios = await prisma.Municipios.findMany();
     municipios = municipios.map((municipio) => {
         return {

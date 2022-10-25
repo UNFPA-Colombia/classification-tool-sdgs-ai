@@ -44,12 +44,13 @@
 .title,
 .description,
 .question {
-  text-align: center;
-  margin-right: 1rem;
-  margin-left: 1rem;
+    text-align: center;
+    margin-right: 1rem;
+    margin-left: 1rem;
 }
 
-.label, .description {
+.label,
+.description {
     color: #743E00;
 }
 
@@ -62,29 +63,29 @@
 }
 
 .buttonStart {
-  background-color: transparent;
-  border-radius: 10px;
-  border: 1px solid #eaeaea;
-  box-sizing: border-box;
-  cursor: pointer;
-  display: inline-block;
-  font-family: inherit;
-  padding: 10px 16px;
-  position: relative;
-  text-align: center;
-  transition: color 100ms;
-  vertical-align: baseline;
-  color: #743E00;
-  margin: 1rem;
-  font-size: 1.2rem;
-  background-color: #eaeaea95;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid #eaeaea;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font-family: inherit;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    transition: color 100ms;
+    vertical-align: baseline;
+    color: #743E00;
+    margin: 1rem;
+    font-size: 1.2rem;
+    background-color: #eaeaea95;
 }
 
 .buttonStart:hover,
 .buttonStart:focus,
 .buttonReturn:hover,
 .buttonReturn:focus {
-  border-color: #412300;
+    border-color: #412300;
 }
 
 .buttonReturn {
@@ -114,33 +115,23 @@
     align-items: center;
 }
 
-.selectItem { 
+.selectItem {
     min-width: 250px;
     max-width: 600px;
     display: inline-block;
-    color:#412300;
+    color: #412300;
     font-size: 1rem;
     margin: 0.5rem;
 }
 
-.logo{
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 100;
-    font-family: sans-serif;
-    color: rgba(255,255,255,0.6);
-    letter-spacing: 2px;
-}
-
 @media (prefers-color-scheme: dark) {
     .container {
-      background: linear-gradient(160deg, #664c00, #b32c00);
-      color: #EFEFEF;
+        background: linear-gradient(160deg, #664c00, #b32c00);
+        color: #EFEFEF;
     }
-    .label, .description {
+
+    .label,
+    .description {
         color: #E6E6E6;
     }
 }

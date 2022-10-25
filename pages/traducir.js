@@ -7,6 +7,7 @@ import Image from 'next/image';
 import TextAudioQuestion from '../components/TextAudioQuestion';
 import Loading from '../components/Loading';
 import styles from '../styles/Traducir.module.css';
+import LogosHeader from '../components/LogosHeader';
 
 export default function Traducir({ objetivos, metas }) {
 
@@ -293,14 +294,7 @@ export default function Traducir({ objetivos, metas }) {
             </Head>
             <Link href="/"><button className={styles.buttonReturn} role="button">&#10140;</button></Link>
 
-            <div className={styles.logosHeader}>
-                <div className={styles.logoODSIA}>
-                    <span><Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={10} height={10} /></span>DS-IA
-                </div>
-                <div className={styles.logoUNFPA}>
-                    <a href="https://colombia.unfpa.org" target="_blank" rel="noopener noreferrer"><Image src="/UNFPA_logo.png" alt="UNFPA logo" layout={'fill'} objectFit={'contain'} /></a>
-                </div>
-            </div>
+            <LogosHeader />
 
             <div className={styles.main}>
                 <h1 className={styles.title}>
@@ -326,10 +320,10 @@ export default function Traducir({ objetivos, metas }) {
                         {showTraduccion()}
 
                     </div>
-                    <div style={{width:"100%"}}>
-                    <div className={styles.moduleDetails}>
-                        {showDetalleResultados()}
-                    </div>
+                    <div style={{ width: "100%" }}>
+                        <div className={styles.moduleDetails}>
+                            {showDetalleResultados()}
+                        </div>
                     </div>
                 </div>
             </div>
