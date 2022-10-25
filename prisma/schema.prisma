@@ -68,7 +68,7 @@ model Departamentos {
 }
 
 model Encuestas {
-  id                   String        @id @default(uuid())
+  id                   String        @id @default(cuid())
   createdAt            DateTime      @default(now())
   updatedAt            DateTime      @updatedAt
   municipio            Municipios    @relation(fields: [municipioDivipola], references: [divipola])
