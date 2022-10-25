@@ -12,8 +12,8 @@
 
 .logoODSIA {
     position: absolute;
-    top: 8px;
-    right: 65px;
+    top: 25px;
+    right: 80px;
     white-space: nowrap;
 }
 
@@ -25,8 +25,8 @@
     position: absolute;
     top: 0;
     right: 0px;
-    height: 40px;
-    width: 65px;
+    height: 4.5rem;
+    width: 6rem;
 }
 
 .logoUNFPADark {
