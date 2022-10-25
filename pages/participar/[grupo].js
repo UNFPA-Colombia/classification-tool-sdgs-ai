@@ -27,6 +27,30 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
     const maxQuestions = 4;
 
     const [posting, setPosting] = useState(0); // 0: not posted, 1: posting, 2: posted 3: error
+    const [idEncuesta, setIdEncuesta] = useState(undefined);
+
+    const [urlCopiada, setUrlCopiada] = useState(false);
+
+    async function copiarTextoAlClipBoard(text) {
+        if ('clipboard' in navigator) {
+            return await navigator.clipboard.writeText(text);
+        } else {
+            return document.execCommand('copy', true, text);
+        }
+    }
+
+    function clickCopiarUrl() {
+        copiarTextoAlClipBoard(`http://localhost:3000/consultar/encuesta/${idEncuesta}`)
+            .then(() => {
+                setUrlCopiada(true);
+                setTimeout(() => {
+                    setUrlCopiada(false);
+                }, 1800);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
 
     function nextQuestion() {
         setQuestion(question + 1);
@@ -68,7 +92,7 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
                 setPosting(2);
                 return response.json()
                     .then((data) => {
-                        console.log('Success:', data);
+                        setIdEncuesta(data.id);
                     });
             } else {
                 setPosting(3);
@@ -233,19 +257,25 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
                 </>);
             case 1:
                 return <>
-                    <p className={styles.posting}>Enviando...</p>{showButtonBack()}
-                    {showButtonNext()}
+                    <p className={styles.posting}>Enviando...</p>
                 </>;
             case 2:
-                return <>
-                    <p className={styles.posting}>Enviado</p>{showButtonBack()}
-                    {showButtonNext()}
-                </>;
+                return <div>
+                    <div className={styles.select}>
+                        {idEncuesta ? <Link href={`/consultar/encuesta/${idEncuesta}`} ><button className={styles.buttonNextQuestion} role="button">Ver los resultados &#128202;</button></Link> : <></>}
+                        <button className={styles.buttonNextQuestion} onClick={clickCopiarUrl} >{urlCopiada ? <>Enlace copiado &#128203;</> : <>Copiar enlace &#128203;</>}</button>
+                    </div>
+                    <p className={styles.posting}>¡Tus respuestas se guardaron y enviaron con éxito!</p>
+                    <p className={styles.posting}>Código único: <strong>{idEncuesta}</strong></p>
+                </div>;
             case 3:
-                return <>
-                    <p className={styles.posting}>Error</p>{showButtonBack()}
-                    {showButtonNext()}
-                </>;
+                return <div>
+                    <p className={styles.posting}>Hubo un error al enviar tus respuestas, por favor intenta nuevamente...</p>
+                    <div className={styles.select}>
+                        {showButtonBack()}
+                        {showButtonNext()}
+                    </div>
+                </div>;
             default:
                 return <></>;
         }
@@ -314,7 +344,7 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
                 <meta name="keywords" content="IA, Objetivos de Desarrollo Sostenibles, UNFPA, Colombia"></meta>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            {posting === 0 ? <Link href="/participar"><button className={styles.buttonReturn} role="button">&#10140;</button></Link> : <></>}
+            {posting === 0 || posting === 3 ? <Link href="/participar"><button className={styles.buttonReturn} role="button">&#10140;</button></Link> : <></>}
 
             <LogosHeader />
 

@@ -334,6 +334,10 @@
     text-align: center;
 }
 
+.posting {
+    text-align: center;
+}
+
 @media (prefers-color-scheme: dark) {
     .container {
         background: linear-gradient(160deg, #1d4325, #477933);
