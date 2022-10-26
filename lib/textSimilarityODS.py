@@ -34,8 +34,8 @@ def getGoals(texto):
     '''get closest goals to text'''
 
     coseno_word2vec_m = s_word2vec_m.coseno(golasClean, limpieza_texto(texto))
-    goalId = np.argsort(coseno_word2vec_m.flatten())[::-1][:10]
-    goalSim = np.sort(coseno_word2vec_m.flatten())[::-1][:10]
+    goalId = np.argsort(coseno_word2vec_m.flatten())[::-1][:5]
+    goalSim = np.sort(coseno_word2vec_m.flatten())[::-1][:5]
     return (goalId, goalSim)
 
 
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     for i in range(1, len(sys.argv)):
         finalTargets = []
         ids, sims = getGoals(sys.argv[i])
-        approved = sims >= 0.5
+        approved = sims >= 0.6
         approved = approved.tolist()
         ids = (ids+1).tolist()
         sims = sims.tolist()
