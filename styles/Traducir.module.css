@@ -31,7 +31,7 @@
 
 .grid {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-center;
     flex-wrap: wrap;
 }
 
@@ -172,7 +172,9 @@
     min-height: 0rem;
     padding: 0.5rem;
     font-size: 0.9rem;
-    margin: 0rem;
+    margin: 0.5rem;
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
     padding-bottom: 0.6rem;
 }
 
@@ -319,11 +321,38 @@
     width: 100px;
     height: 122px;
     margin-left: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 4.4rem;
     position: relative;
-    overflow: hidden;
     border-radius: 0;
 }
+
+.buttonMetaExt div {
+    position: relative;
+    top: 92px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.buttonMetaExt p {
+    margin: 0;
+    padding-top: 7px;
+    color: #eaeaea
+}
+
+.dot {
+    height: 35px;
+    width: 35px;
+    background-color: #252C76ff;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+}
+
+.buttonMetaExt:hover .dot {
+    box-shadow: 0 0 4px #454DAC;
+}
+
 
 .logoObjetivo {
     cursor: pointer;
@@ -378,6 +407,10 @@
     .resultado:hover,
     .buttonMetaExt:hover {
         box-shadow: 0 0 5px #E6E6E6;
+    }
+
+    .buttonMetaExt:hover .dot {
+        box-shadow: 0 0 4px #E6E6E6;
     }
 }
 

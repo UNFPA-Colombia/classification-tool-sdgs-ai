@@ -96,11 +96,13 @@ export default function Traducir({ objetivos, metas }) {
         const targets = resultadoTraduccion.sort((a, b) => { a.sim - b.sim }).map((item, index) => {
             const meta = metas.find((meta) => meta.id === item.goal + '.' + item.target);
             const sim = Math.round((item.sim + Number.EPSILON) * 100);
+            const factor = (sim - 60) / 40;
             return (<>
                 <button key={index} className={styles.buttonMetaExt} onClick={() => {
                     setDetalle(item.goal);
                 }}>
                     <Image src={`/targets/TARGET_${item.goal}_${item.target}.svg`} layout="fill" objectFit="cover" objectPosition="left bottom" alt={`Logo de la Meta de Desarrollo Sostenible numero ${item.goal}.${item.target}`} />
+                    <div><span className={styles.dot} style={{ width: `${(factor * 15) + 40}px`, height: `${(factor * 15) + 40}px` }}><p style={{ paddingTop: `${(factor * 7.5) + 10}px` }}><strong>{sim}%</strong></p></span></div>
                 </button>
             </>);
         });
@@ -243,7 +245,6 @@ export default function Traducir({ objetivos, metas }) {
                         <button className={styles.buttonVerMetas} onClick={() => {
                             agruparMetas ? setAgruparMetas(false) : setAgruparMetas(true);
                         }}>{agruparMetas ? <>Desagrupar metas &#128209;</> : <>Agrupar por objetivos &#128450;</>}</button>
-                        &nbsp;&nbsp;&nbsp;
                         <button className={styles.buttonVerMetas} onClick={() => {
                             detalle === 18 ? setDetalle(0) : setDetalle(18);
                         }}>Ver todas las metas &#127919;</button>
