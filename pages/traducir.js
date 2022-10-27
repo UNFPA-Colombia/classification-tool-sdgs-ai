@@ -101,7 +101,7 @@ export default function Traducir({ objetivos, metas }) {
                 <button key={index} className={styles.buttonMetaExt} onClick={() => {
                     setDetalle(detalle === item.goal ? 0 : item.goal);
                 }}>
-                    <Image src={`/targets/TARGET_${item.goal}_${item.target}.svg`} layout="fill" objectFit="cover" objectPosition="left bottom" alt={`Logo de la Meta de Desarrollo Sostenible numero ${item.goal}.${item.target}`} />
+                    <Image src={`/targets/TARGET_${item.goal}_${item.target.toUpperCase()}.svg`} layout="fill" objectFit="cover" objectPosition="left bottom" alt={`Logo de la Meta de Desarrollo Sostenible numero ${item.goal}.${item.target}`} />
                     <div><span className={styles.dot} style={{ width: `${(factor * 15) + 40}px`, height: `${(factor * 15) + 40}px` }}><p style={{ paddingTop: `${(factor * 7.5) + 10}px` }}><strong>{sim}%</strong></p></span></div>
                 </button>
             </>);
@@ -130,7 +130,7 @@ export default function Traducir({ objetivos, metas }) {
                         <br />
                         <div className={styles.containerMeta}>
                             <div className={styles.imgMeta}>
-                                <Image src={`/targets/TARGET_${item.goal}_${item.target}.svg`} layout="fill" objectFit="cover" objectPosition="left bottom" alt={`Logo de la Meta de Desarrollo Sostenible numero ${item.goal}.${item.target}`} />
+                                <Image src={`/targets/TARGET_${item.goal}_${item.target.toUpperCase()}.svg`} layout="fill" objectFit="cover" objectPosition="left bottom" alt={`Logo de la Meta de Desarrollo Sostenible numero ${item.goal}.${item.target}`} />
                             </div>
                             <div className={styles.descripcionMeta}>
                                 {meta ? meta.descripcion : ''}
@@ -170,7 +170,7 @@ export default function Traducir({ objetivos, metas }) {
                     <br />
                     <div className={styles.containerMeta}>
                         <div className={styles.imgMeta}>
-                            <Image src={`/targets/TARGET_${item.goal}_${item.target}.svg`} layout="fill" objectFit="cover" objectPosition="left bottom" alt={`Logo de la Meta de Desarrollo Sostenible numero ${item.goal}.${item.target}`} />
+                            <Image src={`/targets/TARGET_${item.goal}_${item.target.toUpperCase()}.svg`} layout="fill" objectFit="cover" objectPosition="left bottom" alt={`Logo de la Meta de Desarrollo Sostenible numero ${item.goal}.${item.target}`} />
                         </div>
                         <div className={styles.descripcionMeta}>
                             {meta ? meta.descripcion : ''}

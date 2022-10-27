@@ -24,7 +24,7 @@ export default function Resultado({ encuesta }) {
                                     <button key={index} className={styles.buttonMeta} onClick={() => {
 
                                     }} disabled>
-                                        <Image src={`/targets/TARGET_${meta.meta.objetivoId}_${meta.meta.key}.svg`} layout="fill" objectFit="cover" objectPosition="left bottom" alt={`Logo de la Meta de Desarrollo Sostenible numero ${meta.meta.id}`} />
+                                        <Image src={`/targets/TARGET_${meta.meta.objetivoId}_${meta.meta.key.toUpperCase()}.svg`} layout="fill" objectFit="cover" objectPosition="left bottom" alt={`Logo de la Meta de Desarrollo Sostenible numero ${meta.meta.id}`} />
                                         <div><span className={styles.dot} style={{ width: `${(factor * 15) + 40}px`, height: `${(factor * 15) + 40}px` }}><p style={{ paddingTop: `${(factor * 7.5) + 10}px` }}><strong>{sim}%</strong></p></span></div>
                                         <span className={styles.tooltiptext}>
                                             <p><strong>Meta {meta.meta.id}:</strong> {meta.meta.descripcion}</p>
