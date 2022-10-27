@@ -46,7 +46,7 @@ export default function Home() {
             </a>
           </Link>
 
-          <Link href="/consultar">
+          <Link href="/consultar/encuesta">
             <a className={styles.card}>
               <h2>Resultados &#x1F50E;</h2>
               <p>Consulta los ODSs más relevantes para las personas de tu ciudad o municipio.</p>

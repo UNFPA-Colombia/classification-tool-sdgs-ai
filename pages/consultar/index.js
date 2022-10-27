@@ -24,7 +24,7 @@ export default function Consultar({ municipios, departamentos }) {
     function showButton() {
         if (municipio) {
             return (
-                <Link href={`/${municipio.value}/`}><button className={styles.buttonStart} role="button">Consultar</button></Link>
+                <Link href={`/consultar/${municipio.value}/`}><button className={styles.buttonStart} role="button">Consultar</button></Link>
             );
         }
     }

@@ -1,8 +1,8 @@
 .container {
     width: 100vw;
     height: 100vh;
-    color: #412300;
-    background: linear-gradient(160deg, #ffecb9, #ffb5a0);
+    color: #37372d;
+    background: linear-gradient(160deg, #e7e7e1, #989881);
     font-family: 'Nunito', sans-serif;
     font-weight: 500;
     overflow: scroll;
@@ -28,7 +28,8 @@
 }
 
 .question {
-    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
     font-size: 2rem;
     width: 100%;
     text-align: center;
@@ -51,7 +52,7 @@
 
 .label,
 .description {
-    color: #743E00;
+    color: #7a7a64;
 }
 
 .grid {
@@ -75,7 +76,7 @@
     text-align: center;
     transition: color 100ms;
     vertical-align: baseline;
-    color: #743E00;
+    color: #7a7a64;
     margin: 1rem;
     font-size: 1.2rem;
     background-color: #eaeaea95;
@@ -85,7 +86,7 @@
 .buttonStart:focus,
 .buttonReturn:hover,
 .buttonReturn:focus {
-    border-color: #412300;
+    border-color: #37372d;
 }
 
 .buttonReturn {
@@ -102,7 +103,7 @@
     text-align: center;
     transition: color 100ms;
     vertical-align: baseline;
-    color: #743E00;
+    color: #37372d;
     font-size: 1rem;
     transform: rotate(180deg);
     background-color: #eaeaea95;
@@ -119,12 +120,234 @@
     min-width: 250px;
     max-width: 600px;
     display: inline-block;
-    color: #412300;
+    color: #37372d;
     font-size: 1rem;
     margin: 0.5rem;
 }
 
-@media (max-width: 700px) {
+.item {
+    margin: 0.5rem;
+    margin-bottom: 0rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.formField,
+.formLabel,
+.formField:focus~.formLabel {
+    color: #7a7a64;
+}
+
+.formGroup {
+    position: relative;
+    padding: 15px 0 0;
+    margin: 1rem;
+    margin-top: 0;
+}
+
+.formField {
+    font-family: inherit;
+    max-width: 600px;
+    min-width: 300px;
+    border: 0;
+    border-bottom: 2px solid #7a7a64;
+    outline: 0;
+    font-size: 1.3rem;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.formField::placeholder {
+    color: transparent;
+}
+
+.formField:placeholder-shown~.formLabel {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+}
+
+.formLabel {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+}
+
+.formField:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image-slice: 1;
+}
+
+.formField:focus~.formLabel {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.infoDemografica {
+    background-color: #37372d95;
+    border: 1px solid #37372d;
+    color: #eaeaea;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    padding-bottom: 0;
+    padding-top: 0;
+    width: 90vw;
+    max-width: 1400px;
+}
+
+.infoDemografica p {
+    display: inline-block;
+    margin: 0;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+}
+
+.infoEncuesta {
+    text-align: center;
+    font-size: smaller;
+    margin: 0.5rem;
+}
+
+.infoEncuesta p {
+    margin: 0.4rem;
+}
+
+.respuesta {
+    background-color: #eaeaea95;
+    border: 1px solid #eaeaea;
+    margin: 1rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    width: 45vw;
+    min-height: 400px;
+    max-width: 650px;
+}
+
+.metas {
+    width: 100%;
+    text-align: center;
+}
+
+.buttonMeta {
+    background-color: transparent;
+    border: none;
+    border-radius: 0.5rem;
+    color: inherit;
+    cursor: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    text-align: left;
+    padding-top: 0.4rem;
+    padding-bottom: 0.3rem;
+    width: 100%;
+}
+
+.buttonMeta {
+    padding: 0;
+    width: 90px;
+    height: 109.8px;
+    margin-left: 1rem;
+    margin-bottom: 4.4rem;
+    position: relative;
+    border-radius: 0;
+}
+
+.buttonMeta div {
+    position: relative;
+    top: 92px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.buttonMeta p {
+    margin: 0;
+    padding-top: 7px;
+    color: #eaeaea;
+}
+
+.dot {
+    height: 35px;
+    width: 35px;
+    background-color: #37372dff;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+}
+
+.grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1500px;
+}
+
+.buttonMeta .tooltiptext {
+    visibility: hidden;
+    width: 240px;
+    background-color: #37372d;
+    color: #E6E6E6;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 5px;
+
+    position: absolute;
+    z-index: 1;
+
+    bottom: 105%;
+    left: 50%;
+    margin-left: -120px;
+}
+
+.buttonMeta:hover .tooltiptext {
+    visibility: visible;
+}
+
+.tooltiptext p {
+    color: #E6E6E6;
+}
+
+.mensajeProcesar {
+    text-align: center;
+    margin: 1rem;
+}
+
+.buttonRecargar {
+    border-radius: 0.7rem;
+    border: 1px solid #eaeaea;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 0.5rem;
+    text-align: center;
+    color: #37372d;
+    font-size: 1rem;
+    background-color: #eaeaea95;
+    min-width: 2.5rem;
+    margin: 1rem;
+}
+
+.buttonRecargar:hover {
+    border-color: #7a7a64;
+}
+
+@media (max-width: 800px) {
     .main {
         padding: 6rem 0;
     }
@@ -135,14 +358,53 @@
     }
 }
 
+@media (max-width: 1300px) {
+    .respuesta {
+        width: 90vw;
+        max-width: 90vw;
+    }
+}
+
 @media (prefers-color-scheme: dark) {
+
+    .formField,
+    .formLabel,
+    .formField:focus~.formLabel {
+        color: #E6E6E6;
+    }
+
+    .formField {
+        border-bottom: 2px solid #E6E6E6;
+    }
+
     .container {
-        background: linear-gradient(160deg, #664c00, #b32c00);
+        background: linear-gradient(160deg, #26261f, #4d4d3f);
         color: #EFEFEF;
     }
 
     .label,
     .description {
+        color: #E6E6E6;
+    }
+
+    .infoDemografica {
+        background-color: #eaeaea90;
+        color: #37372d;
+    }
+
+    .respuesta {
+        background-color: #4d4d3f95;
+    }
+
+    .buttonMeta p {
+        color: #37372d;
+    }
+
+    .dot {
+        background-color: #eaeaeaff;
+    }
+
+    .tooltiptext p {
         color: #E6E6E6;
     }
 }
