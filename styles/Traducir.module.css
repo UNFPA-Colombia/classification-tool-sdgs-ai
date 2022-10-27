@@ -39,6 +39,8 @@
     margin: 1.5rem;
     color: inherit;
     width: 45vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .moduleDetails {
@@ -194,8 +196,8 @@
 .noAudioAlert {
     color: #454DAC;
     font-size: 0.8rem;
-    margin: 4rem;
-    margin-top: 0;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
     margin-bottom: 1rem;
     text-align: center;
 }
@@ -337,7 +339,7 @@
 .buttonMetaExt p {
     margin: 0;
     padding-top: 7px;
-    color: #eaeaea
+    color: #eaeaea;
 }
 
 .dot {
@@ -412,6 +414,14 @@
     .buttonMetaExt:hover .dot {
         box-shadow: 0 0 4px #E6E6E6;
     }
+
+    .buttonMetaExt p {
+        color: #252C76;
+    }
+    
+    .dot {
+        background-color: #eaeaeaff;
+    }
 }
 
 @media (max-width: 1000px) {
@@ -423,7 +433,7 @@
 
     .module,
     .moduleDetails {
-        width: 85vw;
+        width: 90vw;
     }
 
 }
