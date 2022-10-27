@@ -40,7 +40,7 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
     }
 
     function clickCopiarUrl() {
-        copiarTextoAlClipBoard(`http://localhost:3000/consultar/encuesta/${idEncuesta}`)
+        copiarTextoAlClipBoard(`${idEncuesta}`)
             .then(() => {
                 setUrlCopiada(true);
                 setTimeout(() => {
@@ -263,10 +263,10 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
                 return <div>
                     <div className={styles.select}>
                         {idEncuesta ? <Link href={`/consultar/encuesta/${idEncuesta}`} ><button className={styles.buttonNextQuestion} role="button">Ver los resultados &#128202;</button></Link> : <></>}
-                        <button className={styles.buttonNextQuestion} onClick={clickCopiarUrl} >{urlCopiada ? <>Enlace copiado &#128203;</> : <>Copiar enlace &#128203;</>}</button>
+                        <button className={styles.buttonNextQuestion} onClick={clickCopiarUrl} >{urlCopiada ? <>CU copiado &#128203;</> : <>Copiar CU &#128203;</>}</button>
                     </div>
                     <p className={styles.posting}>¡Tus respuestas se guardaron y enviaron con éxito!</p>
-                    <p className={styles.posting}>Código único: <strong>{idEncuesta}</strong></p>
+                    <p className={styles.posting}>Código único (CU): <strong>{idEncuesta}</strong></p>
                 </div>;
             case 3:
                 return <div>

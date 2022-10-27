@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from '../../styles/Participar.module.css';
 import LogosHeader from '../../components/LogosHeader';
 
