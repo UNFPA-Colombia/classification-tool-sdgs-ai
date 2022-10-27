@@ -305,7 +305,7 @@ export default function Traducir({ objetivos, metas }) {
 
             <div className={styles.main}>
                 <h1 className={styles.title}>
-                    Traductor de <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={44} height={44} />DSs
+                    Traductor de <nobr><Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={42} height={42} />DSs</nobr>
                 </h1>
                 <div className={styles.grid}>
                     <div className={styles.module}>

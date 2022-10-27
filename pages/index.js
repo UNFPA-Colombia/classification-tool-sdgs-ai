@@ -19,10 +19,9 @@ export default function Home() {
       <main className={styles.main}>
         <h1 className={styles.title}>
           ¡Bienvenido a <strong>
-            <span >
-              <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={54} height={54} />
-            </span>
-            DS-IA
+            <nobr >
+              <Image src="/SDG_logo.png" alt="SDGs logo" layout="fixed" width={52} height={52} />DS-IA
+            </nobr>
           </strong> del <a href="https://colombia.unfpa.org" target="_blank" rel="noopener noreferrer">UNFPA!</a>
         </h1>
 
