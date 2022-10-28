@@ -357,14 +357,9 @@ export default function Preguntas({ municipios, departamentos, preguntas }) {
 
 export async function getStaticPaths() {
 
-    let grupos = await prisma.Grupos.findMany();
-    grupos = grupos.map((grupo) => {
-        return {
-            params: {
-                grupo: grupo.nombre
-            }
-        }
-    });
+    let grupos = [
+        { params: { grupo: "predeterminado" } }
+    ];
 
     return {
         paths: grupos,
@@ -414,6 +409,13 @@ export async function getStaticProps({ params }) {
         };
     });
 
-    return { props: { municipios, departamentos, preguntas } };
+    return {
+        props: {
+            municipios,
+            departamentos,
+            preguntas
+        },
+        revalidate: 60,
+    };
 
 }
