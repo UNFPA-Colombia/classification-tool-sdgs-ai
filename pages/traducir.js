@@ -95,14 +95,14 @@ export default function Traducir({ objetivos, metas }) {
     function showResultadoTraduccionMetas() {
         const targets = resultadoTraduccion.sort((a, b) => { a.sim - b.sim }).map((item, index) => {
             const meta = metas.find((meta) => meta.id === item.goal + '.' + item.target);
-            const sim = Math.round((item.sim + Number.EPSILON) * 100);
+            const sim = Math.round((item.sim + Number.EPSILON) * 1000) / 10;
             const factor = (sim - 60) / 40;
             return (<>
                 <button key={index} className={styles.buttonMetaExt} onClick={() => {
                     setDetalle(detalle === item.goal ? 0 : item.goal);
                 }}>
                     <Image src={`/targets/TARGET_${item.goal}_${item.target.toUpperCase()}.svg`} layout="fill" objectFit="cover" objectPosition="left bottom" alt={`Logo de la Meta de Desarrollo Sostenible numero ${item.goal}.${item.target}`} />
-                    <div><span className={styles.dot} style={{ width: `${(factor * 15) + 40}px`, height: `${(factor * 15) + 40}px` }}><p style={{ paddingTop: `${(factor * 7.5) + 10}px` }}><strong>{sim}%</strong></p></span></div>
+                    <div><span className={styles.dot} style={{ width: `${(factor * 15) + 46}px`, height: `${(factor * 15) + 46}px` }}><p style={{ paddingTop: `${(factor * 7.5) + 14.5}px` }}><strong>{sim.toFixed(1)}%</strong></p></span></div>
                 </button>
             </>);
         });
@@ -116,13 +116,13 @@ export default function Traducir({ objetivos, metas }) {
         if (detalle === 18) {
             const targets = resultadoTraduccion.sort((a, b) => { a.sim - b.sim }).map((item, index) => {
                 const meta = metas.find((meta) => meta.id === item.goal + '.' + item.target);
-                const sim = Math.round((item.sim + Number.EPSILON) * 100);
+                const sim = Math.round((item.sim + Number.EPSILON) * 1000) / 10;
                 return (<>
                     <button key={index} className={styles.buttonMeta} onClick={() => {
                         setDetalle(item.goal);
                     }}>
                         <span>
-                            <strong>{`${item.goal}.${item.target.length > 1 ? item.target : item.target + ' '}${item.goal > 9 ? '' : '\u00A0\u00A0'}`}</strong>&nbsp;&nbsp;{sim}%&nbsp;
+                            <strong>{`${item.goal}.${item.target.length > 1 ? item.target : item.target + ' '}${item.goal > 9 ? '' : '\u00A0\u00A0'}`}</strong>&nbsp;&nbsp;{sim.toFixed(1)}%&nbsp;
                         </span>
                         <span className={styles.detalleBar} style={{ width: sim * 0.75 + '%' }}>
 
@@ -157,12 +157,12 @@ export default function Traducir({ objetivos, metas }) {
         }
         const objetivo = objetivos.find((objetivo) => objetivo.id === detalle);
         const targets = resultadoTraduccion.filter((item) => item.goal == detalle).map((item, index) => {
-            const sim = Math.round((item.sim + Number.EPSILON) * 100);
+            const sim = Math.round((item.sim + Number.EPSILON) * 1000) / 10;
             const meta = metas.find((meta) => meta.id === item.goal + '.' + item.target);
             return (<>
                 <div key={index} className={styles.contMeta}>
                     <span>
-                        <strong>{`${item.goal}.${item.target.length > 1 ? item.target : item.target + ' '}`}</strong>&nbsp;&nbsp;{sim}%&nbsp;
+                        <strong>{`${item.goal}.${item.target.length > 1 ? item.target : item.target + ' '}`}</strong>&nbsp;&nbsp;{sim.toFixed(1)}%&nbsp;
                     </span>
                     <span className={styles.detalleBar} style={{ width: sim * 0.75 + '%' }}>
 
