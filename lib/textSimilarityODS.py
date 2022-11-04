@@ -46,13 +46,14 @@ if __name__ == '__main__':
         ids, sims = getGoals(sys.argv[i])
         approved = sims >= 0.6
         approved = approved.tolist()
-        ids = (ids+1).tolist()
+        ids = ids.tolist()
         sims = sims.tolist()
         goals = fullGoals.loc[ids, 'id_objetivo'].tolist()
         targets = fullGoals.loc[ids, 'meta_id'].tolist()
         for i in range(len(approved)):
             if approved[i]:
-                finalTargets.append({'id': ids[i], 'sim': sims[i], 'goal': goals[i], 'target': targets[i]})
+                finalTargets.append(
+                    {'id': ids[i], 'sim': sims[i], 'goal': goals[i], 'target': targets[i]})
         result.append(finalTargets)
     json.dump(result, sys.stdout)
     sys.stdout.flush()
