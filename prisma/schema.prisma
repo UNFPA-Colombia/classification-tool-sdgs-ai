@@ -13,6 +13,7 @@ model Objetivos {
   descripcion String  @db.VarChar(1000)
   url         String? @db.VarChar(255)
   img         String? @db.VarChar(255)
+  color       String? @db.VarChar(7)
   metas       Metas[]
 }
 
