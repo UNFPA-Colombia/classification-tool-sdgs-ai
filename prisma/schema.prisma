@@ -18,14 +18,15 @@ model Objetivos {
 }
 
 model Metas {
-  id             String            @id @db.VarChar(5)
-  key            String            @db.VarChar(2)
-  descripcion    String            @db.VarChar(1000)
-  img            String?           @db.VarChar(255)
-  url            String?           @db.VarChar(255)
-  objetivos      Objetivos         @relation(fields: [objetivoId], references: [id])
-  objetivoId     Int
-  metasRespuesta MetasRespuestas[]
+  id              String            @id @db.VarChar(5)
+  key             String            @db.VarChar(2)
+  descripcion     String            @db.VarChar(1000)
+  img             String?           @db.VarChar(255)
+  url             String?           @db.VarChar(255)
+  objetivos       Objetivos         @relation(fields: [objetivoId], references: [id])
+  objetivoId      Int
+  metasRespuesta  MetasRespuestas[]
+  MetasTraduccion MetasTraduccion[]
 }
 
 model Grupos {
@@ -102,12 +103,31 @@ model Respuestas {
 }
 
 model MetasRespuestas {
-  respuesta   Respuestas @relation(fields: [respuestaId], references: [id])
-  respuestaId String
-  meta        Metas      @relation(fields: [metaId], references: [id])
-  metaId      String
-  similitud   Float      @db.Real
-  createdAt   DateTime   @default(now())
+  respuesta         Respuestas @relation(fields: [respuestaId], references: [id])
+  respuestaId       String
+  meta              Metas      @relation(fields: [metaId], references: [id])
+  metaId            String
+  similitud         Float      @db.Real
+  createdAt         DateTime   @default(now())
+  retroalimentacion Boolean?
 
   @@id([respuestaId, metaId])
+}
+
+model Traduccion {
+  id              String            @id @default(uuid())
+  createdAt       DateTime          @default(now())
+  texto           String            @db.VarChar(1000)
+  MetasTraduccion MetasTraduccion[]
+}
+
+model MetasTraduccion {
+  meta              Metas      @relation(fields: [metaId], references: [id])
+  metaId            String
+  traduccion        Traduccion @relation(fields: [traduccionId], references: [id])
+  traduccionId      String
+  similitud         Float      @db.Real
+  retroalimentacion Boolean?
+
+  @@id([metaId, traduccionId])
 }
