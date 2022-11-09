@@ -270,14 +270,15 @@
 
 .descripcionObjetivo,
 .descripcionMeta {
-    font-weight: 300;
+    font-weight: 400;
     font-size: 1rem;
     padding-bottom: 2px;
     line-height: 1.3;
 }
 
 .descripcionMeta {
-    font-size: 0.9rem;
+    font-size: 1rem;
+    font-weight: 300;
     line-height: 1.2;
     margin-bottom: 0.5rem;
     width: calc(100% - 100px);
@@ -301,7 +302,7 @@
 
 .contMeta {
     overflow: hidden;
-    margin-top: 0.5rem;
+    padding-top: 0.5rem;
     margin-bottom: 1rem;
     margin-left: 0.5rem;
 }
@@ -392,6 +393,10 @@
     background-color: #454DAC50;
     border: 1px solid #454DACBB;
     font-size: 0.9rem;
+    margin: 0;
+
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
 }
 
 .buttonRetro:hover {
@@ -410,6 +415,34 @@
 
 .buttonRetroR {
     border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #eaeaeaee;
+    text-align: center;
+    padding: 0;
+    border-radius: 0.5rem;
+
+    position: absolute;
+    z-index: 1;
+
+    bottom: -1rem;
+    right: 0.1rem;
+    margin-right: 70px;
+}
+
+.retroalimentacion:hover+.tooltiptext {
+    visibility: visible;
+}
+
+.tooltiptext p {
+    color: #454DAC;
+    font-size: 0.8rem;
+    line-height: 1;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
 @media (max-width: 700px) {
