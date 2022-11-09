@@ -296,11 +296,14 @@
 
 .containerMeta {
     margin-top: 0.5rem;
+    position: relative;
 }
 
 .contMeta {
     overflow: hidden;
-    padding-bottom: 0.7rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
 }
 
 .buttonMeta,
@@ -356,7 +359,6 @@
     box-shadow: 0 0 4px #454DAC;
 }
 
-
 .logoObjetivo {
     cursor: pointer;
     padding: 0;
@@ -367,6 +369,47 @@
     position: relative;
     float: left;
     margin-right: 1rem;
+}
+
+.retroalimentacion {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.1rem;
+    font-size: 0.8rem;
+}
+
+.buttonMeta {
+    margin-bottom: 1rem;
+}
+
+.buttonRetro {
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: center;
+    transition: color 100ms;
+    vertical-align: baseline;
+    background-color: #454DAC50;
+    border: 1px solid #454DACBB;
+    font-size: 0.9rem;
+}
+
+.buttonRetro:hover {
+    background-color: #454DACBB;
+}
+
+.buttonRetro:disabled {
+    cursor: initial;
+    opacity: 0.6;
+    background-color: #454DAC;
+}
+
+.buttonRetroL {
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.buttonRetroR {
+    border-radius: 0 0.5rem 0.5rem 0;
 }
 
 @media (max-width: 700px) {
@@ -422,6 +465,24 @@
 
     .dot {
         background-color: #eaeaeaff;
+    }
+
+    .buttonRetro {
+        background-color: #eaeaea95;
+        border: 1px solid #eaeaeabb;
+        color: #454DAC;
+    }
+
+    .buttonRetroS {
+        background-color: #eaeaea;
+    }
+
+    .buttonRetro:hover {
+        background-color: #eaeaeabb;
+    }
+
+    .buttonRetro:disabled {
+        background-color: #eaeaea;
     }
 }
 

@@ -8,6 +8,7 @@ import TextAudioQuestion from '../components/TextAudioQuestion';
 import Loading from '../components/Loading';
 import styles from '../styles/Traducir.module.css';
 import LogosHeader from '../components/LogosHeader';
+import MetaTraducir from '../components/MetaTraducir';
 
 export default function Traducir({ objetivos, metas }) {
 
@@ -17,6 +18,7 @@ export default function Traducir({ objetivos, metas }) {
     const [textoMuyCorto, setTextoMuyCorto] = useState(false);
     const [detalle, setDetalle] = useState(0);
     const [agruparMetas, setAgruparMetas] = useState(false);
+    const [idTraduccion, setIdTraduccion] = useState('');
     const textoAviso = useRef(null);
     const detalleDiv = useRef(null);
 
@@ -51,7 +53,8 @@ export default function Traducir({ objetivos, metas }) {
             if (response.ok) {
                 return response.json()
                     .then((data) => {
-                        setResultadoTraduccion(data[0]);
+                        setResultadoTraduccion(data.metas);
+                        setIdTraduccion(data.id);
                         setEstadoTraduccion(2);
                     }).catch((error) => {
                         console.log(error);
@@ -117,6 +120,7 @@ export default function Traducir({ objetivos, metas }) {
             const targets = resultadoTraduccion.sort((a, b) => { a.sim - b.sim }).map((item, index) => {
                 const meta = metas.find((meta) => meta.id === item.goal + '.' + item.target);
                 const sim = Math.round((item.sim + Number.EPSILON) * 1000) / 10;
+                return <MetaTraducir meta={meta} sim={sim} item={item} key={index} idTraduccion={idTraduccion} />
                 return (<>
                     <button key={index} className={styles.buttonMeta} onClick={() => {
                         setDetalle(item.goal);
@@ -159,25 +163,7 @@ export default function Traducir({ objetivos, metas }) {
         const targets = resultadoTraduccion.filter((item) => item.goal == detalle).map((item, index) => {
             const sim = Math.round((item.sim + Number.EPSILON) * 1000) / 10;
             const meta = metas.find((meta) => meta.id === item.goal + '.' + item.target);
-            return (<>
-                <div key={index} className={styles.contMeta}>
-                    <span>
-                        <strong>{`${item.goal}.${item.target.length > 1 ? item.target : item.target + ' '}`}</strong>&nbsp;&nbsp;{sim.toFixed(1)}%&nbsp;
-                    </span>
-                    <span className={styles.detalleBar} style={{ width: sim * 0.75 + '%' }}>
-
-                    </span>
-                    <br />
-                    <div className={styles.containerMeta}>
-                        <div className={styles.imgMeta}>
-                            <Image src={`/targets/TARGET_${item.goal}_${item.target.toUpperCase()}.svg`} layout="fill" objectFit="cover" objectPosition="left bottom" alt={`Logo de la Meta de Desarrollo Sostenible numero ${item.goal}.${item.target}`} />
-                        </div>
-                        <div className={styles.descripcionMeta}>
-                            {meta ? meta.descripcion : ''}
-                        </div>
-                    </div>
-                </div>
-            </>);
+            return <MetaTraducir meta={meta} sim={sim} item={item} key={index} idTraduccion={idTraduccion} />
         });
         return (
             <div ref={detalleDiv} className={styles.resultadoDetalle}>
