@@ -118,6 +118,7 @@ model Traduccion {
   id              String            @id @default(uuid())
   createdAt       DateTime          @default(now())
   texto           String            @db.VarChar(1000)
+  ipOrigen        String?           @db.VarChar(39)
   MetasTraduccion MetasTraduccion[]
 }
 

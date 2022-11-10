@@ -22,9 +22,11 @@ export default async function handler(req, res) {
 
                 pythonProcess.stdout.on('data', (data) => {
                     const newData = { metas: JSON.parse(data.toString())[0], id: '' };
+                    const ip = req.headers["x-real-ip"] || req.headers["x-forwarded-for"] || req.connection.remoteAddress;
                     prisma.Traduccion.create({
                         data: {
                             texto: value.data,
+                            ipOrigen: ip,
                         },
                         select: {
                             id: true,
