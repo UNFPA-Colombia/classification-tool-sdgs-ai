@@ -52,6 +52,15 @@ export default function Home() {
             </a>
           </Link>
 
+          <Link href="/documentos">
+            <a className={styles.card}>
+              <h2>Documentos &#128196;</h2>
+              <p>
+                Encuentra los Objetivos de Desarrollo Sostenible que aparecen en un Plan de Ordenamiento Territorial.
+              </p>
+            </a>
+          </Link>
+
           <Link href="/conocer">
             <a className={styles.card}>
               <h2>Conocer más &#x1F4DA;</h2>
