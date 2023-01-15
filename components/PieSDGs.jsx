@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import * as d3 from "d3";
 
-function drawChart(svgRef, data, setObjetivo, objetivo) {
+function drawChart(svgRef, data, setObjetivo) {
 
     const width = 450,
         height = 450,
@@ -26,9 +26,9 @@ function drawChart(svgRef, data, setObjetivo, objetivo) {
         .selectAll('path')
         .data(pie(data))
         .join('path')
-        .attr('d', d3.arc()
+        .attr('d', (d,i) => d3.arc()
             .innerRadius(100)
-            .outerRadius(radius)
+            .outerRadius(radius+d.data.radius)(d, i)
         )
         .attr('fill', d => d.data.color)
         .on('mouseover', function (d, i) {
@@ -46,10 +46,10 @@ function drawChart(svgRef, data, setObjetivo, objetivo) {
         });
 }
 
-export default function PieSDGs({ objetivos, setObjetivo, objetivo }) {
+export default function PieSDGs({ objetivos, setObjetivo }) {
     const svg = useRef(null);
     useEffect(() => {
-        drawChart(svg, objetivos, setObjetivo, objetivo);
+        drawChart(svg, objetivos, setObjetivo);
     }, [svg]);
 
     return <svg ref={svg} />;
