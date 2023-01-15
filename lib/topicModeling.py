@@ -74,7 +74,7 @@ def getBestTopics(corpus, id2word, texts):
         lda_model = gensim.models.LdaMulticore(corpus=corpus, id2word=id2word, num_topics=i,
                                                random_state=100, chunksize=100, passes=10,
                                                per_word_topics=True)
-        models.append(models)
+        models.append(lda_model)
         coherence_model_lda = CoherenceModel(
             model=lda_model, texts=texts, dictionary=id2word, coherence="c_v")
         coherencia = coherence_model_lda.get_coherence()
@@ -82,7 +82,7 @@ def getBestTopics(corpus, id2word, texts):
         if coherencia > best_coherence:
             best_coherence = coherencia
             topics_best_coherence = i
-    return (models, answer, topics_best_coherence)
+    return models, answer, topics_best_coherence
 
 
 def topicModeling(ruta):
@@ -113,9 +113,9 @@ def topicModeling(ruta):
     # Term Document Frequency #[[], [(0 , 1),(1, 1),(2, 1),(3, 1),(4, 6)]] word id and frequency
     corpus = [id2word.doc2bow(text) for text in data_words_bigrams]
 
-    answer = getBestTopics(corpus, id2word, data_words_bigrams)
-
-    return answer
+    models, answer, topics_best_coherence = getBestTopics(corpus, id2word, data_words_bigrams)
+    
+    return {"error": False, "bestModel": topics_best_coherence, "models": answer}
 
 
 if __name__ == '__main__':
@@ -124,5 +124,5 @@ if __name__ == '__main__':
     try:
         json.dump(result, sys.stdout)
     except Exception as e:
-        json.dump({"error": e}, sys.stdout)
+        json.dump({"error": str(e)}, sys.stdout)
     sys.stdout.flush()
