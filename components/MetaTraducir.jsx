@@ -101,7 +101,7 @@ export default function MetaTraducir({ meta, sim, item, key, idTraduccion, refre
                 </div>
                 {botonRetro()}
                 <span className={styles.tooltiptext}>
-                    <p>¿Te parece que el objetivo {`${item.goal}.${item.target}`} es una buena traducción?</p>
+                    <p>¿Te parece que la meta {`${item.goal}.${item.target}`} es una buena traducción?</p>
                 </span>
             </div>
 
