@@ -9,6 +9,7 @@ import Loading from '../components/Loading';
 import styles from '../styles/Traducir.module.css';
 import LogosHeader from '../components/LogosHeader';
 import MetaTraducir from '../components/MetaTraducir';
+import PieSDGs from '../components/PieSDGs';
 
 export default function Traducir({ objetivos, metas }) {
 
@@ -76,6 +77,49 @@ export default function Traducir({ objetivos, metas }) {
             return r;
         }, Object.create(null));
 
+        const resultado = [...objetivos].map((obj) => {
+            return {
+                ...obj,
+                valor: -10,
+            }
+        });
+
+        Object.entries(resultadosAgrupados).forEach((item, index) => {
+            
+            const [key, value] = item;
+            const objetivo = resultado.find((objetivo) => objetivo.id === parseInt(key));
+            if (objetivo) {
+                objetivo.valor = value.length*20;
+            }
+        });
+
+        console.log(resultado);
+        return (
+            <div className={styles.resultadosRueda}>
+                <PieSDGs objetivos={
+                    resultado.map((obj) => {
+                        return {
+                            id: obj.id,
+                            nombre: obj.nombre,
+                            color: obj.color,
+                            valor: 1,
+                            radius: obj.valor,
+                        }
+                    })
+                }
+                    setObjetivo={(obj) => { setDetalle(detalle === obj ? 0 : obj)}}
+                />
+            </div>
+        );
+    }
+
+    function showResultadoTraduccionObjetivos2() {
+        const resultadosAgrupados = resultadoTraduccion.reduce(function (r, a) {
+            r[a.goal] = r[a.goal] || [];
+            r[a.goal].push(a);
+            return r;
+        }, Object.create(null));
+
         const resultado = []
         Object.entries(resultadosAgrupados).forEach((item, index) => {
             const [key, value] = item;
@@ -111,6 +155,7 @@ export default function Traducir({ objetivos, metas }) {
         });
         return targets;
     }
+
 
     function showDetalleResultados() {
         if (detalle === 0) {
