@@ -11,28 +11,58 @@ const fileTypes = ["PDF"];
 export default function Documentos() {
 
 	const [files, setFiles] = useState([]);
+	const [status, setStatus] = useState(0); // 0: no files, 1: uploading, 2: uploaded 3: error size, 4: error type, 5: error
 
 	const handleChange = (newFiles) => {
 		setFiles([...files, ...Array.from(newFiles)]);
 	};
 
 	const handleSubmission = () => {
-		
+
+		if (files.length > 0) {
+			setStatus(0);
+
+			const data = new FormData();
+
+			for (const file of files) {
+				data.append('files', file, file.name);
+			}
+
+			fetch('/api/documentos', {
+				method: 'POST',
+				body: data,
+			})
+				.then((response) => response.json())
+				.then((result) => {
+					setStatus(2);
+				})
+				.catch((error) => {
+					if (error === "Error: Wrong type") {
+						setStatus(4);
+					}
+					else if (error === "Error: File too large") {
+						setStatus(3);
+					}
+					else {
+						setStatus(5);
+						console.error(error);
+					}
+				});
+		}
 	};
 
 	function showDocumentos() {
 		if (files.length > 0) {
 			return (
-			
-			<ul>
-				{files.map((f, index) => <>
-					<li className={styles.archivo} key={index}>{f.name} &nbsp;&nbsp;
-						<button onClick={() => {
-							setFiles(files.filter((_, i) => i !== index))
-						}} className={styles.buttonRemove} role="button">&#10060;</button>
-					</li>
-				</>)}
-			</ul>
+				<ul>
+					{files.map((f, index) => <>
+						<li className={styles.archivo} key={index}>{f.name} &nbsp;&nbsp;
+							<button onClick={() => {
+								setFiles(files.filter((_, i) => i !== index))
+							}} className={styles.buttonRemove} role="button">&#10060;</button>
+						</li>
+					</>)}
+				</ul>
 			);
 		}
 	}
@@ -61,10 +91,10 @@ export default function Documentos() {
 						onDraggingStateChange={(f) => { console.log("dragging", f) }}
 						onTypeError={(f) => { console.log("type error", f) }}
 						onSizeError={(f) => { console.log("size error", f) }}
-						name="file"
+						name="files"
 						types={fileTypes}
 						multiple={true}
-						maxSize={1}
+						maxSize={6}
 					>
 						<div className={styles.cajaArchivos}>
 							{files.length > 0 ? <p>Quieres agregar más? Arrástralos o <u>haz click aquí</u></p> : <p>Arrastra los documentos o <u>haz click aquí</u></p>}
@@ -73,8 +103,12 @@ export default function Documentos() {
 					{showDocumentos()}
 				</div>
 				{files.length > 0 && <button onClick={handleSubmission} className={styles.buttonStart} role="button">Empezar</button>}
+				{status === 1 && <p className={styles.status}>Subiendo...</p>}
+				{status === 2 && <p className={styles.status}>¡Listo! Puedes ver los resultados en la sección de <Link href="/resultados"><a>Resultados</a></Link></p>}
+				{status === 3 && <p className={styles.status}>Error: El archivo es demasiado grande</p>}
+				{status === 4 && <p className={styles.status}>Error: El archivo no es PDF</p>}
+				{status === 5 && <p className={styles.status}>Error: Ocurrió un error inesperado</p>}
 			</main>
-
 		</div>
 	)
 }
