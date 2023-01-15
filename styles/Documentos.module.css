@@ -143,8 +143,6 @@
 }
 
 
-
-
 @media (prefers-color-scheme: dark) {
 
     .container {
@@ -152,6 +150,7 @@
         color: #EFEFEF;
     }
 
+    .archivo,
     .description {
         color: #E6E6E6;
     }

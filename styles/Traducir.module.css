@@ -445,6 +445,12 @@
     padding-right: 0.5rem;
 }
 
+.resultadosRueda {
+    width: 300px;
+    display: block;
+    margin: auto;
+}
+
 @media (max-width: 700px) {
     .main {
         padding: 6rem 0;
