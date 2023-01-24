@@ -1,0 +1,356 @@
+/* VARIABLES DE COLORES */
+@value Ublue: #09B9D7;
+@value UblueLight: #B4FAFE;
+@value Ugray: #666666;
+@value Uwhite: #F3F3F3;
+@value Upurple: rgba(91, 104, 244, 1);
+/* #5B68F4  */
+@value UpurpleDark: #5F5FF6;
+/* Para los fondos */
+@value UpurpleLight: #7568FD;
+@value Ured: #DC3148;
+@value UgreenLight: #B4FAFE;
+@value UgrayLight: rgba(50, 50, 0, 0.5);
+@value UpinkLight: #FFDED8;
+
+
+.welcomePage {
+  background-color: Ublue;
+  height: 100vh;
+  width: 100%;
+  padding-top: 15vh;
+  padding-left: 25vh;
+  padding-right: 25vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.tituloEstilo1 {
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+.tituloEstilo2 {
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: right;
+}
+
+.tituloEstilo3 {
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: left;
+  font-size: 1.5rem;
+}
+
+.documentData {
+  background-color: Ugray;
+  height: 635px;
+  -webkit-transform: skewY(-20deg);
+  -moz-transform: skewY(-20deg);
+  -ms-transform: skewY(-20deg);
+  -o-transform: skewY(-20deg);
+  transform: skewY(-20deg);
+  padding-top: 190px;
+}
+
+
+.generalDataImg {
+  width: 100px;
+  position: relative;
+}
+
+.generalAllDataComponent {
+  height: 550px;
+  background-color: Ugray;
+  padding-left: 10%;
+  padding-top: 20px;
+  padding-right: 10%;
+}
+
+.generalDataView {
+  background-color: Ublue;
+}
+
+.titleAllDataGeneral {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-right: 5vh;
+}
+
+.titleDocumentos {
+  transform: rotate(-20deg);
+  color: white;
+  padding-bottom: 15px;
+}
+
+/* Circulos */
+.circle {
+  display: flex;
+  border-radius: 50%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.text1 {
+  text-align: center;
+  margin-bottom: 0px;
+  font-size: 1.2rem;
+}
+
+.text2 {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.text3 {
+  margin-top: 0;
+  text-align: center;
+  font-style: italic;
+  
+  font-weight: 600;
+}
+.textStorytelling{
+  margin-bottom: 0px;
+  text-align: center;
+  margin-bottom: 0px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white
+}
+
+.circleH1 {
+  margin: 0;
+  text-align: center;
+}
+
+/* Hexagon */
+.hexagon {
+
+  width: 385px;
+  height: 258px;
+  clip-path: polygon(75px 0px, 225px 0px, 295px 128px, 335px 128px, 335px 131px, 295px 131px, 225px 260px, 75px 260px, 0 130px);
+  box-shadow: 0 8px 6px -6px black;
+  align-items: center;
+  display: flex;
+}
+
+.hexagon_child {
+  -webkit-transform: skewY(20deg);
+  -moz-transform: skewY(20deg);
+  -ms-transform: skewY(20deg);
+  -o-transform: skewY(20deg);
+  transform: skewY(20deg);
+}
+
+.titleHexagon {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.hexagonIcon {
+  padding: 0 px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.generalCleanData {
+  background: linear-gradient(0deg, Upurple 0%, Ublue 100%);
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
+
+.rotateTitle {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  margin: 0;
+}
+
+.row {
+  align-items: center;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.center2{
+  display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+.centerDescription {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 150px;
+  padding: 40px 50px 40px 5vw;
+}
+
+.fondoColorMoradoGradient {
+  background: linear-gradient(0deg, UpurpleDark 0%, Upurple 100%);
+  ;
+}
+
+.fondoColorMorado {
+  background-color: UpurpleDark;
+}
+
+.fondoColorMoradoClaro {
+  background-color: UpurpleLight;
+  padding-bottom: 3%;
+  padding-top: 3%;
+}
+.heightAllScreen{
+  height: 100vh;
+}
+
+.paralelogramo {
+  background-color: Ured;
+  color: Uwhite;
+  clip-path: polygon(10% 0px, 100% 0px, 100% 100%, 0 100%);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1em 10% 1em 15%;
+}
+
+.paralelogramoComplete {
+  background-color: Ured;
+  color: Uwhite;
+  clip-path: polygon(10% 0px, 100% 0px, 90% 100%, 0 100%);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1em 10% 1em 15%;
+}
+.shadow {
+  filter: drop-shadow(-4px 3px 3px UgrayLight);
+}
+.shadowBottom{
+  box-shadow: 0 5px 5px -5px #333;
+}
+
+.shadowLateral{
+  box-shadow: 5px 0 5px -5px black, -5px 0 5px -5px black;
+}
+
+.divGraficosDescription{
+  width: 17vw ;
+  background-color:UpinkLight;    
+  position: sticky;
+    top: 25%;
+    padding: 8px 10px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+
+}
+.generalDataLi,
+.generalDataUl {
+
+  font-size: 1.5rem;
+
+}
+
+
+
+
+
+
+
+
+/*-----------------------------------------------------------------------------------------------------------  */
+
+/* General data y General Clean Data*/
+.pages {
+  margin-top: 80px;
+}
+
+.generalDataH2 {
+  font-size: 7rem !important;
+  margin-top: 60px;
+
+}
+
+.generalData {
+  padding: 10px 10px 10px 50px;
+}
+
+.generalDataH3 {
+  font-size: 5rem !important;
+  color: rgb(168, 168, 168);
+
+}
+
+
+
+/* Number of groups */
+.numberOfGroups {
+  padding: 10px 10px 10px 50px;
+}
+
+.numberOfGroupsButton {
+  border: none;
+  /* background-color: white; */
+  font-style: italic;
+
+}
+
+.numberOfGroupsH2 {
+  text-align: -webkit-center;
+  font-size: 5rem !important;
+}
+
+.numberOfGroupsP {
+  font-size: 3rem !important;
+  margin-bottom: 0;
+}
+
+.menuSuperior {
+  margin-top: 200px;
+}
+
+/* Graphs  */
+.graphs {
+  padding: 10px 10px 10px 50px;
+  background: linear-gradient(0deg, rgba(68, 22, 218, 1) 0%, rgba(0, 146, 255, 1) 100%)
+}
+
+.graphsH1 {
+  font-size: 5rem !important;
+  margin-bottom: 150px;
+  text-align: center;
+}
+
+/* WordClouds */
+.containerWordcloud {
+  background-color: white;
+  display: "flex";
+  align-items: "center";
+  justify-content: "center";
+  border-radius: 65px;
+  width: 450px;
+  height: 250px;
+  margin-bottom: 30px;
+}
+
+/* .wordCloudTitle {
+  background-color: purple;
+  position: relative;
+  top: -15px;
+  width: 50%;
+  margin-left: 25%;
+  text-align: center;
+  border-radius: 20px;
+} */

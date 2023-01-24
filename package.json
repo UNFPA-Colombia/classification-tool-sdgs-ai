@@ -10,17 +10,23 @@
   },
   "dependencies": {
     "@prisma/client": "^4.3.1",
+    "bootstrap": "^5.2.3",
     "d3": "^7.6.1",
+    "d3-cloud": "^1.2.5",
     "joi": "^17.6.1",
     "multer": "^1.4.5-lts.1",
     "next": "12.3.0",
     "next-connect": "^0.13.0",
     "react": "18.2.0",
+    "react-bootstrap": "^2.7.0",
     "react-dom": "18.2.0",
     "react-drag-drop-files": "^2.3.7",
+    "react-icons": "^4.7.1",
     "react-select": "^5.4.0",
     "react-speech-recognition": "^3.9.1",
-    "regenerator-runtime": "^0.13.9"
+    "react-srcdoc-iframe": "^1.0.3",
+    "regenerator-runtime": "^0.13.9",
+    "socket.io": "^4.5.4"
   },
   "devDependencies": {
     "eslint": "8.23.1",

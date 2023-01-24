@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import styles from '../../styles/Documentos.module.css'
 import LogosHeader from '../../components/LogosHeader'
+import Resultados from '../../components/Documentos/Resultados'
 import { FileUploader } from "react-drag-drop-files";
 
 import { useState } from 'react'
@@ -12,16 +13,17 @@ export default function Documentos() {
 
 	const [files, setFiles] = useState([]);
 	const [status, setStatus] = useState(0); // 0: no files, 1: uploading, 2: uploaded 3: error size, 4: error type, 5: error
+	const [data, setData] = useState({});
 
 	const handleChange = (newFiles) => {
 		setFiles([...files, ...Array.from(newFiles)]);
 	};
 
 	const handleSubmission = () => {
-
+		setStatus(0);
 		if (files.length > 0) {
-			setStatus(0);
-
+			
+			setStatus(1);
 			const data = new FormData();
 
 			for (const file of files) {
@@ -34,7 +36,14 @@ export default function Documentos() {
 			})
 				.then((response) => response.json())
 				.then((result) => {
-					setStatus(2);
+					console.log('result:', result)
+					if(result["error"]){
+						setStatus(5);
+					}
+					else{
+						setStatus(2);
+						setData(result);
+					}
 				})
 				.catch((error) => {
 					if (error === "Error: Wrong type") {
@@ -109,6 +118,7 @@ export default function Documentos() {
 				{status === 4 && <p className={styles.status}>Error: El archivo no es PDF</p>}
 				{status === 5 && <p className={styles.status}>Error: Ocurrió un error inesperado</p>}
 			</main>
+			{status === 2 && <Resultados data={data} />}
 		</div>
 	)
 }

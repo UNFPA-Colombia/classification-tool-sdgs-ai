@@ -60,7 +60,7 @@ def organiceResult(lda_model, coherencia):
             topics_and_frecuency = j.split("*")
             topic = topics_and_frecuency[1].replace('"', '').strip()
             frecuency = topics_and_frecuency[0].strip()
-            palabras.append({"palabra": topic, "frecuencia": frecuency})
+            palabras.append({"text": topic, "value": frecuency})
         topicos.append({"topico": i[0], "palabras": palabras})
     return {"topicos": topicos, "coherencia_c_v": coherencia}
 
