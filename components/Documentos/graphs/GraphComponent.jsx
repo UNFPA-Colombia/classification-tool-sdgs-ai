@@ -17,6 +17,7 @@ function GraphComponent(props) {
     flexDirection: "row-reverse", position: "relative",
     bottom: "-50px"
   }
+  
   const style = props.derecha ? style1 : style2
   return (
     <div className={`${styles.fondoColorMorado} ${styles.shadow}`}>
@@ -47,7 +48,7 @@ function GraphComponent(props) {
             <Circle text1={props.description} text2="" text3={props.description2} data="" width="45vw" height="20rem" fontSize="24px" fontSize3="1em" color="#FFDED8" />
           </Col> :
           <Col>
-            <PieSDGs objetivos={props.data} setObjetivo={""} objetivo={""} />
+            <PieSDGs objetivos={props.data} setObjetivo={(obj)=>{}} objetivo={""} />
           </Col>
         }
       </Row>
