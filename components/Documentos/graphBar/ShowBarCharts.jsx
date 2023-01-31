@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap'
-import Paralelogramo from './commons/Paralelogramo'
-import styles from "../../styles/DocumentosComponentes.module.css"
+import Paralelogramo from '../commons/Paralelogramo'
+import styles from "../../../styles/DocumentosComponentes.module.css"
 import ShowGraphsComponent from './ShowGraphsComponent'
 
 function ShowBarCharts({ topicos }) {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import styles from "../../styles/DocumentosComponentes.module.css"
-import Paralelogramo from './commons/Paralelogramo'
-import BarChart from './commons/BarChart'
+import styles from "../../../styles/DocumentosComponentes.module.css"
+import Paralelogramo from '../commons/Paralelogramo'
+import BarChart from '../commons/BarChart'
 
 
 function ShowGraphsComponent(props) {
