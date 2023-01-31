@@ -20,7 +20,6 @@ function WordCloudsView({ topicos }) {
 
       <Row>
         {topicos.map((palabras, index) => {
-          console.log(palabras["palabras"]);
           return (index + 1) % 2 != 0 ?
             <Col lg="7" key={index} style={{ padding: 0 }}>
               <Row>
