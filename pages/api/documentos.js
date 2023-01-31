@@ -15,7 +15,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
     storage: multer.diskStorage({
         destination: './lib/docsTopicModeling',
-        filename: (req, file, cb) => cb(null, file.fieldname + '_' + Date.now() + '.' + file.mimetype.split('/')[1]),
+        filename: (req, file, cb) => cb(null, file.originalname.split(".")[0].replace(/_/g, '') + '_' + file.fieldname + '_' + Date.now() + '.' + file.mimetype.split('/')[1]),
     }),
     fileFilter: fileFilter,
     limits: {
