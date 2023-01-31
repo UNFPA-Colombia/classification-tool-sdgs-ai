@@ -6,6 +6,7 @@ import Resultados from '../../components/Documentos/Resultados'
 import { FileUploader } from "react-drag-drop-files";
 
 import { useState } from 'react'
+import { timeout } from 'd3'
 
 const fileTypes = ["PDF"];
 
@@ -13,6 +14,7 @@ export default function Documentos() {
 
 	const [files, setFiles] = useState([]);
 	const [status, setStatus] = useState(0); // 0: no files, 1: uploading, 2: uploaded 3: error size, 4: error type, 5: error
+	const [statusFake, setStatusFake] = useState(0); // 0: Subiendo, 1: Procesando, 2: Obteniendo datos generales, 3: Generando el modelo, 4: Obteniendo resultados, 5: Procesando resultados
 	const [data, setData] = useState({});
 
 	const handleChange = (newFiles) => {
@@ -24,6 +26,24 @@ export default function Documentos() {
 		if (files.length > 0) {
 			
 			setStatus(1);
+			setStatusFake(0);
+			setTimeout(() => {
+				setStatusFake(1);
+				setTimeout(() => {
+					setStatusFake(2);
+					setTimeout(() => {
+						setStatusFake(3);
+						setTimeout(() => {
+							setStatusFake(4);
+							setTimeout(() => {
+								setStatusFake(5);
+							}, 30000);
+						}, 60000);
+					}, 30000);
+				}, 20000);
+			}, 10000);
+
+
 			const data = new FormData();
 
 			for (const file of files) {
@@ -36,7 +56,7 @@ export default function Documentos() {
 			})
 				.then((response) => response.json())
 				.then((result) => {
-					console.log('result:', result)
+					//console.log('result:', result)
 					if(result["error"]){
 						setStatus(5);
 					}
@@ -76,6 +96,28 @@ export default function Documentos() {
 		}
 	}
 
+	function showStatus() {
+		if (statusFake === 0) {
+			return <p className={styles.status}>Subiendo... esto puede tardar hasta 30 segundos</p>
+		}
+		else if (statusFake === 1) {
+			return <p className={styles.status}>Procesando... esto puede tardar hasta 1 minuto</p>
+		}
+		else if (statusFake === 2) {
+			return <p className={styles.status}>Obteniendo datos generales... esto puede tardar hasta 2 minutos</p>
+		}
+		else if (statusFake === 3) {
+			return <p className={styles.status}>Generando el modelo... esto puede tardar hasta 1 minuto</p>
+		}
+		else if (statusFake === 4) {
+			return <p className={styles.status}>Obteniendo resultados... esto puede tardar hasta 1 minuto</p>
+		}
+		else if (statusFake === 5) {
+			return <p className={styles.status}>Procesando resultados... esto puede tardar hasta 3 minutos</p>
+		}
+	}
+
+	console.log(status, statusFake)
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -97,9 +139,15 @@ export default function Documentos() {
 				<div className={styles.documentos}>
 					<FileUploader
 						handleChange={handleChange}
-						onDraggingStateChange={(f) => { console.log("dragging", f) }}
-						onTypeError={(f) => { console.log("type error", f) }}
-						onSizeError={(f) => { console.log("size error", f) }}
+						onDraggingStateChange={(f) => { 
+							//console.log("dragging", f) 
+						}}
+						onTypeError={(f) => { 
+							//console.log("type error", f) 
+						}}
+						onSizeError={(f) => { 
+							//console.log("size error", f)
+						}}
 						name="files"
 						types={fileTypes}
 						multiple={true}
@@ -111,9 +159,9 @@ export default function Documentos() {
 					</FileUploader>
 					{showDocumentos()}
 				</div>
-				{files.length > 0 && <button onClick={handleSubmission} className={styles.buttonStart} role="button">Empezar</button>}
-				{status === 1 && <p className={styles.status}>Subiendo...</p>}
-				{status === 2 && <p className={styles.status}>¡Listo! Puedes ver los resultados en la sección de <Link href="/resultados"><a>Resultados</a></Link></p>}
+				{files.length > 0 && status !== 1 && <button onClick={handleSubmission} className={styles.buttonStart} role="button">Empezar</button>}
+				{status === 1 && showStatus()}
+				{status === 2 && <p className={styles.status}>¡Listo! Puedes ver los resultados en la sección de abajo</p>}
 				{status === 3 && <p className={styles.status}>Error: El archivo es demasiado grande</p>}
 				{status === 4 && <p className={styles.status}>Error: El archivo no es PDF</p>}
 				{status === 5 && <p className={styles.status}>Error: Ocurrió un error inesperado</p>}
