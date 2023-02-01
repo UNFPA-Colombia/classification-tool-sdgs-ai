@@ -100,14 +100,14 @@ export default function Traducir({ objetivos, metas }) {
                     resultado.map((obj) => {
                         return {
                             id: obj.id,
-                            nombre: obj.nombre,
+                            nombre: obj.id,
                             color: obj.color,
                             valor: 1,
                             radius: obj.valor,
                         }
                     })
                 }
-                    setObjetivo={(obj) => { setDetalle(detalle === obj ? 0 : obj)}}
+                    setObjetivo={(obj) => { setDetalle(detalle === obj ? 0 : obj) }}
                 />
             </div>
         );
