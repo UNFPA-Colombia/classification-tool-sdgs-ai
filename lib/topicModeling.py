@@ -406,10 +406,9 @@ def getAllDistributions(corpus, numDocumentos, models):
     """
     allData=[]
     for i in range(0,numDocumentos):
-        data={"documento":i}
+        data={"documento":i, "distribucion":[]}
         for j in range(0, 9):
-            distribucion= getDistributionTopicsInAllText( j,  i , corpus, models)
-            data["distribucion"]= distribucion
+            data["distribucion"].append(getDistributionTopicsInAllText( j,  i , corpus, models))
         allData.append(data)
     return allData 
 
@@ -491,11 +490,22 @@ def funcionFinal (ruta):
     finalJson={"error": False, "generalData": generalData, "topicModeling": topicModeling, "distribuciones": distribuciones, 
               "interactive":interactiveGraph}
     
-    return finalJson
+    return finalJson, id2word, bigram_mod, models
 
 if __name__ == '__main__':  
-    ruta = sys.argv[1:]  
-    result = funcionFinal(ruta) 
+    ruta = sys.argv[1:-2]  
+    result, id2word, bigram_mod, models = funcionFinal(ruta) 
+    
+    path=os.path.join(sys.argv[-1], sys.argv[-2])
+    id = sys.argv[-2] 
+    os.mkdir(path)
+    
+    id2word.save(fname_or_handle=os.path.join(path,"id2word.dict"))
+    bigram_mod.save(os.path.join(path,"bigramMod.pkl"))
+    for i in range(0, len(models)):
+        models[i].save(os.path.join(path,"model_"+str(i)+".model"))  
+        
+    result["id"]=id
     
     # Remove temporary files
     for file in ruta:
