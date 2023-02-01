@@ -1,6 +1,8 @@
 import nextConnect from 'next-connect';
 import multer from 'multer';
 import path from 'path';
+import {v4 as uuidv4} from 'uuid';
+import fs from 'fs';
 const { spawn } = require('child_process');
 
 
@@ -40,8 +42,9 @@ apiRoute.post((req, res) => {
         let files = req.files.map((file) => {
             return `${libDirectory}/docsTopicModeling/${file.filename}`;
         });
+        const userID = uuidv4();
         const pythonPath = libDirectory + '/venvTopicModeling/bin/python'; // path to python 3.9.13 virtual environment with all required libraries
-        const pythonProcess = spawn(pythonPath, [libDirectory + '/topicModeling.py', ...files]);
+        const pythonProcess = spawn(pythonPath, [libDirectory + '/topicModeling.py', ...files, userID, libDirectory + '/dataTopicModeling']);
         console.log('Running python script...');
         let bufferArray= []
         pythonProcess.stdout.on('data', (data) => {
@@ -53,15 +56,22 @@ apiRoute.post((req, res) => {
         });
 
         pythonProcess.on('close', (code) => {
+            files.forEach(element => {
+                fs.unlink(element, (err) => { });
+            });
             if (code !== 0) {
                 console.log(`child process exited with code ${code}`);
                 res.status(500).send('Internal error');
+                fs.rmdir(libDirectory + '/dataTopicModeling/' + userID, { recursive: true, force: true }, (err) => { });
             }
             else {
                 let dataBuffer = Buffer.concat(bufferArray);
                 console.log(dataBuffer.toString())
                 res.setHeader('content-type', 'application/json');
                 res.status(200).send(dataBuffer);
+                setTimeout(() => {
+                    fs.rmdir(libDirectory + '/dataTopicModeling/' + userID, { recursive: true, force: true }, (err) => { });
+                }, 60000 * 30); // delete folder after 30 minutes
             }
             resolve();
         });
