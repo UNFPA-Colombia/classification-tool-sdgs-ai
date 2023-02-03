@@ -50,7 +50,7 @@ export default function PieSDGs({ objetivos, setObjetivo }) {
     const svg = useRef(null);
     useEffect(() => {
         drawChart(svg, objetivos, setObjetivo);
-    }, [svg]);
+    }, [svg, objetivos, setObjetivo]);
 
     return <svg ref={svg} />;
 };

@@ -497,6 +497,7 @@ if __name__ == '__main__':
     result, id2word, bigram_mod, models = funcionFinal(ruta) 
     
     path=os.path.join(sys.argv[-1], sys.argv[-2])
+    path = path.replace("\\", "/")
     id = sys.argv[-2] 
     os.mkdir(path)
     
@@ -508,8 +509,8 @@ if __name__ == '__main__':
     result["id"]=id
     
     # Remove temporary files
-    for file in ruta:
-        os.remove(file)
+    # for file in ruta:
+    #     os.remove(file)
         
     # Save results to stdout as JSON
     try:

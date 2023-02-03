@@ -1,6 +1,6 @@
 import React from 'react'
 import Paralelogramo from '../commons/Paralelogramo'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Form, Row } from 'react-bootstrap'
 import styles from "../../../styles/DocumentosComponentes.module.css"
 import Circle from '../commons/Circle'
 import Gauge from '../commons/Gauge'
@@ -17,7 +17,19 @@ function GraphComponent(props) {
     flexDirection: "row-reverse", position: "relative",
     bottom: "-50px"
   }
-  
+
+  const colores = ["#FFB2E6",
+    "#EC92F3",
+    "#D972FF",
+    "#AF5DFF",
+    "#9A52FF",
+    "#8447FF",
+    "#88A3ED",
+    "#8CFFDA",
+    "#C6FFE1",
+    "#FFFFE8"
+  ]
+
   const style = props.derecha ? style1 : style2
   return (
     <div className={`${styles.fondoColorMorado} ${styles.shadow}`}>
@@ -36,7 +48,7 @@ function GraphComponent(props) {
               </div>
               <Gauge number={props.data} />
             </div>
-            
+
           </Col>
           :
           <Col className={styles.center}>
@@ -48,7 +60,23 @@ function GraphComponent(props) {
             <Circle text1={props.description} text2="" text3={props.description2} data="" width="45vw" height="20rem" fontSize="24px" fontSize3="1em" color="#FFDED8" />
           </Col> :
           <Col>
-            <PieSDGs objetivos={props.data} setObjetivo={(obj)=>{}} objetivo={""} />
+            <Row>
+              <Col>
+                <PieSDGs objetivos={props.data} setObjetivo={(obj) => { }} objetivo={""} />
+                <Form.Select style={{width:"auto", margin:"auto"}} onChange={(e) => {
+                      console.log("respuesta"+ e);
+                    }}>
+                  {props.files.map((file, i) => {
+                    return ( file.title == "Total" ?null:
+                      <option key={i} value={i} >{file.title}</option>
+                    )
+                  })}
+                </Form.Select>
+              </Col>
+              {/* <Col >
+              </Col> */}
+
+            </Row>
           </Col>
         }
       </Row>

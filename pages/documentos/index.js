@@ -136,7 +136,7 @@ export default function Documentos() {
 				<p className={styles.description}>Puedes obtener los temas de un documento y su relación con los Objetivos de Desarrollo Sostenible.</p>
 				<p className={styles.question}>¡Para empezar sube uno o varios documentos en formato PDF!</p>
 
-				<div className={styles.documentos}>
+				<div className={styles.documentos}  style={{textAlign:"center"}}>
 					<FileUploader
 						handleChange={handleChange}
 						onDraggingStateChange={(f) => { 

@@ -10,8 +10,8 @@ function InteractiveGraphView(props) {
   return (
     <div className={`${styles.fondoColorMorado} ${styles.center} ${styles.heightAllScreen}`} style={{ height: "175vh" }}>
       <div className={`${styles.fondoColorMoradoClaro} ${styles.shadowLateral}`} style={{ width: "20.5vw" }}>
-        <p className={styles.textStorytelling}>Puedes mirar la frecuencia de cada palabra en cada grupo.</p>
-        <p className={styles.textStorytelling}>Prueba dar click en los circulos que tienen el número de grupo</p>
+        <p className={styles.textStorytelling}>Puedes mirar la frecuencia de cada palabra en cada tópico.</p>
+        <p className={styles.textStorytelling}>Prueba dar click en los círculos que tienen el número de tópico</p>
       </div>
       <ReactSrcDocIframe srcDoc={html} width="95%" height="1200" />
     </div >

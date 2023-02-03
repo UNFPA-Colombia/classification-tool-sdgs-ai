@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap'
 import Circle from '../commons/Circle'
 import styles from "../../../styles/DocumentosComponentes.module.css"
 
+
 function GeneralCleanDataView(props) {
   var size = ((100 / props.data.length) - 5) < 20 ? 20 : ((100 / props.data.length) - 5) > 30 ? 30 : ((100 / props.data.length) - 5)
   var secondcolum = props.data.length > 6
@@ -51,29 +52,30 @@ function GeneralCleanDataView(props) {
                 )
               })}
             </Col>
-            <Col  className={styles.center}>
-              {
-                secondcolum ?
-                  dataP2.map((documento, idx) => {
-                    return (
-                      documento["title"] != "Total" ?
-                        <div key={idx + 5}>
-                          <Circle text1={"Doc. #" + (idx + 6)} text2="" text3="" data={documento["deleted"]} width={size + "vh"} height={size + "vh"} fontSize="14px" fontSizeData={"2em"} color="#B4FAFE" line={idx != (dataP2.length - 2) && idx != 9} />
-                        </div> :null
-                    )
-                  }):null 
-              }
-            </Col>
+            {secondcolum ?
+              <Col className={styles.center}>
+                {
+                  secondcolum ?
+                    dataP2.map((documento, idx) => {
+                      return (
+                        documento["title"] != "Total" ?
+                          <div key={idx + 5}>
+                            <Circle text1={"Doc. #" + (idx + 6)} text2="" text3="" data={documento["deleted"]} width={size + "vh"} height={size + "vh"} fontSize="14px" fontSizeData={"2em"} color="#B4FAFE" line={idx != (dataP2.length - 2) && idx != 9} />
+                          </div> : null
+                      )
+                    }) : null
+                }
+              </Col> : null
+            };
             {console.log("valor de seconf", secondcolum)}
           </Row>
         </Col>
         <Col>
-        <h3 className={styles.rotateTitle}>En total</h3>
-              <Circle text1="Eliminamos" text2="palabras vacías" text3="Lo cual es el 50% del total de palabras" data={props.data[props.data.length - 1]["deleted"]} width="60vh" height="60vh" fontSize="28px" fontSize3="14px" fontSizeData="60px" paddingTop="00%" color="#B4FAFE"  />
+          <h3 className={styles.rotateTitle}>En total</h3>
+          <Circle text1="Eliminamos" text2="palabras vacías" text3="Lo cual es el 50% del total de palabras" data={props.data[props.data.length - 1]["deleted"]} width="60vh" height="60vh" fontSize="28px" fontSize3="14px" fontSizeData="60px" paddingTop="00%" color="#B4FAFE" />
         </Col>
       </Row>
     </div>
   )
 }
-
 export default GeneralCleanDataView
