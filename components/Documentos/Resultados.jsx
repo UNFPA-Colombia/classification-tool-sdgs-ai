@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
-
 import NumberOfGroups from './NumberOfGroups';
 import GraphsView from './graphs/GraphsView';
 import WordCloudsView from './WordCloud/WordCloudsView';
@@ -15,7 +14,6 @@ import InfoButton from './commons/InfoButton';
 
 
 function Resultados({ data }) {
-   console.log(data);
 
    /* General data */
    const dataGeneral = data["generalData"]

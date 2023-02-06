@@ -67,7 +67,6 @@ function GeneralCleanDataView(props) {
                 }
               </Col> : null
             };
-            {console.log("valor de seconf", secondcolum)}
           </Row>
         </Col>
         <Col>

@@ -23,19 +23,16 @@ function FinalScreenView(props) {
       data.append('files', files, files.name);
       data.append('id', props.id)
       data.append('topicNumber', props.topicNumber)
-      console.log("dataaaa: " + data);
       fetch('/api/documentosUse', {
         method: 'POST',
         body:data,
       })
         .then((response) => response.json())
         .then((result) => {
-          console.log('result:', result)
           if (result["error"] != 0) {
             setStatus(5);
           }
           else {
-            console.log("Vamos bien")
             setStatus(2);
             setData(result);
           }

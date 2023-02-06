@@ -3,7 +3,6 @@ import { Col, Row } from 'react-bootstrap'
 import styles from "../../../styles/DocumentosComponentes.module.css"
 import WordCloudComponent from './WordCloudComponent'
 import Paralelogramo from '../commons/Paralelogramo'
-import InfoButton from '../commons/InfoButton'
 
 
 function WordCloudsView({ topicos }) {

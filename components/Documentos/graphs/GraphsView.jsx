@@ -20,11 +20,6 @@ function GraphsView({ coherencia, distribuciones, topicos, files }) {
   "#C6FFE1",
   "#FFFFE8"
   ]
-  function findDocumento(titleDocument){
-    setDocumento(files.findIndex(({ title }) => title === titleDocument));
-    console.log("Ojala funcione", documento);
-  }
-
   useEffect(() => {
     setData(distribuciones[documento]["distribucion"][topicos].map((element, index) => {
       return {
