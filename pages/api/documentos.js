@@ -43,7 +43,7 @@ apiRoute.post((req, res) => {
             return `${libDirectory}/docsTopicModeling/${file.filename}`;
         });
         const userID = uuidv4();
-        const pythonPath = libDirectory + '/venvTopicModeling/bin/python'; // path to python 3.9.13 virtual environment with all required libraries
+        const pythonPath = "C:/Users/brend/AppData/Local/Programs/Python/Python310/python.exe"; // path to python 3.9.13 virtual environment with all required libraries
         const pythonProcess = spawn(pythonPath, [libDirectory + '/topicModeling.py', ...files, userID, libDirectory + '/dataTopicModeling']);
         console.log('Running python script...');
         let bufferArray= []

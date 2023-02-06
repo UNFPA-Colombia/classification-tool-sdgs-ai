@@ -31,6 +31,7 @@ function drawChart(svgRef, data, setObjetivo) {
             .outerRadius(radius+d.data.radius)(d, i)
         )
         .attr('fill', d => d.data.color)
+        .append("svg:title").text(function(d) { return d.data.nombre; })
         .on('mouseover', function (d, i) {
             d3.select(this).transition()
                 .duration('50')

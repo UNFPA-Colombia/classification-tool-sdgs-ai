@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import styles from "../../styles/DocumentosComponentes.module.css"
 import { FileUploader } from 'react-drag-drop-files'
-import Link from 'next/link';
 import UseModelView from './useModelView';
 const fileTypes = ["PDF"];
 
@@ -89,7 +88,7 @@ function FinalScreenView(props) {
           {console.log(data)}
         </div>
       </div>
-      {status === 2 && <UseModelView data={data} />}
+      {status === 2 && data && <UseModelView data={{"error": 0, "distribution": [{"topico": 0, "valor": 0.0002515223459340632}, {"topico": 1, "valor": 0.00025184304104186594}, {"topico": 2, "valor": 0.0002515223459340632}, {"topico": 3, "valor": 0.9982390403747559}, {"topico": 4, "valor": 0.0002515224041417241}, {"topico": 5, "valor": 0.00025152243324555457}, {"topico": 6, "valor": 0.00025152237503789365}, {"topico": 7, "valor": 0.0002515224041417241}]}}/> }
     </div>
   )
 }

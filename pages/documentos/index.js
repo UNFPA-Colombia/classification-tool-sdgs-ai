@@ -7,6 +7,7 @@ import { FileUploader } from "react-drag-drop-files";
 
 import { useState } from 'react'
 import { timeout } from 'd3'
+import UseModelView from '../../components/Documentos/useModelView'
 
 const fileTypes = ["PDF"];
 
