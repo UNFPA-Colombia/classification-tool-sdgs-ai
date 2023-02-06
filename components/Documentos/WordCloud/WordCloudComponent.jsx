@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from "../../styles/DocumentosComponentes.module.css";
-import Paralelogramo from './commons/Paralelogramo';
-import WordCloud from './commons/WordCloud';
+import styles from "../../../styles/DocumentosComponentes.module.css";
+import Paralelogramo from '../commons/Paralelogramo';
+import WordCloud from '../commons/WordCloud';
 
 function WordCloudComponent(props) {
 

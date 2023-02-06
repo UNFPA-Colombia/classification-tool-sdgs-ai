@@ -3,12 +3,12 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 const { spawn } = require('child_process');
-const Joi = require('joi');
+// const Joi = require('joi');
 
-const schema = Joi.object({
-    id: Joi.string().required(),
-    topicNumber: Joi.integer().required(),
-});
+// const schema = Joi.object({
+//     id: Joi.string().required(),
+//     topicNumber: Joi.integer().required(),
+// });
 
 
 const fileFilter = (req, file, cb) => {
@@ -42,11 +42,9 @@ const apiRoute = nextConnect({
 apiRoute.use(upload.array('files'));
 
 apiRoute.post((req, res) => {
-    const { error, value } = schema.validate(req.body);
-    if (error) {
-        res.status(400).send(error.details[0].message);
-        return;
-    }
+    
+    console.log("hace post")
+    console.log(req)
     return new Promise(function (resolve, reject) {
         const libDirectory = path.join(process.cwd(), 'lib');
         let files = req.files.map((file) => {
@@ -54,8 +52,9 @@ apiRoute.post((req, res) => {
         });
         const userID = req.body.id;
         const topicNumber = req.body.topicNumber;
-        const pythonPath = libDirectory + '/venvTopicModeling/bin/python'; // path to python 3.9.13 virtual environment with all required libraries
-        const pythonProcess = spawn(pythonPath, [libDirectory + '/useTtopicModeling.py', files[0], libDirectory + '/dataTopicModeling/' + userID, topicNumber]);
+        console.log('Get ready...');
+        const pythonPath = "C:/Users/brend/AppData/Local/Programs/Python/Python310/python.exe"; // path to python 3.9.13 virtual environment with all required libraries
+        const pythonProcess = spawn(pythonPath, [libDirectory + '/useTopicModeling.py', files[0], libDirectory + '/dataTopicModeling/' + userID, topicNumber]);
         console.log('Running python script use...');
         let bufferArray= []
         pythonProcess.stdout.on('data', (data) => {

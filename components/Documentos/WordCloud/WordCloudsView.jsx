@@ -1,21 +1,22 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap'
-import styles from "../../styles/DocumentosComponentes.module.css"
+import styles from "../../../styles/DocumentosComponentes.module.css"
 import WordCloudComponent from './WordCloudComponent'
-import Paralelogramo from './commons/Paralelogramo'
+import Paralelogramo from '../commons/Paralelogramo'
 
 
 function WordCloudsView({ topicos }) {
 
   return (
     <div className={`${styles.fondoColorMorado} ${styles.shadowBottom} ${styles.center}`} styles={{
-      paddingLeft: "155rem",
+      paddingLeft: "155rem", paddingBottom:"15vh",
     }}>
       <div className={styles.divGraficosDescription} >
         < p className={styles.text1}>
-          En el siguiente apartado veremos las nubes de palabras para cada uno de los topicos encontrados. Recuerda que el tamaño de la palabra representa la importancia que tiene en cada topico.
+          En el siguiente apartado veremos las nubes de palabras para cada uno de los tópicos encontrados. Recuerda que el tamaño de la palabra representa la importancia que tiene en cada tópico.
         </p>
       </div>
+
       <Paralelogramo text="Nubes de palabras" width="30vw" />
 
       <Row>

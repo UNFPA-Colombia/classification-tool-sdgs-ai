@@ -101,20 +101,21 @@ if __name__ == '__main__':
     """
     ruta = sys.argv[1]  
     path=sys.argv[2]
+    path = path.replace("\\\\", "/")
     numberOfTopics = sys.argv[3]
     
-    
-    try: 
-        model_load= LdaModel.load(os.path.join(path, "model-"+str(numberOfTopics)+".model"))
+
+    try:
+        model_load= LdaModel.load(os.path.join(path, "model_"+str(numberOfTopics)+".model"))
         id2word_load = corpora.Dictionary.load(os.path.join(path, "id2word.dict"))
         bigram_mod_load=Phrases.load(os.path.join(path, "bigramMod.pkl"))
         try: 
             result=getDistributionNewText(ruta,id2word_load, bigram_mod_load, model_load)
             result={"error":0, "distribution":result}
-        except:
-            result={"error":2}  
-    except:
-        result={"error":1}    
+        except Exception as e:
+            result={"error":2, "description":str(e)}  
+    except  Exception as e:
+        result={"error":1, "description":str(e)}    
         
     # Save results to stdout as JSON
     try:

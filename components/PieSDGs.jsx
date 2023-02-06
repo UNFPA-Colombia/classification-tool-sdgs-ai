@@ -31,6 +31,7 @@ function drawChart(svgRef, data, setObjetivo) {
             .outerRadius(radius+d.data.radius)(d, i)
         )
         .attr('fill', d => d.data.color)
+        .append("svg:title").text(function(d) { return d.data.nombre; })
         .on('mouseover', function (d, i) {
             d3.select(this).transition()
                 .duration('50')
@@ -50,7 +51,7 @@ export default function PieSDGs({ objetivos, setObjetivo }) {
     const svg = useRef(null);
     useEffect(() => {
         drawChart(svg, objetivos, setObjetivo);
-    }, [svg]);
+    }, [svg, objetivos, setObjetivo]);
 
     return <svg ref={svg} />;
 };

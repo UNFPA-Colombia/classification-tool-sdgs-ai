@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from 'react'
 import { scaleBand, scaleLinear } from 'd3-scale';
-// import {howto, altplot} from "@d3/example-components"
-// import { transition } from 'd3-transition';
 import * as d3 from "d3";
 
 
@@ -79,8 +77,8 @@ function drawChart(svgRef, data) {
     .selectAll("rect")
     .data(I)
     .join("rect")
-    .style("font-size", "1.2em")
-    .style("font-weight", "600")
+    .style("font-size", "5.2em")
+    .style("font-weight", "500")
     .attr("x", i => xScale(X[i]) + 10)
     .attr("y", i => yScale(Y[i]))
     .attr("height", i => yScale(0) - yScale(Y[i]))
@@ -94,7 +92,7 @@ function drawChart(svgRef, data) {
     .call(xAxis)
     .selectAll("text")
     .style("text-anchor", "end")
-    .style("font-size", "1.75em")
+    .style("font-size", "1.85em")
     .style("font-weight", "600")
     .attr("dx", "-.5em")
     .attr("dy", ".15em")

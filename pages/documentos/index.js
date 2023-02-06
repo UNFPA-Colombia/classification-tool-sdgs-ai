@@ -7,6 +7,7 @@ import { FileUploader } from "react-drag-drop-files";
 
 import { useState } from 'react'
 import { timeout } from 'd3'
+import UseModelView from '../../components/Documentos/useModelView'
 
 const fileTypes = ["PDF"];
 
@@ -136,7 +137,7 @@ export default function Documentos() {
 				<p className={styles.description}>Puedes obtener los temas de un documento y su relación con los Objetivos de Desarrollo Sostenible.</p>
 				<p className={styles.question}>¡Para empezar sube uno o varios documentos en formato PDF!</p>
 
-				<div className={styles.documentos}>
+				<div className={styles.documentos}  style={{textAlign:"center"}}>
 					<FileUploader
 						handleChange={handleChange}
 						onDraggingStateChange={(f) => { 

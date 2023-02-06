@@ -102,18 +102,20 @@
   text-align: center;
   margin-bottom: 0px;
   font-size: 1.2rem;
+  color: black;
 }
 
 .text2 {
   text-align: center;
   margin-bottom: 0;
+  color: black;
 }
 
 .text3 {
   margin-top: 0;
   text-align: center;
   font-style: italic;
-  
+  color: black;
   font-weight: 600;
 }
 .textStorytelling{
@@ -126,6 +128,7 @@
 }
 
 .circleH1 {
+  color: black;
   margin: 0;
   text-align: center;
 }
@@ -150,6 +153,7 @@
 }
 
 .titleHexagon {
+  color: black;
   text-align: center;
   margin-bottom: 0;
 }
@@ -168,9 +172,11 @@
 }
 
 .rotateTitle {
-  writing-mode: vertical-rl;
   text-orientation: upright;
-  margin: 0;
+  margin-bottom: 5vh;
+  text-align: center;
+  color: black;
+  font-weight: 500;
 }
 
 .row {
@@ -261,6 +267,52 @@
 
   font-size: 1.5rem;
 
+}
+.documentos {
+  width: 75vw;
+  max-width: 700px;
+}
+
+.cajaArchivos {
+  border-style: dashed;
+  border-width: 2px;
+  border-color: #fff;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.cajaArchivos:hover {
+  border-color: #37372d;
+}
+
+.archivo {
+  font-weight: 600;
+  color: #37372d;
+  margin-bottom: 0.3rem;
+}
+
+.buttonStart {
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid #eaeaea;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font-family: inherit;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    transition: color 100ms;
+    vertical-align: baseline;
+    color: #37372d;
+    margin: 1rem;
+    font-size: 1.2rem;
+    background-color: #eaeaea95;
+    margin-top: 2rem;
 }
 
 
