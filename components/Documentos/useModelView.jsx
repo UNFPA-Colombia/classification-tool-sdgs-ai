@@ -31,7 +31,7 @@ function UseModelView({ data }) {
 
   return (
     <div className={`${styles.fondoColorMorado}`}  >
-      <p className={styles.tituloEstilo3} style={{ padding: "0px 50px 0px 5vw", margin: 0 }} >
+      <p className={styles.tituloEstilo3} style={{ padding: "80px 50px 0px 5vw", margin: 0 }} >
         Analizamos el nuevo documento que subiste y lo comparamos con el número de tópicos que dejaste seleccionado. Con esto, ¡Encontramos la siguiente distribución de los tópicos!.
       </p>
       <br />

@@ -51,7 +51,12 @@ function GraphComponent(props) {
 
           </Col>
           :
-          <Col className={styles.center}>
+          <Col >
+            <Row >
+              <Col md={{ offset: 1 }} style={{marginBottom: "80px"}} >
+                <InfoButton message='Recuerda: Si pasas el mouse sobre el color, puedes ver el tópico al que pertenece.' placement="right" />
+              </Col>
+            </Row>
             <Circle text1={props.description} text2="" text3={props.description2} data="" width="45vw" height="20rem" fontSize="1.5rem" color="#FFDED8" />
           </Col>
         }
@@ -63,19 +68,16 @@ function GraphComponent(props) {
             <Row>
               <Col>
                 <PieSDGs objetivos={props.data} setObjetivo={(obj) => { }} objetivo={""} />
-                <Form.Select style={{width:"auto", margin:"auto"}} onChange={(e) => {
-                      console.log("respuesta"+ e);
-                    }}>
+                <Form.Select style={{ width: "auto", margin: "auto" }} onChange={(e) => {
+                  props.funcion(e.target.value)
+                }}>
                   {props.files.map((file, i) => {
-                    return ( file.title == "Total" ?null:
+                    return (file.title == "Total" ? null :
                       <option key={i} value={i} >{file.title}</option>
                     )
                   })}
                 </Form.Select>
               </Col>
-              {/* <Col >
-              </Col> */}
-
             </Row>
           </Col>
         }

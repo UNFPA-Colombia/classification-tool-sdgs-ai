@@ -58,7 +58,7 @@ function FinalScreenView(props) {
   }
 
   return (
-    <div className={`${styles.fondoColorMorado} ${styles.center}`} style={{ height: "100vh", justifyContent: "flex-start" }} >
+    <div className={`${styles.fondoColorMorado} ${styles.center}`} style={{ height: "auto", justifyContent: "flex-start" }} >
       <div className={`${styles.fondoColorMoradoClaro} ${styles.shadow}`} style={{ width: "25vw", marginBottom: "15vh" }}>
         <p className={styles.textStorytelling}>Ahora prueba tu mismo el modelo que acabas de  crear. Sube otro archivo pdf para ver que tópicos que creaste tiene este nuevo documento.
         </p>
@@ -85,10 +85,9 @@ function FinalScreenView(props) {
           {status === 1 && <p className={styles.status}>Subiendo el archivo </p>}
           {status === 2 && <p className={styles.status}>¡Listo! Puedes ver los resultados en la sección de abajo</p>}
           {status === 3 && <p className={styles.status}>Error: El archivo es demasiado grande</p>}
-          {console.log(data)}
         </div>
       </div>
-      {status === 2 && data && <UseModelView data={{"error": 0, "distribution": [{"topico": 0, "valor": 0.0002515223459340632}, {"topico": 1, "valor": 0.00025184304104186594}, {"topico": 2, "valor": 0.0002515223459340632}, {"topico": 3, "valor": 0.9982390403747559}, {"topico": 4, "valor": 0.0002515224041417241}, {"topico": 5, "valor": 0.00025152243324555457}, {"topico": 6, "valor": 0.00025152237503789365}, {"topico": 7, "valor": 0.0002515224041417241}]}}/> }
+      {status === 2 && data && <UseModelView data={data}/> }
     </div>
   )
 }

@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from 'react'
 import { scaleBand, scaleLinear } from 'd3-scale';
-// import {howto, altplot} from "@d3/example-components"
-// import { transition } from 'd3-transition';
 import * as d3 from "d3";
 
 
